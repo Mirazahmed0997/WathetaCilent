@@ -15,6 +15,8 @@ export default async function BlogsPage({ searchParams }) {
   );
   const heroBlog = blogs?.data.find(blog => blog?.isHero === true)
 
+  const category = await fetchDataAsServer(apiConfig?.GET_BLOG_CATEGORIES)
+
   return (
     <section className="pt-24 max-w-7xl mx-auto space-y-4">
       <div className="my-10 flex justify-between">
@@ -27,11 +29,38 @@ export default async function BlogsPage({ searchParams }) {
           <span>BN</span>
         </Link>
       </div>
-      <nav className="w-full bg-teal-800 p-1 rounded-full">
-        <ul>
-          <li className="w-fit rounded-full px-3 py-1 text-sm bg-white">All</li>
+
+      <nav className="w-full bg-teal-800 p-2 rounded-full">
+        <ul className="flex items-center flex-wrap gap-2">
+          {/* All blogs button */}
+          <li className="w-fit rounded-full px-3 py-1 text-sm bg-white">
+            <Link href="/blog/en">All</Link>
+          </li>
+
+          {/* Categories */}
+          {category?.map((cat) => (
+            <li key={cat.id} className="relative group">
+              <span className="w-fit rounded-full px-3 py-1 text-sm bg-white cursor-pointer">
+                {cat.name}
+              </span>
+
+              {/* Subcategories dropdown */}
+              {cat.subCategories?.length > 0 && (
+                <ul className="absolute left-0 mt-1 hidden group-hover:block bg-white rounded-md shadow-lg z-10 min-w-[150px]">
+                  {cat.subCategories.map((sub) => (
+                    <Link key={sub.id} href={`/blogs?categoryId=${cat.id}&subCategoryId=${sub.id}`}>
+                      <li className="px-3 py-1 text-sm hover:bg-teal-200">
+                        {sub.name}
+                      </li>
+                    </Link>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))}
         </ul>
       </nav>
+
       <div className="flex flex-col gap-4">
         {heroBlog && <BlogHero heroBlog={heroBlog} />}
         <div className="grid grid-cols-3 gap-4">

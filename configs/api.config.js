@@ -13,6 +13,7 @@ const apiConfig = {
   //────────────────────────────────────────────
   GET_BLOG_PUBLIC: '/blog/post/public',
   GET_BLOG_PUBLIC_BY_SLUG: '/blog/post/public/',
+  GET_BLOG_CATEGORIES: '/blog/category/public/',
 
   GET_BLOG_PUBLISHED: '/blog-published',
   GET_BLOG_PUBLISHED_BY_ID: '/blog-slug/',
