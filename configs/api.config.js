@@ -19,14 +19,9 @@ const apiConfig = {
   GET_BLOG_PUBLISHED_BY_ID: '/blog-slug/',
   GET_BLOG_METADATA: '/getPageDiscription/selecte/blog',
   //────────────────────────────────────────────
-  //? API: ---- User [Product, supplier, purchase] ----
+  //? API: ---- Pricing ----
   //────────────────────────────────────────────
-  GET_PRODUCT: '/user/product',
-  CREATE_PRODUCT: '/user/product',
-  UPDATE_PRODUCT: '/user/product/',
-  DELETE_PRODUCT: '/user/product/',
-  GET_PRODUCT_BY_ID: '/user/product/',
-  GET_PRODUCT_BY_SEARCH: '/user/product/search?q=',
+  GET_PRICING: '/price/public',
 };
 
 export default apiConfig;
