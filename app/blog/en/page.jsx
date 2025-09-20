@@ -4,14 +4,14 @@ import apiConfig from "@/configs/api.config";
 import HomeFAQ from "@/components/HomeFAQ";
 import JoinOurNewsLetter from "@/components/JoinOurNewsLetter";
 import { fetchDataAsServer } from "@/utils/axiosServer";
-import { Languages } from "lucide-react";
+import { Languages, Search } from "lucide-react";
 import BlogCard from "../components/BlogCard";
 import BlogHero from "../components/BlogHero";
 
 export default async function BlogsPage({ searchParams }) {
-  const { tagId } = await searchParams;
+  const { tagId, categoryId, subcategoryId } = await searchParams;
   const blogs = await fetchDataAsServer(
-    apiConfig.GET_BLOG_PUBLIC + `?language=EN${tagId ? `&tagId=${tagId}` : ""}`
+    apiConfig.GET_BLOG_PUBLIC + `?language=EN${tagId ? `&tagId=${tagId}` : ""}${categoryId ? `&categoryId=${categoryId}` : ""}${subcategoryId ? `&subcategoryId=${subcategoryId}` : ""}`
   );
   const heroBlog = blogs?.data.find(blog => blog?.isHero === true)
 
@@ -37,22 +37,41 @@ export default async function BlogsPage({ searchParams }) {
             <Link href="/blog/en">All</Link>
           </li>
 
+          <li className="w-fit rounded-full px-3 py-1.5 text-sm bg-white">
+            <Search className="w-4 h-4"/>
+          </li>
+
           {/* Categories */}
           {category?.map((cat) => (
-            <li key={cat.id} className="relative group">
-              <span className="w-fit rounded-full px-3 py-1 text-sm bg-white cursor-pointer">
-                {cat.name}
-              </span>
+            <li
+              key={cat.id}
+              className="relative group text-white rounded-full px-3 py-1 text-sm cursor-pointer"
+            >
+              <span>{cat.name}</span>
 
-              {/* Subcategories dropdown */}
+              {/* Subcategories expand absolutely inside */}
               {cat.subCategories?.length > 0 && (
-                <ul className="absolute left-0 mt-1 hidden group-hover:block bg-white rounded-md shadow-lg z-10 min-w-[150px]">
-                  {cat.subCategories.map((sub) => (
-                    <Link key={sub.id} href={`/blogs?categoryId=${cat.id}&subCategoryId=${sub.id}`}>
-                      <li className="px-3 py-1 text-sm hover:bg-teal-200">
+                <ul
+                  className="
+                    absolute left-0 top-full pt-3
+                    shadow-lg z-10 min-w-[160px]
+                    max-h-0 overflow-hidden opacity-0 scale-y-0 origin-top
+                    transition-all duration-300 ease-in-out
+                    group-hover:max-h-60 group-hover:opacity-100 group-hover:scale-y-100
+                  "
+                >
+                  {cat.subCategories.map((sub, index) => (
+                    <li key={index}>
+                      <Link
+                        href={`/blog/en?categoryId=${cat.id}&subcategoryId=${sub.id}`}
+                        className={`block px-3 py-2 text-sm bg-teal-900 text-white hover:bg-teal-800
+                          ${index === 0 ? "rounded-t-md" : ""}
+                          ${index === cat.subCategories.length - 1 ? "rounded-b-md" : ""}
+                        `}
+                      >
                         {sub.name}
-                      </li>
-                    </Link>
+                      </Link>
+                    </li>
                   ))}
                 </ul>
               )}
