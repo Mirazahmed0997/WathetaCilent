@@ -3,9 +3,19 @@ import apiConfig from "@/configs/api.config";
 import { fetchDataAsServer } from "@/utils/axiosServer";
 import parse from "html-react-parser";
 
+function getLocale(language) {
+  switch (language?.toLowerCase()) {
+    case "bn":
+    case "bangla":
+      return "bn-BD";
+    default:
+      return "en-US";
+  }
+}
+
 export default async function BlogDetailsPage({ params }) {
   const { id } = await params;
-  
+
   // Fetch blog by slug/id
   const blogData = await fetchDataAsServer(apiConfig.GET_BLOG_PUBLIC_BY_SLUG + id);
 
@@ -18,6 +28,7 @@ export default async function BlogDetailsPage({ params }) {
   }
 
   const blog = blogData;
+  const locale = getLocale(blog.language);
 
   return (
     <div className="pt-24 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -33,7 +44,13 @@ export default async function BlogDetailsPage({ params }) {
       {/* Language & Date */}
       <div className="flex items-center gap-4 text-gray-500 mb-6">
         <span className="uppercase font-medium">{blog.language}</span>
-        <span>{new Date(blog.date).toLocaleDateString("bn-BD", { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+        <span>
+          {new Date(blog.date).toLocaleDateString(locale, {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+          })}
+        </span>
       </div>
 
       {/* Blog Image */}
@@ -74,7 +91,11 @@ export default async function BlogDetailsPage({ params }) {
             Created by: <span className="font-medium">{blog.createdBy?.name}</span>
           </p>
           <p className="text-gray-500 text-sm">
-            Updated at: {new Date(blog.updatedAt).toLocaleString("bn-BD")}
+            Updated at: {new Date(blog.date).toLocaleDateString(locale, {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+            })}
           </p>
         </div>
       </div>
