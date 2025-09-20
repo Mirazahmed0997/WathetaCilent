@@ -7,16 +7,19 @@ import { fetchDataAsServer } from "@/utils/axiosServer";
 import { Languages } from "lucide-react";
 import BlogCard from "../components/BlogCard";
 import BlogHero from "../components/BlogHero";
+import BlogSearch from "../components/BlogSearch";
 
-export default async function BlogsPage({searchParams}) {
-  const { tagId } = await searchParams;
+export default async function BlogsPage({ searchParams }) {
+  const { q, tagId, categoryId, subcategoryId } = await searchParams;
   const blogs = await fetchDataAsServer(
-    apiConfig.GET_BLOG_PUBLIC + `?language=BN${tagId ? `&tagId=${tagId}` : ""}`
+    apiConfig.GET_BLOG_PUBLIC + `?language=BN${q ? `&q=${q}` : ""}${tagId ? `&tagId=${tagId}` : ""}${categoryId ? `&categoryId=${categoryId}` : ""}${subcategoryId ? `&subcategoryId=${subcategoryId}` : ""}`
   );
   const heroBlog = blogs?.data.find(blog => blog?.isHero === true)
 
+  const category = await fetchDataAsServer(apiConfig?.GET_BLOG_CATEGORIES)
+
   return (
-    <section className="pt-24 max-w-7xl mx-auto space-y-4">
+    <section className="pt-24 max-w-7xl mx-auto space-y-4 px-2">
       <div className="my-10 flex justify-between">
         <div className="flex items-end">
           <h1 className=" text-teal-800 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">Blog</h1>
@@ -28,13 +31,57 @@ export default async function BlogsPage({searchParams}) {
         </Link>
       </div>
       <nav className="w-full bg-teal-800 p-1 rounded-full">
-        <ul>
-          <li className="w-fit rounded-full px-3 py-1 text-sm bg-white">All</li>
+        <ul className="flex items-center flex-wrap gap-2">
+          {/* All blogs button */}
+          <li className="w-fit rounded-full px-3 py-1 text-sm bg-white">
+            <Link href="/blog/bn">All</Link>
+          </li>
+
+          <li> <BlogSearch language='bn' /> </li>
+
+          {/* Categories */}
+          <li className="hidden md:flex items-center flex-wrap gap-2">
+            {category?.map((cat) => (
+              <div
+                key={cat.id}
+                className="relative group text-gray-300 hover:text-white rounded-full px-3 py-1 text-sm cursor-pointer"
+              >
+                <span>{cat.name}</span>
+
+                {/* Subcategories expand absolutely inside */}
+                {cat.subCategories?.length > 0 && (
+                  <ul
+                    className="
+                    absolute left-0 top-full pt-3
+                    shadow-lg z-10 min-w-[160px]
+                    max-h-0 overflow-hidden opacity-0 scale-y-0 origin-top
+                    transition-all duration-300 ease-in-out
+                    group-hover:max-h-60 group-hover:opacity-100 group-hover:scale-y-100
+                  "
+                  >
+                    {cat.subCategories.map((sub, index) => (
+                      <li key={index}>
+                        <Link
+                          href={`/blog/bn?categoryId=${cat.id}&subcategoryId=${sub.id}`}
+                          className={`block px-3 py-2 text-sm bg-teal-900 text-white hover:bg-teal-800
+                          ${index === 0 ? "rounded-t-md" : ""}
+                          ${index === cat.subCategories.length - 1 ? "rounded-b-md" : ""}
+                        `}
+                        >
+                          {sub.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            ))}
+          </li>
         </ul>
       </nav>
       <div className="flex flex-col gap-4">
         {heroBlog && <BlogHero heroBlog={heroBlog} />}
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid md:grid-cols-3 gap-4">
           {blogs?.data ? (blogs?.data?.map(blog => (
             <BlogCard key={blog?.id} blog={blog} />
           ))) : (

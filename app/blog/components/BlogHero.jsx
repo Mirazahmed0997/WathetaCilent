@@ -4,7 +4,7 @@ import React from 'react'
 
 export default function BlogHero({heroBlog}) {
     return (
-        <Link href={`/blog/${heroBlog?.slug}`}>
+        <Link href={`/blog/${heroBlog?.slug}`} className='hidden md:block'>
             <article className="w-full bg-teal-800 rounded-3xl overflow-hidden grid grid-cols-12">
                 <div className="col-span-5 px-6 py-20 text-white flex flex-col justify-between">
                     <div className="space-y-4">
