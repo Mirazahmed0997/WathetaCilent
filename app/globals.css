@@ -1,8 +1,10 @@
 @import "tailwindcss";
+@plugin "daisyui";
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  font-family: var(--font-inter), sans-serif;
 }
 
 @theme inline {
@@ -14,13 +16,4108 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #ffffff;
+    --foreground: #171717;
+    font-family: var(--font-inter), sans-serif;
   }
 }
+
+
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), sans-serif;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  height: 8.3vh;
+}
+.navLogoDiv {
+  width: 12vw;
+  height: 5vh;
+}
+.navLog {
+  width: 100%;
+  height: 100%;
+}
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 1.2rem;
+}
+.nav-item {
+  position: relative;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 400;
+  color: #333;
+}
+.navBgActive{
+  background-color: #f1f0ff;
+}
+.nav-item {
+  position: relative;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333;
+}
+.nav-item.active {
+  font-weight: bold;
+  color: black;
+}
+.nav-item.active::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 3px;
+  background-color: #f05a26;
+  border-radius: 5px;
+}
+.get-started {
+  background: linear-gradient(to bottom, #6cc17b, #46ba85);
+  color: #ffffff;
+  border: none;
+  border-radius: 1.875rem;
+  padding: 0.7rem 1.3rem;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.get-started:hover {
+  background-color: #0056b3;
+}
+.breadcrumb {
+  display: none;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+/* home hero */
+.HomeHeroDivHeight {
+  height: 115vh;
+}
+.homeHerobg {
+  /* background-color: #f6f6f6; */
+  background: linear-gradient(180deg, #F6F6F6 0%, #EBFFEF 100%);
+}
+.homeHeroHeadLinkDiv {
+  /* width: 47.56rem; */
+  width: 100%;
+}
+.heroNewHeadline{
+ font-size: 64px;
+ font-weight: 700;
+ color: #292D32;
+line-height: 75px;
+}
+.powerText{
+  font-size: 20px;
+}
+.whatsAppApiText{
+  color: #46BA85;
+}
+.newHeroPera{
+  font-size: 20px;
+  color: #292D32;
+}
+.newHeroImgaDiv{
+  width: 95%;
+  height: 52vh;
+}
+.newHeroImga{
+  width: 100%;
+  height: 100%;
+}
+.homeHeroHeadline {
+  font-size: 4.5rem;
+  font-weight: 700;
+  color: #292d32;
+  line-height: 85px;
+}
+.homeHeroPeraDiv {
+  width: 27rem;
+  text-align: justify;
+}
+.homeHeroPera {
+  font-size: 16px;
+  color: #292d32;
+}
+.homeHeroGetButton {
+  background: linear-gradient(to bottom, #6cc17b, #46ba85);
+  padding: 0.5rem 1.5rem;
+  color: #ffffff;
+  font-size: 1rem;
+  border: 1.5px solid #6cc17b;
+  border-radius: 2.5rem;
+  transition: all 0.3s ease-in-out;
+}
+.homeHeroGetButton:hover {
+  background: #f6f6f6;
+  padding: 0.5rem 1.5rem;
+  color: black;
+  box-shadow: gainsboro 2px 8px 4px;
+  font-size: 1rem;
+  border: 1.5px solid #6cc17b;
+  border-radius: 2.5rem;
+}
+.homeScheduleButton {
+  border: 1.5px solid #6cc17b;
+  padding: 0.5rem 1.5rem;
+  color: #292d32;
+  font-size: 1rem;
+  border-radius: 2.25rem;
+  transition: all 0.3s ease-in-out;
+}
+.homeScheduleButton:hover {
+  background: linear-gradient(to bottom, #6cc17b, #46ba85);
+  border: 1.5px solid #6cc17b;
+  padding: 0.5rem 1.5rem;
+  color: #ffffff;
+  font-size: 1rem;
+  border-radius: 2.25rem;
+  box-shadow: gainsboro 2px 8px 4px;
+}
+.homeHeroImgaDiv {
+  width: 100%;
+  height: 484px;
+}
+.homeHeroImga { 
+  width: 100%;
+  height: 100%;
+}
+.openRetImgaeDiv{
+  width: 126px;
+  height: 90px;
+}
+.openRetImgae{
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+.comentWithAvatarDiv{
+  width: 266px;
+  height: 135px;
+}
+.comentWithAvatarimg{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.cartSunglssImgDiv{
+  width: 330px;
+  height: 250px;
+}
+.cartSunglssImg{
+  width: 100%;  
+  height:100%;
+  object-fit: cover;
+}
+.talkImgDiv{
+  width: 300px;
+  height: 180px;
+}
+.talkImg{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.conversatinImgDiv{
+  width: 270px;
+  height: 218px;
+}
+.conversatinImg{
+  width: 100%;
+  height: 100%;
+  /* object-fit: cover; */
+}
+.capImgDiv{
+  width: 300px;
+  height: 340px;
+}
+.capImg{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.whatsAppImgDiv{
+  width: 280px;
+  height: 135px;
+}
+.whatsAppImg{
+  width: 100%;
+  height: 100%;
+  /* object-fit: cover; */
+}
+
+.ZoomIn {
+  animation: zoomin 3s ease-in-out infinite;
+}
+
+@keyframes zoomin {
+  0% {
+    transform: scale(0.9);
+  }
+
+  25% {
+    transform: scale(0.95);
+  }
+
+  50% {
+    transform: scale(1);
+  }
+
+  75% {
+    transform: scale(0.95);
+  }
+
+  100% {
+    transform: scale(0.9);
+  }
+}
+.ZoomInk {
+  animation: zoomink 3s ease-in-out infinite;
+}
+
+@keyframes zoomink {
+  0% {
+    transform: scale(0.85);
+  }
+
+  25% {
+    transform: scale(0.95);
+  }
+
+  50% {
+    transform: scale(1);
+  }
+
+  75% {
+    transform: scale(0.95);
+  }
+
+  100% {
+    transform: scale(0.85);
+  }
+}
+/* trusted coustomers logo */
+.trustedText {
+  font-size: 18px;
+  color: #292d32;
+}
+.trustLogoDiv {
+ display: flex;
+  justify-content: center;
+  align-items: center;
+  /* padding: 0.5rem; */
+  /* background: #fff; */
+  border-radius: 0.5rem;
+  cursor: pointer;
+  /* box-shadow: 0 0 5px rgba(0,0,0,0.1); */
+  transition: transform 0.3s ease;
+}
+.trustLogoDiv:hover {
+  transform: scale(1.05);
+}
+.trustLogo {
+  max-width: 100%;
+  max-height: 60px;
+  object-fit: contain;
+  display: block;
+}
+.trustLogoDivBM{
+  width: 66px;
+  height: 66px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.trustLogoDivBM:hover{
+  transform: scale(1.05);
+}
+.trustLogo {
+  width: 100%;
+  height: 100%;
+}
+.trustLogoDiv:hover{
+  transform: scale(1.05);
+}
+.trustLogoDivTrepical{
+  width: 100px;
+  height: 85px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.trustLogoDivTrepical:hover{
+  transform: scale(1.05);
+}
+.trustLogocarnibaDiv{
+  width: 182px;
+  height: 48px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.trustLogocarnibaDiv:hover{
+  transform: scale(1.05);
+}
+.trustLogoasthaDiv{
+  width: 198px;
+  height: 48px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.trustLogoasthaDiv:hover{
+  transform: scale(1.05);
+}
+.trustLogoambuDiv{
+  width: 237px;
+  height: 65px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.trustLogoambuDiv:hover{
+  transform: scale(1.05);
+}
+.trustLogoambuDiv{
+  width: 237px;
+  height: 65px;
+}
+.trustLogoOracalDiv{
+  width: 94px;
+  height: 72px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.trustLogoOracalDiv:hover{
+  transform: scale(1.05);
+}
+.trustLogoJoysanDiv{
+  width: 205px;
+  height: 55px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.trustLogoJoysanDiv:hover{
+  transform: scale(1.05);
+}
+.trustLogoOstadDiv{
+  width: 141px;
+  height: 38px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.trustLogoOstadDiv:hover{
+  transform: scale(1.05);
+}
+.trustLogoUnitedDiv{
+  width: 102px;
+  height: 48px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.trustLogoUnitedDiv:hover{
+  transform: scale(1.05);
+}
+.trustLogoSocianDiv{
+  width: 107px;
+  height: 34px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.trustLogoSocianDiv:hover{
+  transform: scale(1.05);
+}
+.trustLogoMascotDiv{
+  width: 163px;
+  height: 48px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.trustLogoMascotDiv:hover{
+  transform: scale(1.05);
+}
+.trustLogoKNDiv{
+  width: 149px;
+  height: 38px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.trustLogoKNDiv:hover{
+  transform: scale(1.05);
+}
+.trustLogoRupayonDiv{
+  width: 100px;
+  height: 48px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.trustLogoRupayonDiv:hover{
+  transform: scale(1.05);
+}
+.trustLogoPayDiv{
+  width: 144px;
+  height: 48px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.trustLogoPayDiv:hover{
+  transform: scale(1.05);
+}
+.trustLogoSaltanatDiv{
+  width: 256px;
+  height: 42px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.trustLogoSaltanatDiv:hover{
+  transform: scale(1.05);
+}
+.trustLogoChutiDiv{
+  width: 84px;
+  height: 70px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.trustLogoChutiDiv:hover{
+  transform: scale(1.05);
+}
+.trustLogoRatulDiv{
+  width: 167px;
+  height: 40px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.trustLogoRatulDiv:hover{
+  transform: scale(1.05);
+}
+.trustLogoIccDiv{
+  width: 76px;
+  height: 48px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.trustLogoIccDiv:hover{
+  transform: scale(1.05);
+}
+.trustLogoJamunaDiv{
+  width: 225px;
+  height: 40px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.trustLogoJamunaDiv:hover{
+  transform: scale(1.05);
+}
+.trustLogoOscoDiv{
+  width: 132px;
+  height: 61px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.trustLogoOscoDiv:hover{
+  transform: scale(1.05);
+}
+.trustLogoHDADiv{
+  width: 118px;
+  height: 50px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.trustLogoHDADiv:hover{
+  transform: scale(1.05);
+}
+.trustLogoMegaShopDiv{
+  width: 256px;
+  height: 56px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.trustLogoMegaShopDiv:hover{
+  transform: scale(1.05);
+}
+.trustLogoDataHostDiv{
+  width: 176px;
+  height: 44px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.trustLogoDataHostDiv:hover{
+  transform: scale(1.05);
+}
+.trustLogoEcoTrvelDiv{
+  width: 144px;
+  height: 78px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.trustLogoEcoTrvelDiv:hover{
+  transform: scale(1.05);
+}
+.trustLogoDWLDiv{
+  width: 171px;
+  height: 77px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.trustLogoDWLDiv:hover{
+  transform: scale(1.05);
+}
+.trustLogoUSAUKDiv{
+  width: 212px;
+  height: 46px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.trustLogoUSAUKDiv:hover{
+  transform: scale(1.05);
+}
+.trustLogoHerbexDiv{
+  width: 106px;
+  height: 77px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.trustLogoHerbexDiv:hover{
+  transform: scale(1.05);
+}
+.trustLogoBponiDiv{
+  width: 180px;
+  height: 60px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.trustLogoBponiDiv:hover{
+  transform: scale(1.05);
+}
+.trustLogoShimaTrabelDiv{
+  width: 79px;
+  height: 83px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.trustLogoShimaTrabelDiv:hover{
+  transform: scale(1.05);
+}
+.trustLogoHairFairDiv{
+  width: 87px;
+  height: 50px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.trustLogoHairFairDiv:hover{
+  transform: scale(1.05);
+}
+.trustLogoExpartOnlineDiv{
+  width: 234px;
+  height: 66px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.trustLogoExpartOnlineDiv:hover{
+  transform: scale(1.05);
+}
+.trustLogoIstiakDiv{
+  width: 152px;
+  height: 38px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.trustLogoIstiakDiv:hover{
+  transform: scale(1.05);
+}
+.trustLogoBponi2ndDiv{
+  width: 70px;
+  height: 70px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.trustLogoBponi2ndDiv:hover{
+  transform: scale(1.05);
+}
+.trustLogoDeshiDiv{
+  width: 163px;
+  height: 81px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.trustLogoDeshiDiv:hover{
+  transform: scale(1.05);
+}
+.trustLogoBWDiv{
+  width: 90px;
+  height: 61px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.trustLogoBWDiv:hover{
+  transform: scale(1.05);
+}
+.trustLogoDazzalDiv{
+  width: 133px;
+  height: 32px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.trustLogoDazzalDiv:hover{
+  transform: scale(1.05);
+}
+.trustLogoExtreamDiv{
+  width: 116px;
+  height: 58px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.trustLogoExtreamDiv:hover{
+  transform: scale(1.05);
+}
+.trustLogoCanadaDiv{
+  width: 97px;
+  height: 99px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.trustLogoCanadaDiv:hover{
+  transform: scale(1.05);
+}
+.trustLogohelperDiv{
+  width: 177px;
+  height: 38px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.trustLogohelperDiv:hover{
+  transform: scale(1.05);
+}
+.trustLogoButyDiv{
+  width: 174px;
+  height: 45px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.trustLogoButyDiv:hover{
+  transform: scale(1.05);
+}
+
+
+
+/* footer css */
+.footerbg {
+  background-color: #f2f2f2;
+}
+
+.footerLogoDiv {
+  width: 8.33vw;
+  height: 3.24vh;
+}
+.footerlogo {
+  width: 100%;
+  height: 100%;
+}
+.footerMetaLogoDiv {
+  width: 5.42vw;
+  height: 5.37vh;
+}
+.footerMetaLog {
+  width: 100%;
+  height: 100%;
+}
+.footerInfoHeadline {
+  color: #292d32;
+  font-size: 18px;
+  font-weight: 600;
+}
+.footerInfoHeadlineSub {
+  color: #292d32;
+  font-size: 15px;
+  font-weight: 600;
+}
+.footerPera {
+  font-size: 14px;
+  font-weight: 400;
+}
+.footerMailIcon {
+  width: 18px;
+  height: 18px;
+}
+.foterSocialIconDiv {
+  width: 15px;
+  height: 15px;
+}
+.foterSocialIcon {
+  width: 100%;
+  height: 100%;
+}
+.footerSelectedButtonText {
+  font-size: 1rem;
+}
+.hover-underline {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+.hover-underline::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background-color: #f97316; 
+  transition: width 0.3s ease;
+}
+.hover-underline:hover::after {
+  width: 100%;
+}
+
+/* homeFeatures */
+.homeFeaturesbg {
+  background-color: #f5f4ff;
+}
+.HomeFeturesHeadline {
+  font-size: 3.375rem;
+  color: #292d32;
+  font-weight: 600;
+}
+.homeFeaturHedlindPera {
+  font-size: 1rem;
+}
+.homeFeaturesLogoDiv {
+  width: 60px;
+  height: 60px;
+}
+.homeFeaturesLogo {
+  width: 100%;
+  height: 100%;
+}
+.cardFeaturesHeadline {
+  padding-top: 10px;
+  font-size: 1.5rem;
+  color: #000000;
+  font-weight: 500;
+}
+.cardFeaturesPera {
+  font-size: 1rem;
+}
+.HomeFeturescardShadow {
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  /* box-shadow: none;  */
+}
+.HomeFeturescardShadow:hover {
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* WhatsAppChatBots */
+.whatsAppChatBotsBg {
+  background-color: #f8f4e9;
+}
+.whatsAppChatbotsImgDiv {
+  /* width: 100%; */
+  /* height: 450px; */
+  border: 0.5px solid #dbd9d9;
+  width: 100%;
+  height: 62vh;
+  border-radius: 20px;
+  /* aspect-ratio: 16 / 9; */
+  overflow: hidden;
+}
+.whatsAppChatbotsImg {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  object-fit: fill;
+}
+.whatsAppChatBotsText {
+  font-size: 16px;
+  color: #292d32;
+  background-color: #ffffff;
+  font-weight: 500;
+}
+.wahtsChatbotswhatsLogoDiv {
+  width: 14px;
+  height: 14px;
+}
+.wahtsChatbotswhatsLogo {
+  width: 100%;
+  height: 100%;
+}
+.KeepYourBusinessText {
+  font-size: 1.725rem;
+  color: #292d32;
+  font-weight: 600;
+  width: 100%;
+}
+.whatsAppChatBotsTextPera {
+  font-size: 1.11rem;
+  font-weight: 400;
+  color: #292d32;
+  width: 100%;
+}
+.persentText {
+  font-size: 18px;
+  width: 13vw;
+}
+.persentTextNumber {
+  font-size: 26px;
+  font-weight: 600;
+}
+.repleacesText {
+  font-size: 14px;
+  color: #292d32;
+  font-weight: 400;
+}
+.repleacesItems {
+  font-size: 12px;
+  color: #525252;
+}
+.repleacesItemsLogoDiv {
+  width: 20px;
+  height: 20px;
+}
+.repleacesItemsLogo {
+  width: 100%;
+  height: 100%;
+}
+.chatbotImgDivMain{
+  width: 60%;
+}
+.chatbotTextDivMain{
+  width: 40%;
+}
+
+/* teambox */
+.homeTemboxBg {
+  background-color: #f2fbf5;
+}
+/* Broadcaster */
+.broadcasterBg {
+  background-color: #f4f2ff;
+}
+/* connectors */
+.connectorsbg {
+  background-color: #e9f8e3;
+}
+
+/* intrergrations */
+.intregeteDivBG {
+  background-image: url("/images/integrations.png");
+  background-repeat: no-repeat;
+  background-position-x: center;
+  height: 697px;
+  width: 100%;
+}
+.integrationsText {
+  font-size: 18px;
+}
+.intregeteHeadline {
+  font-size: 3rem;
+  /* font-size: 3.375rem; */
+  font-weight: 600;
+  width: 852px;
+}
+
+/* happyclients */
+.HappyClientSaysBg {
+  background-color: #292d32;
+  height: 941px;
+}
+.happyClientsSaysText {
+  font-size: 54px;
+  font-weight: 600;
+}
+.happyClientsSaysImgDiv {
+  width: 60px;
+  height: 60px;
+  border-radius: 50px;
+}
+.happyClientsSaysImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50px;
+}
+.clientSaySliderPera {
+  font-size: 16px;
+  font-weight: 400;
+}
+.happyClientsCardDiv{
+  height: 300px;
+}
+
+/* whaychooseWatheta */
+.whaychooseWathetabg {
+  background-color: #f1f0ff;
+}
+.whyChooseWaThetaText {
+  font-size: 54px;
+  font-weight: 600;
+  width: 348px;
+}
+.whyChooseWaThetaPera {
+  font-size: 17.5px;
+  width: 60%;
+}
+.whyChooseWathetaCardImgDiv {
+  width: 94px;
+  height: 100px;
+}
+.whyChooseCardImg {
+  width: 100%;
+  height: 100%;
+}
+.whyChooseCardHeadline {
+  font-size: 24px;
+  font-weight: 600;
+  width: 224px;
+}
+/* conversational */
+.conversationalbg {
+  background-color: #f6f6f6;
+}
+.conversationalHeadline {
+  font-size: 54px;
+  font-weight: 600;
+  width: 754px;
+}
+.conversationalCardTitle {
+  font-size: 26px;
+  font-weight: 600;
+}
+.conversationallearnMoreButton {
+  font-size: 16px;
+  color: #292d32;
+}
+.conversationalArrowDiv {
+  width: 5vw; /* Adjust based on design */
+  height: 5vw;
+  max-width: 36px;
+  max-height: 36px;
+}
+.conversationalArrow {
+  width: 100%;
+  height: 100%;
+}
+.conversationalIconDiv {
+  width: 6vw;
+  height: 6vw;
+  max-width: 46px;
+  max-height: 46px;
+}
+.conversationalIcon {
+  width: 100%;
+  height: 100%;
+}
+.viewallindustryButtonText {
+  font-size: 1rem;
+}
+
+/* rescon to switch */
+.resonToSwitchHeadline {
+  font-size: 3.375rem;
+  font-weight: 600;
+  width: 750px;
+}
+.resonIconDiv {
+  width: 5vw;
+  height: 5vw;
+}
+.resonIcon {
+  width: 100%;
+  height: 100%;
+}
+.resonCardHeadline {
+  font-size: 24px;
+  font-weight: 600;
+}
+.resonCardPera {
+  font-size: 0.9rem;
+  color: #7a7a7a;
+}
+.HomeReasonToSwitchCard {
+  width: 100%;
+  height: 300px;
+}
+/* homeBlogs */
+.homeBlogsBg {
+  background-color: #f6f6f6;
+}
+.homeBlogsHeadline {
+  font-size: 3.375rem;
+  font-weight: 600;
+}
+.homeBlogsHeadPera {
+  font-size: 1rem;
+  width: 690px;
+}
+.homeBlogsCols2ImgDiv {
+  width: 100%;
+  height: 400px;
+}
+.homeBlogsCols2Img {
+  width: 100%;
+  height: 100%;
+}
+.homeBlogsCols1-1stImgDiv {
+  width: 100%;
+  height: 400px;
+}
+.homeBlogsCols1-1stImg {
+  width: 100%;
+  height: 100%;
+}
+.homeBlogCardHeadline {
+  font-size: 1.625rem;
+  font-weight: 600;
+  width: 84%;
+}
+.dayOrCounttext {
+  font-size: 1rem;
+  color: #7a7a7a;
+}
+.homeBlogCard2ndHeadline {
+  font-size: 1.375rem;
+  font-weight: 600;
+  width: 95%;
+}
+.homeBlogsCols1-2ndImgDiv {
+  width: 100%;
+  height: 250px;
+}
+
+/* HomegettingStart */
+.gettingBg {
+  background-color: black;
+  height: 55vh;
+}
+.gettingHeadlin {
+  font-size: 3.375rem;
+  font-weight: 600;
+  color: #f4f4f4;
+  width: 573px;
+}
+.gettingPera {
+  font-size: 1.12rem;
+  color: #f4f4f4;
+}
+.gettingGetButton {
+  background: linear-gradient(to bottom, #6cc17b, #46ba85);
+  color: white;
+}
+/* High Performer */
+.heighPrfomerLogoDiv {
+  width: 100%;
+  height: 195px;
+}
+.heighPrfomerLogo {
+  width: 100%;
+  height: 100%;
+}
+/* Home FAQ */
+.homeFaqHEeadLine {
+  font-size: 3.375rem;
+  font-weight: 600;
+  width: 450px;
+}
+.homeFaqButtonDiv {
+  width: 255px;
+  /* background-color: #DDF2E6; */
+  text-align: start;
+  padding-left: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.homeFaqButtonDivActive {
+  width: 255px;
+  background-color: #ddf2e6;
+  text-align: start;
+  padding-left: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.homeFaqButton {
+  height: 38px;
+  text-align: start;
+  padding-left: 10px;
+  border-radius: 4px;
+}
+.homeFaqButtonActive {
+  height: 38px;
+  text-align: start;
+  padding-left: 10px;
+  border-left: 4px solid #5fbf7f;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.ellipsis-2-lines {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 5em;
+  vertical-align: top;
+  font: 1.5rem;
+  color: white;
+  width: 60%;
+}
+/* Fetueres */
+.featuresHeroDiv {
+  width: 100%;
+  height: 90vh;
+}
+.featuresHeroBg {
+  position: absolute;
+  width: 100%;
+  height: 90vh;
+}
+.featuresHeadlineDiv {
+  position: relative;
+  height: 90vh;
+}
+.featuresHeadline {
+  font-size: 4rem;
+  font-weight: 600;
+  width: 100%;
+  color: white;
+}
+.featuresPera {
+  font-size: 20px;
+  line-height: 33px;
+  width: 100%;
+  color: white;
+}
+.cardHover {
+  cursor: pointer;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+.cardHover:hover {
+  cursor: pointer;
+  box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.1);
+}
+.FeaturesCardDiv{
+  height: 20vh;
+}
+.featuresCardLogoDiv {
+  width: 60px;
+  height: 60px; 
+}
+.featuresCardLogo {
+  width: 100%;
+  height: 100%;
+}
+.featuresCardHeadline {
+  font-size: 1rem;
+  font-weight: 500;
+}
+/* blogs */
+.blogsHeroBg {
+  background-image: url("/images/image 314.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 65vh;
+}
+.blogsHeroBgImg {
+  width: 100%;
+  height: 65vh;
+}
+.blogsHeroHeadline {
+  font-size: 4vw;
+  font-weight: 600;
+}
+.blogsHeroHeadPera {
+  font-size: 1.25rem;
+  width: 729px;
+}
+.blogs2ndHeroBgImgDiv {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  overflow: hidden;
+}
+.blogs2ndHeroBgImg {
+  position: absolute;
+  width: 100%;
+  height: 70vh;
+}
+.blogs2ndHeroContectDiv {
+  position: relative;
+  height: 70vh;
+}
+.blogsStartupsButton {
+  background: #4f4f4f;
+  backdrop-filter: blur(10px);
+  color: white;
+  font-size: 0.9vw;
+}
+.blogs2ndHeroHealdline {
+  font-size: 2vw;
+  color: white;
+  width: 40vw;
+}
+.blogs2ndHeroPera {
+  font: 1.5vw;
+  color: white;
+  width: 40vw;
+}
+.blogsReadArticleButton {
+  background-color: white;
+  font-size: 1.2vw;
+  color: black;
+}
+.blogPageImgeDiv {
+  width: 100%;
+  height: 40vh;
+}
+.blogPageImge {
+  width: 100%;
+  height: 100%;
+}
+.blogProductText {
+  font-size: 14px;
+  font-weight: 600;
+}
+.blogProductMinText {
+  font-size: 14px;
+  font-weight: 400;
+  color: #292d32;
+}
+.blogPageHeadline {
+  font-size: 1.375rem;
+  color: #000000;
+  font-weight: 500;
+  /* width: 96%; */
+  width: 95%;
+}
+.blogReadMoreText {
+  font-size: 1rem;
+  color: #292d32;
+}
+.blogRecentBlog {
+  background-color: #e9f8e3;
+}
+.blogPageReasentHeadline {
+  font-size: 3.375rem;
+  font-weight: 600;
+}
+.blogePageResentBlogsImgDiv {
+  width: 100%;
+  height: 310px;
+}
+.blogePageResentBlogsImg {
+  width: 100%;
+  height: 100%;
+}
+.blogPageResentImgDiv2nd {
+  /* width: 13vw; */
+  width: 100%;
+  height: 140px;
+}
+.blogPageResent2Img {
+  width: 100%;
+  height: 100%;
+}
+.joinOurNewsletterbgImgDiv {
+  position: relative;
+  width: 100%;
+  height: 404px;
+}
+.joinOurNewsletterbgImg {
+  position: absolute;
+  width: 100%;
+  height: 404px;
+}
+.joinOurNewsletterContentDiv {
+  position: relative;
+  height: 404px;
+}
+.JoinournewsletterText {
+  font-size: 3.375rem;
+  font-weight: 500;
+}
+.joinournewsletterPeraText {
+  color: white;
+  font-size: 1.125rem;
+}
+.joinournewsletterInputDiv {
+  position: relative;
+  width: 636px;
+  height: 60px;
+}
+.joinournewsletterInput {
+  position: absolute;
+  background: rgba(46, 51, 57, 0.6);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 10px;
+  padding-left: 20px;
+  border-radius: 50px;
+  outline: none;
+  font-size: 16px;
+  width: 100%;
+  height: 100%;
+}
+.joinournewsletterSubscribeButton {
+  position: relative;
+  /* left: 76%; */
+  float: right;
+  background: #46ba85;
+  color: white;
+  height: 60px;
+}
+/* single blogs */
+.singleBlogsHeadline {
+  font-size: 4rem;
+}
+.singleStartupButton {
+  font-size: 1rem;
+}
+.singleBlogImgDiv {
+  width: 100%;
+  height: 487px;
+}
+.singleBlogImg {
+  width: 100%;
+  height: 100%;
+}
+.inThisArticleText {
+  font-size: 1.25rem;
+}
+.inthisSingleButtons {
+  font-size: 1rem;
+  width: 180px;
+  height: 36px;
+}
+.inthisSingleButtonsDiv {
+  border-left: 4px solid #c6e7ce;
+}
+.inthisSingleButtonsDivActive {
+  border-left: 4px solid #46ba85;
+}
+.shearAricleText {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+.singleBlogsPeraText {
+  font-size: 1.125rem;
+  color: #292d32;
+}
+.singleContentImgDiv {
+  width: 100%;
+  height: 55vh;
+}
+.singleContentImg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Integrations */
+.integrateHeroBg {
+  background-image: url("/images/imageIntreget 314.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 434px;
+}
+.inregrationPageButton {
+  font-size: 1.125rem;
+}
+.integrationsPageHeadLine {
+  font-size: 4rem;
+  font-weight: 600;
+  width: 889px;
+  text-align: center;
+  line-height: 80px;
+}
+.integetSearchInputDiv {
+  position: relative;
+  width: 730px;
+  height: 60px;
+  /* background-color: white; */
+}
+.integetSearchInput {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  background-color: white;
+}
+.searchIconButton {
+  position: relative;
+  top: 0;
+  height: 60px;
+}
+.searchInconDiv {
+  width: 24px;
+  height: 24px;
+}
+.searchIncon {
+  width: 100%;
+  height: 100%;
+}
+.integetCategoryText {
+  font-size: 1.75rem;
+  font-weight: 500;
+}
+.integratonCard {
+  box-shadow: 1px 5px 4px #888f98;
+}
+.intreInconDiv {
+  width: 41px;
+  height: 41px;
+}
+.intreIncon {
+  width: 100%;
+  height: 100%;
+}
+.interCategoryPera {
+  font-size: 15px;
+  color: #292d32;
+}
+.interCategoryLearnButton {
+  border-bottom: 1px solid #000000;
+  color: #292d32;
+}
+.interCategoryLearnButton:hover {
+  border-bottom: 1px solid #7d10d1;
+  color: #7d10d1;
+}
+.categoryButtonBg {
+  background-color: #ededed;
+}
+.categoryButtonBgActive {
+  background-color: #e4c1ff;
+}
+
+/* pricing */
+/* .lmitedBgDiv{
+  background-color: #F1DCDC;
+} */
+.pricingBg {
+  background-image: url("/images/pricingBG.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 750px;
+}
+.pricingHeroContentDiv {
+  width: 100%;
+  height: 680px;
+}
+.pricingMetaLogoDivMain {
+  background-color: white;
+  cursor: pointer;
+  width: 315px;
+  padding: 20px 20px;
+  border-radius: 20px;
+  box-shadow: 1px 1px 1px rgb(177, 177, 177);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.pricingMetaLogoDivMain:hover {
+  transform: scale(1.05);
+  box-shadow: 5px 5px 5px rgba(113, 113, 113, 0.614);
+}
+.pricingMetaLogoDiv {
+  width: 115px;
+  height: 64px;
+}
+.pricingMetaLogo{
+  width: 100%;
+  height: 100%;
+}
+.pricingOfficialText {
+  font-size: 1rem;
+  font-weight: 600;
+}
+.metaBusinessText {
+  font-size: 0.875rem;
+}
+.pricingHeadline {
+  font-size: 4rem;
+  font-weight: 600;
+  width: 641px;
+  text-align: center;
+  color: white;
+  font-family: "Inter", sans-serif;
+}
+.pricingPera {
+  font-size: 1.25rem;
+  color: white;
+  font-weight: 400;
+  font-family: "Inter", sans-serif;
+}
+.pricingWhatsAppText {
+  font-size: 1rem;
+  background-color: #e4e2e26d;
+  color: #ffffff;
+  font-weight: 400;
+}
+.pricingCardDiv {
+  width: 100%;
+  height: 170px;
+  border-radius: 15px;
+}
+.pricingHeorIconDiv {
+  width: 40px;
+  height: 40px;
+}
+.pricingHeorIcon {
+  width: 100%;
+  height: 100%;
+}
+.pricingHerogridCardDiv {
+  background-color: white;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.pricingHerogridCardDiv:hover {
+  background-color: white;
+  transform: scale(1.03);
+  box-shadow: 5px 5px 5px rgba(113, 113, 113, 0.614);
+}
+.pricingHerogridCardPera {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.pricingButtonTaggoleDiv {
+  position: relative;
+  background-color: #f1f1f1;
+  font-size: 1rem;
+}
+.pricingToggoleButton {
+  background-color: #69c07c;
+  color: white;
+}
+.saveText{
+  font-size: 12px;
+  padding: 5px 10px;
+}
+.buttonSaveText {
+  position: absolute;
+  top: -7;
+  right: -15px;
+  font-size: 11px;
+  font-weight: 600;
+  border: 0.8px solid rgb(160, 244, 155);
+  border-radius: 50px;
+  padding: 1px 5px;
+  color: #01360d;
+}
+.pricingFreaturesText {
+  font-size: 1.75rem;
+  font-weight: 500;
+}
+.silverPlanDiv {
+  background-color: #e3f5ff;
+  width: 100%;
+  height: 156px;
+  border-radius: 10px;
+}
+.packagePlaneNameText {
+  font-size: 1rem;
+  font-weight: 300;
+}
+.pricingTKText {
+ font-size: 1.312rem;
+  font-weight: 600;
+}
+.thougtText{
+  font-size: 12px;
+  text-decoration: line-through;
+  text-decoration-style: solid;
+  text-decoration-color: rgb(248, 69, 69);
+}
+.recommendedText {
+  background-color: #69c07c;
+}
+.recommendedTextDiv {
+  /* position: absolute; */
+  background-color: #69c07c;
+}
+/* .goldPlanDivPrice{
+  position: absolute;
+  background-color: white;
+  height: 156px;
+  border: 0.5px solid #69C07C;
+} */
+.goldPlanDiv {
+  background-color: white;
+  width: 100%;
+  height: 156px;
+  border-radius: 10px;
+  border-bottom: 0.5px solid #69c07c;
+  border-left: 0.5px solid #69c07c;
+  border-right: 0.5px solid #69c07c;
+}
+.platinumPlanDiv {
+  background-color: #eae8ff;
+  width: 100%;
+  height: 156px;
+  border-radius: 10px;
+}
+@keyframes shimmer-left {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+.blink-background {
+  background: linear-gradient(
+    90deg,
+    #fa5032 0%,
+    #f5a192 50%,
+    #ff6c3b 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer-left 2s linear infinite;
+  -webkit-background-clip: text;
+  background-clip: border-box;
+  border-radius: 15px !important;
+  padding: 5px;
+  box-shadow: 2px 3px 3px rgb(171, 171, 171);
+}
+
+/* test */
+
+.pricing-card {
+  height: 175px;
+  width: 100%;
+  background: white;
+  border-radius: 12px;
+  text-align: center;
+  border: 0.5px solid #69c07c;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}
+
+.pricing-header {
+  background-color: #6ebe75;
+  color: white;
+  font-size: 14px;
+  padding: 6px;
+}
+
+.pricing-body {
+  /* padding: 20px; */
+  border-top-left-radius: 12px; 
+  border-top-right-radius: 12px;
+}
+
+.priceingFacebbokIconDiv{
+  width: 18px;
+  height: 18px;
+}
+.priceingFacebbokIcon{
+  width: 100%;
+  height: 100%;
+}
+
+.plan-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.price {
+  font-size: 26px;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 5px;
+}
+
+.billing-cycle {
+  font-size: 14px;
+  color: #666;
+}
+/* test */
+.additionalbg {
+  background-color: #f8f4e9;
+}
+.featuresTextPadding{
+  /* padding: 11px 0px; */
+  height: 47px;
+}
+.featuresTextDisPadding{
+  padding: 12.5px 0px;
+}
+.feturesTexts{
+  font-size: 1rem;
+}
+.iIcon{
+  position: relative;
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+}
+.iIconText{
+  position: absolute;
+  width: 550px;
+  height: fit-content;
+  top: 0;
+  display: none;
+  background: #000000;
+  color: white;
+}
+.iIcon:hover .iIconText{
+  display: block;
+}
+.whatsAppConversationsText{
+  font-size: 15px;
+  padding: 12px 0px;
+}
+.featuresDiscription{
+  font-size: 14px;
+}
+.spasingHeght{
+  height: 15px;
+}
+.feturesHead{
+  font-weight: 500;
+  height: 47px;
+}
+.additonalText{
+  font-size: 3.375rem;
+  font-weight: 600;
+}
+.additonalPera{
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #292D32;
+}
+.additonalCardIconDiv{
+  width: 45px;
+  height: 52px;
+}
+.additonalCardIcon{
+  width: 100%;
+  height: 100%;
+}
+.cardBgColor{
+  background: white;
+  cursor: pointer;
+  box-shadow: 0px 0px 0px rgba(234, 233, 233, 0.707);
+  transition: 0.3s ease-in-out;
+}
+.cardBgColor:hover{
+  background: white;
+  box-shadow: 5px 8px 8px rgba(201, 200, 200, 0.707);
+}
+.aditionlCardPera{
+  font-size: 16px;
+  color: #4B5563;
+}
+.aditionalPrice{
+  font-size: 1.625rem;
+  font-weight: 600;
+}
+.aditonalpermaoth{
+  font-size: 14px;
+  font-weight: 400;
+  color: #4B5563;
+}
+.dedicatedText{
+  font-size: 3.375rem;
+  font-weight: 600;
+  color: #292D32;
+  text-align: center;
+}
+.dedicatedPera{
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: #292D32;
+  text-align: center;
+}
+.dedicatedIconDiv{
+  width: 52px;
+  height: 52px;
+}
+.dedicatedIcon{
+  width: 100%;
+  height: 100%;
+}
+.dedicatedCardDiv{
+  cursor: pointer;
+  box-shadow: 0px 0px 0px rgba(208, 207, 207, 0.668);
+  transition: 0.3s ease-in-out;
+}
+.dedicatedCardDiv:hover{
+  box-shadow: 4px 6px 4px rgba(208, 207, 207, 0.668);
+}
+.dedicatedcardHeadline{
+  font-size: 18px;
+  color: #292D32;
+  font-weight: 600;
+}
+.transformYourBusinessText{
+  font-size: 54px;
+  font-weight: 600;
+  width: 636px;
+  line-height: 60px;
+}
+.readyToButton{
+  background-color: #46ba85;
+  padding: 10px 25px;
+  color: white;
+  border-radius: 50px;
+  margin: auto;
+}
+.communicationBg{
+  background-color: #292D32;
+}
+.communicationText{
+  font-size: 3rem;
+  font-weight: 600;
+  color: white;
+  width: 90%;
+  line-height: 68px;
+}
+.communicationTextPera{
+  font-size: 16px;
+  color: #D9D9D9;
+  width: 80%;
+}
+.communicationIconDiv{
+  width: 52px;
+  height: 52px;
+}
+.communicationIcon{
+  width: 100%;
+  height: 100%;
+}
+.communicationIconPera{
+  font-size: 14px;
+  color: #D9D9D9;
+}
+.schedulaDemoText{
+  font-size: 28px;
+  font-weight: 600;
+}
+.schedulaDemoPera{
+  font-size: 14px;
+  font-weight: 400;
+  width: 80%;
+}
+.scheduleInput{
+  width: 100%;
+  height: 44px;
+  outline: none;
+  font-size: 14px;
+  color: #7A7A7A;
+  padding-left: 15px;
+}
+.scheduleTextArea{
+  width: 100%;
+  height: 100px;
+  outline: none;
+  font-size: 14px;
+  color: #7A7A7A;
+  padding-left: 15px;
+  padding-top: 10px;
+  resize: none;
+}
+.scheduleDemoButton{
+  background-color: #46BA85;
+  font-size: 15px;
+  color: white;
+  padding: 10px 25px;
+  border-radius: 50px;
+  transition: 0.3s ease-in-out;
+}
+.scheduleDemoButton:hover{
+  background-color: #46BA85;
+  font-size: 15px;
+  color: white;
+  padding: 10px 25px;
+  border-radius: 50px;
+  box-shadow: 4px 6px 4px rgba(184, 183, 183, 0.756);
+}
+
+/* contact */
+.contactHeadline{
+  font-size: 3.375rem;
+  font-weight: 600;
+  width: 750px;
+  text-align: center;
+  color: white;
+  font-family: "Inter", sans-serif;
+}
+
+/* contact */
+
+.contactBg {
+  background-image: url("/images/fruit-basket-GeEk8Yok6Ig-unsplash.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 680px;
+}
+.contactHeroContentDiv {
+  width: 100%;
+  height: 680px;
+}
+.contactHeorIconDiv{
+  height: 52px;
+  width: 52px;
+}
+
+/* help Page */
+.helpBgDiv{
+  background-image: url("/images/image 314.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 550px;
+}
+.helpContentDiv{
+    width: 100%;
+    height: 550px;
+}
+
+/* button */
+.buttonHeightWitd{
+  width: 207px;
+  height: 54px
+}
+.border{
+  border-color: rgb(200, 198, 198) !important;
+}
+
+/* sass */
+.saasBgDiv{
+  background: linear-gradient(135deg, #3ccf91 0%, #1da976 50%, #179a6a 100%);
+  width: 100%;
+  height: 110vh;
+  /* height: fit-content; */
+}
+.sasheadline{
+  font-size: 3.320rem;
+  margin: auto;
+  font-weight: 600;
+  color: #ffffff;
+}
+.saswhitelablePriceHeadline{
+  font-size: 3.375rem;
+  font-weight: 600;
+}
+.saswhitelablePricePera{
+  font-size: 1rem;
+  color: #4B5563;
+}
+.sasPeiceDiv{
+  background-color: #F8F4E9;
+}
+.adoncardbg{
+  background-color: #FBFCFD;
+}
+.sasstartbg{
+  background-color: #F9FAFB;
+}
+.sasstartDivBg{
+  background: linear-gradient(135deg, #3ccf91 0%, #1da976 50%, #179a6a 100%);
+}
+
+/* 404 error */
+.errorImageDiv{
+  width: 400px;
+  height: 400px;
+}
+.errorImage{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* media query */
+/* Mobile Styles */
+@media (max-width: 600px) {
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    height: 5vh;
+  }
+  .navLogoDiv {
+    width: 95%;
+    height: 3.6vh;
+  }
+  .navLog {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Base hidden mobile menu */
+.nav-links {
+  display: none;
+  flex-direction: column;
+  position: fixed; /* <-- Change this */
+  top: 58px; /* Adjust according to your navbar height */
+  right: 0;
+  width: 100%;
+  height: calc(100vh - 64px); /* Remaining height */
+  background-color: white;
+  padding: 35px 0;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  z-index: 50;
+}
+
+/* When active, slide in */
+.nav-links.active {
+  display: flex;
+  transform: translateX(0%);
+  justify-content: start;
+  align-items: center;
+}
+
+  .get-started {
+    background: linear-gradient(to bottom, #6cc17b, #46ba85);
+    color: #ffffff;
+    border: none;
+    border-radius: 1.875rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: 0.8rem;
+  }
+  .breadcrumb {
+    display: block;
+  }
+
+  /* home hero */
+  .HomeHeroDivHeight {
+    height: 90vh;
+  }
+  .homeHerobg {
+    background: linear-gradient(180deg, #F6F6F6 0%, #EBFFEF 100%);
+  }
+  .homeHeroHeadLinkDiv {
+    /* width: 47.56rem; */
+    width: 100%;
+  }
+  .homeHeroHeadline {
+    /* font-size: 2.375rem; */
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #292d32;
+    line-height: 45px;
+  }
+  .heroNewHeadline{
+    font-size: 1.975rem;
+    font-weight: 700;
+    color: #292D32;
+    line-height: 40px;
+   }
+   .newHeroPera{
+    font-size: 15px;
+    color: #292D32;
+  }
+  .powerText{
+    font-size: 15px;
+  }
+  .homeHeroPeraDiv {
+    /* width: 27rem; */
+    width: 100%;
+    text-align: start;
+  }
+  .homeHeroPera {
+    font-size: 14px;
+    color: #292d32;
+  }
+  .homeHeroGetButton {
+    background: linear-gradient(to bottom, #6cc17b, #46ba85);
+    padding: 0.5rem 0.8rem;
+    color: #ffffff;
+    font-size: 0.8rem;
+    border: 1.5px solid #6cc17b;
+    border-radius: 2.5rem;
+    transition: all 0.3s ease-in-out;
+  }
+  .homeHeroGetButton:hover {
+    background: #f6f6f6;
+    padding: 0.5rem 0.8rem;
+    color: black;
+    box-shadow: gainsboro 2px 8px 4px;
+    font-size: 0.8rem;
+    border: 1.5px solid #6cc17b;
+    border-radius: 2.5rem;
+  }
+  .homeScheduleButton {
+    border: 1.5px solid #6cc17b;
+    padding: 0.5rem 0.5rem;
+    color: #292d32;
+    font-size: 0.8rem;
+    border-radius: 2.25rem;
+    transition: all 0.3s ease-in-out;
+  }
+  .homeScheduleButton:hover {
+    background: linear-gradient(to bottom, #6cc17b, #46ba85);
+    border: 1.5px solid #6cc17b;
+    padding: 0.5rem 0.5rem;
+    color: #ffffff;
+    font-size: 0.8rem;
+    border-radius: 2.25rem;
+    box-shadow: gainsboro 2px 8px 4px;
+  }
+  /* .homeHeroImgaDiv {
+    width: 100%;
+    height: 40vh;
+  }
+  .homeHeroImga {
+    width: 100%;
+    height: 100%;
+  } */
+  /*  */
+
+  /* trastedClients */
+  .trustedText {
+    font-size: 18px;
+    color: #292d32;
+    font-weight: 500;
+  }
+  .trustLogoDiv {
+    width: 100%;
+    height: 34px;
+  }
+  .trustLogo {
+    width: 100%;
+    height: 100%;
+  }
+  .trustLogoDivPhone{
+    width: 96px;
+    height: 34px;
+  }
+  /* .customerPhoneLogoDiv{
+    width: 100%;
+    height: 100vh;
+  }
+  .customerPhoneLogo{
+    width: 100%;
+    height: 100%;
+  } */
+  /* home features */
+  /* .trustLogoDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  background: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.trustLogoDiv:hover {
+  transform: scale(1.05);
+}
+
+.trustLogo {
+  max-width: 100%;
+  max-height: 60px;
+  object-fit: contain;
+  display: block;
+} */
+  .homeFeaturesbg {
+    background-color: #f5f4ff;
+  }
+  .HomeFeturesHeadline {
+    font-size: 1.75rem;
+    color: #292d32;
+    font-weight: 600;
+  }
+  .homeFeaturHedlindPera {
+    font-size: 0.9rem;
+  }
+  .homeFeaturesLogoDiv {
+    width: 40px;
+    height: 40px;
+  }
+  .homeFeaturesLogo {
+    width: 100%;
+    height: 100%;
+  }
+  .cardFeaturesHeadline {
+    padding-top: 10px;
+    font-size: 1rem;
+    color: #000000;
+    font-weight: 500;
+  }
+  .cardFeaturesPera {
+    font-size: 12px;
+  }
+  .HomeFeturescardShadow {
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    /* box-shadow: none;  */
+  }
+  .HomeFeturescardShadow:hover {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  /* WhatsAppChatBots */
+  .whatsAppChatBotsBg {
+    background-color: #f8f4e9;
+  }
+  .whatsAppChatbotsImgDiv {
+    width: 100%;
+    /* height: 432px; */
+    height: 30vh;
+  }
+  .whatsAppChatbotsImg {
+    width: 100%;
+    height: 100%;
+  }
+  .whatsAppChatBotsText {
+    font-size: 16px;
+    color: #292d32;
+    background-color: #ffffff;
+    font-weight: 500;
+  }
+  .wahtsChatbotswhatsLogoDiv {
+    width: 14px;
+    height: 14px;
+  }
+  .wahtsChatbotswhatsLogo {
+    width: 100%;
+    height: 100%;
+  }
+  .KeepYourBusinessText {
+    font-size: 1.5rem;
+    color: #292d32;
+    font-weight: 600;
+    width: 100%;
+  }
+  .whatsAppChatBotsTextPera {
+    font-size: 16px;
+    font-weight: 400;
+    color: #292d32;
+    width: 90%;
+  }
+  .persentText {
+    font-size: 0.9rem;
+    width: 100%;
+  }
+  .persentTextNumber {
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+  .repleacesText {
+    font-size: 14px;
+    color: #292d32;
+    font-weight: 400;
+  }
+  .repleacesItems {
+    font-size: 10px;
+    color: #525252;
+  }
+  .repleacesItemsLogoDiv {
+    width: 15px;
+    height: 15px;
+  }
+  .repleacesItemsLogo {
+    width: 100%;
+    height: 100%;
+  }
+  .openRetImgaeDiv{
+    width: 65.22px;
+    height: 46.59px;
+  }
+  .openRetImgae{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  }
+  .comentWithAvatarDiv{
+    width: 266px;
+    height: 135px;
+  }
+  .comentWithAvatarimg{
+    width: 100%;
+    height: 100%;
+    /* object-fit: cover; */
+  }
+  .cartSunglssImgDiv{
+    width: 126px;
+    height: 92.14px;
+  }
+  .cartSunglssImg{
+    width: 100%;  
+    height:100%;
+    /* object-fit: cover; */
+  }
+  .talkImgDiv{
+    width: 300px;
+    height: 180px;
+  }
+  .talkImg{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .conversatinImgDiv{
+    width: 270px;
+    height: 218px;
+  }
+  .conversatinImg{
+    width: 100%;
+    height: 100%;
+    /* object-fit: cover; */
+  }
+  .capImgDiv{
+    width: 300px;
+    height: 340px;
+  }
+  .capImg{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .whatsAppImgDiv{
+    width: 280px;
+    height: 135px;
+  }
+  .whatsAppImg{
+    width: 100%;
+    height: 100%;
+  }
+  .phoneHeroNewImg{
+    width: 100%;
+    height: 100%;
+  }
+  .chatbotImgDivMain{
+    width: 100%;
+  }
+  .chatbotTextDivMain{
+    width: 100%;
+  }
+  .phoneHeroNewImgDiv{
+    width: 100%;
+    height: 35vh;
+  }
+
+
+  /* happyclients */
+  .HappyClientSaysBg {
+    background-color: #292d32;
+    height: 50vh;
+  }
+  .happyClientsSaysText {
+    font-size: 1.75rem;
+    font-weight: 600;
+  }
+  .happyClientsSaysImgDiv {
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+  }
+  .happyClientsSaysImg {
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+    object-fit: cover;
+  }
+  .clientSaySliderPera {
+    font-size: 14px;
+    font-weight: 400;
+  }
+  .happyClientsCardDiv{
+    height: 30vh;
+  }
+  /*  */
+  .whaychooseWathetabg {
+    background-color: #f1f0ff;
+  }
+  .whyChooseWaThetaText {
+    font-size: 1.75rem;
+    font-weight: 600;
+    width: 100%;
+  }
+  .whyChooseWaThetaPera {
+    font-size: 14px;
+    width: 100%;
+  }
+  .whyChooseWathetaCardImgDiv {
+    width: 70px;
+    height: 70px;
+  }
+  .whyChooseCardImg {
+    width: 100%;
+    height: 100%;
+  }
+  .whyChooseCardHeadline {
+    font-size: 20px;
+    font-weight: 600;
+    width: 100%;
+  }
+  /* homeIntreget */
+  .intregeteDivBG {
+    background-image: url("/images/intregetPhonebg.png");
+    background-repeat: no-repeat;
+    background-position: center center; /* Center both horizontally & vertically */
+    background-size: contain; /* Ensures the full image is visible */
+    height: 366px;
+    width: 100%;
+  }
+  .integrationsText {
+    font-size: 16px;
+  }
+  .intregeteHeadline {
+    font-size: 1.5rem;
+    /* font-size: 3.375rem; */
+    font-weight: 600;
+    width: 320px;
+  }
+  /* conversational */
+  .conversationalbg {
+    background-color: #f6f6f6;
+  }
+  .conversationalHeadline {
+    font-size: 1.75rem;
+    font-weight: 600;
+    width: 100%;
+  }
+  .conversationalCardTitle {
+    font-size: 18px;
+    font-weight: 500;
+    color: #000000;
+  }
+  .conversationallearnMoreButton {
+    font-size: 12px;
+    color: #292d32;
+  }
+  .conversationalArrowDiv {
+    width: 4vw;
+    height: 4vw;
+    max-width: 30px;
+    max-height: 30px;
+  }
+  .conversationalArrow {
+    width: 100%;
+    height: 100%;
+  }
+  .conversationalIconDiv {
+    width: 7vw;
+    height: 7vw;
+    max-width: 30px;
+    max-height: 30px;
+  }
+  .conversationalIcon {
+    width: 100%;
+    height: 100%;
+  }
+  .viewallindustryButtonText {
+    font-size: 0.9rem;
+  }
+
+  /* rescon to switch */
+  .resonToSwitchHeadline {
+    font-size: 1.6rem;
+    font-weight: 600;
+    width: 100%;
+  }
+  .resonIconDiv {
+    width: 10vw;
+    height: 10vw;
+  }
+  .resonIcon {
+    width: 100%;
+    height: 100%;
+  }
+  .resonCardHeadline {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .resonCardPera {
+    font-size: 0.8rem;
+    color: #7a7a7a;
+  }
+  .HomeReasonToSwitchCard {
+    width: 100%;
+    height: 255px;
+  }
+
+
+  /* home  blogs */
+  .homeBlogsBg {
+    background-color: #f6f6f6;
+  }
+  .homeBlogsHeadline {
+    font-size: 1.75rem;
+    font-weight: 600;
+  }
+  .homeBlogsHeadPera {
+    font-size: 1rem;
+    width: 690px;
+  }
+  .homeBlogsCols2ImgDiv {
+    width: 100%;
+    height: 214px;
+  }
+  .homeBlogsCols2Img {
+    width: 100%;
+    height: 100%;
+  }
+  .homeBlogsCols1-1stImgDiv {
+    width: 100%;
+    height: 214px;
+  }
+  .homeBlogsCols1-1stImg {
+    width: 100%;
+    height: 100%;
+  }
+  .homeBlogCardHeadline {
+    font-size: 1.25rem;
+    font-weight: 600;
+    width: 100%;
+  }
+  .dayOrCounttext {
+    font-size: 1rem;
+    color: #7a7a7a;
+  }
+  .homeBlogCard2ndHeadline {
+    font-size: 1.375rem;
+    font-weight: 600;
+    width: 95%;
+  }
+  .homeBlogsCols1-2ndImgDiv {
+    width: 100%;
+    height: 214px;
+  }
+  /* getting start */
+  .gettingBg {
+    background-color: black;
+    height: 39.26vh;
+  }
+  .gettingHeadlin {
+    font-size: 28px;
+    font-weight: 600;
+    color: #f4f4f4;
+    width: 300px;
+  }
+  .gettingPera {
+    font-size: 1rem;
+    color: #f4f4f4;
+    width: 80%;
+  }
+  .gettingGetButton {
+    background: linear-gradient(to bottom, #6cc17b, #46ba85);
+    color: white;
+  }
+  /* heigh perfomer */
+  .heighPrfomerLogoDiv {
+    width: 100%;
+    height: 68px;
+  }
+  .heighPrfomerLogo {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Home FAQ */
+  .homeFaqHEeadLine {
+    font-size: 1.6rem;
+    font-weight: 600;
+    width: 100%;
+  }
+  .homeFaqButtonDiv {
+    width: 255px;
+    /* background-color: #DDF2E6; */
+    text-align: start;
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  .homeFaqButtonDivActive {
+    width: 255px;
+    background-color: #ddf2e6;
+    text-align: start;
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  .homeFaqButton {
+    height: 38px;
+    text-align: start;
+    padding-left: 10px;
+    border-radius: 4px;
+  }
+  .homeFaqButtonActive {
+    height: 38px;
+    text-align: start;
+    padding-left: 10px;
+    border-left: 4px solid #5fbf7f;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+
+  /* Fetures */
+  .featuresHeroDiv {
+    width: 100%;
+    height: 50vh;
+  }
+  .featuresHeroBg {
+    position: absolute;
+    width: 100%;
+    height: 50vh;
+  }
+  .featuresHeadlineDiv {
+    position: relative;
+    height: 50vh;
+  }
+  .featuresHeadline {
+    font-size: 2.275rem;
+    font-weight: 600;
+    width: 100%;
+    color: white;
+  }
+  .featuresPera {
+    font-size: 1rem;
+    line-height: 25px;
+    width: 100%;
+  }
+  .cardHover {
+    cursor: pointer;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+  }
+  .cardHover:hover {
+    cursor: pointer;
+    box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.1);
+  }
+  .featuresCardLogoDiv {
+    width: 40px;
+    height: 40px;
+  }
+  .featuresCardLogo {
+    width: 100%;
+    height: 100%;
+  }
+  .featuresCardHeadline {
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  .FeaturesCardDiv {
+    height: 19vh;
+    border-radius: 15px;
+  }
+
+  /* Blog page */
+  .blogsHeroBg {
+    background-image: url("/images/image 314.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 550px;
+  }
+  .blogsHeroBgImg {
+    width: 100%;
+    height: 550px;
+  }
+  .blogsHeroHeadline {
+    font-size: 38px;
+    font-weight: 600;
+  }
+  .blogsHeroHeadPera {
+    font-size: 1rem;
+    width: 94%;
+  }
+  .blogs2ndHeroBgImgDiv {
+    position: relative;
+    width: 100%;
+    height: 592px;
+    overflow: hidden;
+  }
+  .blogs2ndHeroBgImg {
+    position: absolute;
+    width: 100%;
+    height: 592px;
+  }
+  .blogs2ndHeroContectDiv {
+    position: relative;
+    height: 592px;
+  }
+  .blogsStartupsButton {
+    background: #4f4f4f;
+    backdrop-filter: blur(10px);
+    color: white;
+    font-size: 12px;
+  }
+  .blogs2ndHeroHealdline {
+    font-size: 1.4rem;
+    color: white;
+    width: 100%;
+  }
+  .blogs2ndHeroPera {
+    font: 1rem;
+    color: white;
+    width: 100%;
+  }
+  .blogsReadArticleButton {
+    background-color: white;
+    font-size: 0.9rem;
+  }
+  .blogPageImgeDiv {
+    width: 100%;
+    height: 268px;
+  }
+  .blogPageImge {
+    width: 100%;
+    height: 100%;
+  }
+  .blogProductText {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .blogProductMinText {
+    font-size: 14px;
+    font-weight: 400;
+    color: #292d32;
+  }
+  .blogPageHeadline {
+    font-size: 1.20rem;
+    color: #000000;
+    font-weight: 500;
+    /* width: 96%; */
+    width: 95%;
+  }
+  .blogReadMoreText {
+    font-size: 1rem;
+    color: #292d32;
+  }
+  .blogRecentBlog {
+    background-color: #e9f8e3;
+  }
+  .blogPageReasentHeadline {
+    font-size: 1.75rem;
+    font-weight: 600;
+  }
+  .blogePageResentBlogsImgDiv {
+    width: 100%;
+    height: 310px;
+  }
+  .blogePageResentBlogsImg {
+    width: 100%;
+    height: 100%;
+  }
+  .blogPageResentImgDiv2nd {
+    /* width: 13vw; */
+    width: 100%;
+    height: 140px;
+  }
+  .blogPageResent2Img {
+    width: 100%;
+    height: 100%;
+  }
+  .joinOurNewsletterbgImgDiv {
+    position: relative;
+    width: 100%;
+    height: 404px;
+  }
+  .joinOurNewsletterbgImg {
+    position: absolute;
+    width: 100%;
+    height: 404px;
+  }
+  .joinOurNewsletterContentDiv {
+    position: relative;
+    height: 404px;
+  }
+  .JoinournewsletterText {
+    font-size: 1.75rem;
+    font-weight: 500;
+  }
+  .joinournewsletterPeraText {
+    color: white;
+    font-size: 14px;
+  }
+  .joinournewsletterInputDiv {
+    position: relative;
+    width: 96%;
+    height: 60px;
+  }
+  .joinournewsletterInput {
+    position: absolute;
+    background: rgba(46, 51, 57, 0.6);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 10px;
+    padding-left: 20px;
+    border-radius: 50px;
+    outline: none;
+    font-size: 14px;
+    width: 100%;
+    height: 100%;
+  }
+  .joinournewsletterSubscribeButton {
+    position: relative;
+    /* left: 76%; */
+    float: right;
+    background: #46ba85;
+    color: white;
+    height: 60px;
+  }
+
+  /* single blogs */
+  .singleBlogsHeadline {
+    font-size: 2.2rem;
+  }
+  .singleStartupButton {
+    font-size: 1rem;
+  }
+  .singleBlogImgDiv {
+    width: 100%;
+    height: 171px;
+  }
+  .singleBlogImg {
+    width: 100%;
+    height: 100%;
+  }
+  .inThisArticleText {
+    font-size: 1.25rem;
+  }
+  .inthisSingleButtons {
+    font-size: 1rem;
+    width: 180px;
+    height: 36px;
+  }
+  .inthisSingleButtonsDiv {
+    border-left: 4px solid #c6e7ce;
+  }
+  .inthisSingleButtonsDivActive {
+    border-left: 4px solid #46ba85;
+  }
+  .shearAricleText {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+  .singleBlogsPeraText {
+    font-size: 1.125rem;
+    color: #292d32;
+  }
+  .singleContentImgDiv {
+    width: 100%;
+    height: 202px;
+  }
+  .singleContentImg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Integrations */
+  .integrateHeroBg {
+    background-image: url("/images/imageIntreget 314.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 434px;
+  }
+  .inregrationPageButton {
+    font-size: 1rem;
+  }
+  .integrationsPageHeadLine {
+    font-size: 2rem;
+    font-weight: 600;
+    width: 100%;
+    text-align: center;
+    line-height: 50px;
+  }
+  .integetSearchInputDiv {
+    position: relative;
+    width: 95%;
+    height: 60px;
+  }
+  .integetSearchInput {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    outline: none;
+  }
+  .searchIconButton {
+    position: relative;
+    top: 0;
+    height: 60px;
+  }
+  .searchInconDiv {
+    width: 24px;
+    height: 24px;
+  }
+  .searchIncon {
+    width: 100%;
+    height: 100%;
+  }
+  .integetCategoryText {
+    font-size: 1.75rem;
+    font-weight: 500;
+  }
+  .integratonCard {
+    box-shadow: 1px 5px 4px #888f98;
+  }
+  .intreInconDiv {
+    width: 41px;
+    height: 41px;
+  }
+  .intreIncon {
+    width: 100%;
+    height: 100%;
+  }
+  .interCategoryPera {
+    font-size: 15px;
+    color: #292d32;
+  }
+  .interCategoryLearnButton {
+    border-bottom: 1px solid #000000;
+    color: #292d32;
+  }
+  .interCategoryLearnButton:hover {
+    border-bottom: 1px solid #7d10d1;
+    color: #7d10d1;
+  }
+  .categoryButtonBg {
+    background-color: #ededed;
+  }
+  .categoryButtonBgActive {
+    background-color: #e4c1ff;
+  }
+
+  /* pricing */
+  .pricingBg {
+    background-image: url("/images/fruit-basket-GeEk8Yok6Ig-unsplash.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 680px;
+  }
+  .pricingHeroContentDiv {
+    width: 100%;
+    height: 580px;
+  }
+  .pricingMetaLogoDivMain {
+    background-color: white;
+    cursor: pointer;
+    width: 180px;
+    padding: 10px 10px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px rgb(177, 177, 177);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+  .pricingMetaLogoDivMain:hover {
+    transform: scale(1.05);
+    box-shadow: 5px 5px 5px rgba(113, 113, 113, 0.614);
+  }
+  .pricingMetaLogoDiv {
+    width: 60px;
+    height: 30px;
+  }
+  .pricingMetaLogo{
+    width: 100%;
+    height: 100%;
+  }
+  .pricingOfficialText {
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+  .metaBusinessText {
+    font-size: 0.4rem;
+  }
+  .pricingHeadline {
+    font-size: 1.75rem;
+    font-weight: 600;
+    width: 370px;
+    text-align: center;
+    color: white;
+    font-family: "Inter", sans-serif;
+  }
+  .pricingPera {
+    font-size: 0.9rem;
+    color: white;
+    font-weight: 400;
+    font-family: "Inter", sans-serif;
+  }
+  .pricingWhatsAppText {
+    font-size: 0.8rem;
+    background-color: #e4e2e26d;
+    color: #ffffff;
+    font-weight: 400;
+  }
+  .pricingCardDiv {
+    width: 100%;
+    height: 170px;
+    border-radius: 15px;
+  }
+  .pricingHeorIconDiv {
+    width: 48px;
+    height: 37px;
+  }
+  .pricingHeorIcon {
+    width: 100%;
+    height: 100%;
+  }
+  .pricingHerogridCardDiv {
+    background-color: white;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+  .pricingHerogridCardDiv:hover {
+    background-color: white;
+    transform: scale(1.03);
+    box-shadow: 5px 5px 5px rgba(113, 113, 113, 0.614);
+  }
+  .pricingHerogridCardPera {
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+  .pricingButtonTaggole {
+    background-color: #f1f1f1;
+  }
+  .featuresTextPadding{
+    /* padding: 11px 0px; */
+    font-size: 12px;
+    height: 43px;
+  }
+  .featuresTextDisPadding{
+    padding: 12.5px 0px;
+  }
+  .feturesTexts{
+    font-size: 0.8rem;
+  }
+  .iIcon{
+    position: relative;  
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+  }
+  .iIconText{
+    position: absolute;
+    width: 44vw;
+    height: fit-content;
+    top: 0;
+    display: none;
+    background: #000000;
+    color: white;
+    font-size: 12px;
+  }
+  .whatsAppConversationsText{
+    font-size: 15px;
+    padding: 12px 0px;
+  }
+  .featuresDiscription{
+    font-size: 12px;
+  }
+  .spasingHeght{
+    height: 15px;
+  }
+  .feturesHead{
+    font-weight: 500;
+    height: 40px;
+  }
+  .additionalbg {
+    background-color: #f8f4e9;
+  }
+  .featuresTextPadding{
+    /* padding: 11px 0px; */
+    height: 47px;
+  }
+  .featuresTextDisPadding{
+    padding: 12.5px 0px;
+  }
+  .feturesTexts{
+    font-size: 1rem;
+  }
+  .whatsAppConversationsText{
+    font-size: 15px;
+    padding: 12px 0px;
+  }
+  .spasingHeght{
+    height: 15px;
+  }
+  .feturesHead{
+    font-weight: 500;
+    height: 47px;
+  }
+  .additonalText{
+    font-size: 1.75rem;
+    font-weight: 600;
+  }
+  .additonalPera{
+    font-size: 1rem;
+    font-weight: 500;
+    color: #292D32;
+  }
+  .additonalCardIconDiv{
+    width: 41px;
+    height: 50px;
+  }
+  .additonalCardIcon{
+    width: 100%;
+    height: 100%;
+  }
+  .cardBgColor{
+    background: white;
+    cursor: pointer;
+    box-shadow: 0px 0px 0px rgba(234, 233, 233, 0.707);
+    transition: 0.3s ease-in-out;
+  }
+  .cardBgColor:hover{
+    background: white;
+    box-shadow: 5px 8px 8px rgba(201, 200, 200, 0.707);
+  }
+  .aditionlCardPera{
+    font-size: 16px;
+    color: #4B5563;
+  }
+  .aditionalPrice{
+    font-size: 1.625rem;
+    font-weight: 600;
+  }
+  .aditonalpermaoth{
+    font-size: 14px;
+    font-weight: 400;
+    color: #4B5563;
+  }
+  .aditionlCardPera{
+    font-size: 16px;
+    color: #4B5563;
+  }
+  .aditionalPrice{
+    font-size: 1.625rem;
+    font-weight: 600;
+  }
+  .aditonalpermaoth{
+    font-size: 14px;
+    font-weight: 400;
+    color: #4B5563;
+  }
+  .dedicatedText{
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #292D32;
+    text-align: center;
+  }
+  .dedicatedPera{
+    font-size: 1rem;
+    font-weight: 400;
+    color: #292D32;
+    text-align: center;
+  }
+  .dedicatedIconDiv{
+    width: 48px;
+    height: 48px;
+  }
+  .dedicatedIcon{
+    width: 100%;
+    height: 100%;
+  }
+  .dedicatedCardDiv{
+    cursor: pointer;
+    box-shadow: 0px 0px 0px rgba(208, 207, 207, 0.668);
+    transition: 0.3s ease-in-out;
+  }
+  .dedicatedCardDiv:hover{
+    box-shadow: 4px 6px 4px rgba(208, 207, 207, 0.668);
+  }
+  .dedicatedcardHeadline{
+    font-size: 14px;
+    color: #292D32;
+    font-weight: 600;
+  }
+  .transformYourBusinessText{
+    font-size: 28px;
+    font-weight: 600;
+    width: 358px;
+    line-height: 35px;
+  }
+  .readyToButton{
+    background-color: #46ba85;
+    padding: 8px 20px;
+    color: white;
+    border-radius: 50px;
+    margin: auto;
+  }
+  .communicationBg{
+    background-color: #292D32;
+  }
+  .communicationText{
+    font-size: 26px;
+    font-weight: 600;
+    color: white;
+    width: 98%;
+    line-height: 40px;
+  }
+  .communicationTextPera{
+    font-size: 14px;
+    color: #D9D9D9;
+    width: 90%;
+  }
+  .communicationIconDiv{
+    width: 38px;
+    height: 35px;
+  }
+  .communicationIcon{
+    width: 100%;
+    height: 100%;
+  }
+  .communicationIconPera{
+    font-size: 12px;
+    color: #D9D9D9;
+  }
+  .schedulaDemoText{
+    font-size: 28px;
+    font-weight: 600;
+  }
+  .schedulaDemoPera{
+    font-size: 14px;
+    font-weight: 400;
+    width: 90%;
+  }
+  .scheduleInput{
+    width: 100%;
+    height: 44px;
+    outline: none;
+    font-size: 14px;
+    color: #7A7A7A;
+    padding-left: 15px;
+  }
+  .scheduleTextArea{
+    width: 100%;
+    height: 100px;
+    outline: none;
+    font-size: 14px;
+    color: #7A7A7A;
+    padding-left: 15px;
+    padding-top: 10px;
+    resize: none;
+  }
+  .scheduleDemoButton{
+    background-color: #46BA85;
+    font-size: 15px;
+    color: white;
+    padding: 10px 25px;
+    border-radius: 50px;
+    transition: 0.3s ease-in-out;
+  }
+  .scheduleDemoButton:hover{
+    background-color: #46BA85;
+    font-size: 13px;
+    color: white;
+    padding: 10px 25px;
+    border-radius: 50px;
+    box-shadow: 4px 6px 4px rgba(184, 183, 183, 0.756);
+  }
+  .contactHeadline{
+    font-size: 1.75rem;
+    font-weight: 600;
+    width: 390px;
+    text-align: center;
+    color: white;
+    font-family: "Inter", sans-serif;
+  }
+
+  /* contact page */
+  .contactBg {
+    background-image: url("/images/fruit-basket-GeEk8Yok6Ig-unsplash.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 780px;
+  }
+  .contactHeroContentDiv {
+    width: 100%;
+    height: 780px;
+  }
+
+  /* help */
+  .helpBgDiv{
+    background-image: url("/images/image 314.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      width: 100%;
+      height: 350px;
+  }
+  .helpContentDiv{
+      width: 100%;
+      height: 350px;
+  }
+
+  /* price toggle button */
+  .pricingButtonTaggoleDiv {
+    position: relative;
+    background-color: #f1f1f1;
+  }
+  .pricingToggoleButton {
+    background-color: #69c07c;
+    color: white;
+  }
+  .buttonSaveText {
+    position: absolute;
+    top: -7;
+    right: -15px;
+    font-size: 11px;
+    font-weight: 600;
+    border: 0.8px solid rgb(160, 244, 155);
+    border-radius: 50px;
+    padding: 1px 5px;
+    color: #01360d;
+  }
+   
+  /* sass */
+  .saasBgDiv{
+    background: linear-gradient(135deg, #3ccf91 0%, #1da976 50%, #179a6a 100%);
+    width: 100%;
+    height: fit-content;
+  }
+  .sasheadline{
+    font-size: 1.950rem;
+    margin: auto;
+    font-weight: 600;
+    color: #FFFF;
+  }
+  .sasPeiceDiv{
+    background-color: #F8F4E9;
+  }
+  .saswhitelablePriceHeadline{
+    font-size: 1.752rem;
+    font-weight: 600;
+  }
+  .saswhitelablePricePera{
+    font-size: .952rem;
+    color: #4B5563;
+  }
+  .sasstartbg{
+    background-color: #F9FAFB;
+  }
+  .sasstartDivBg{
+    background: linear-gradient(135deg, #3ccf91 0%, #1da976 50%, #179a6a 100%);
+  }
+
+  /* footer */
+  .footerbg {
+    background-color: #f2f2f2;
+  }
+
+  .footerLogoDiv {
+    width: 22vw;
+    height: 3.24vh;
+  }
+  .footerlogo {
+    width: 100%;
+    height: 100%;
+  }
+  .footerMetaLogoDiv {
+    width: 15vw;
+    height: 4.37vh;
+  }
+  .footerMetaLog {
+    width: 100%;
+    height: 100%;
+  }
+  .footerInfoHeadline {
+    color: #292d32;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .footerInfoHeadlineSub {
+    color: #292d32;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .footerPera {
+    font-size: 14px;
+    font-weight: 400;
+  }
+  .footerMailIcon {
+    width: 18px;
+    height: 18px;
+  }
+  .foterSocialIconDiv {
+    width: 15px;
+    height: 15px;
+  }
+  .foterSocialIcon {
+    width: 100%;
+    height: 100%;
+  }
+  .footerSelectedButtonText {
+    font-size: 0.8rem;
+  }
+  .hover-underline {
+    position: relative;
+    display: inline-block;
+  }
+  .hover-underline::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 0%;
+    background-color: #f97316; /* Tailwind's orange-500 */
+    transition: width 0.3s ease;
+  }
+  .hover-underline:hover::after {
+    width: 100%;
+  }
+  /* 404 error */
+.errorImageDiv{
+  width: 60vw;
+  height: 40vh;
+}
+.errorImage{
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+}
+
+/* tab to pc */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    height: 8vh;
+  }
+  .navLogoDiv {
+    width: 100%;
+    height: 4.7vh;
+  }
+  .navLog {
+    width: 100%;
+    height: 100%;
+  }
+  .nav-links {
+    display: none;
+    background-color: white;
+    flex-direction: column;
+    position: absolute;
+    top: 68px;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+    padding: 35px 0;
+    transform: translateX(100%);
+    transition: 0.4s ease-in-out;
+  }
+  .nav-links.active {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    transform: translateX(0);
+  }
+  .get-started {
+    background: linear-gradient(to bottom, #6cc17b, #46ba85);
+    color: #ffffff;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  .breadcrumb {
+    display: block;
+  }
+  /* homeHero */
+  .HomeHeroDivHeight {
+    height: 100vh;
+  }
+  .homeHerobg {
+    background: linear-gradient(180deg, #F6F6F6 0%, #EBFFEF 100%);
+  }
+  .homeHeroHeadLinkDiv {
+    /* width: 47.56rem; */
+    width: 100%;
+  }
+  .homeHeroHeadline {
+    /* font-size: 2.375rem; */
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #292d32;
+    line-height: 55px;
+  }
+  .homeHeroPeraDiv {
+    /* width: 27rem; */
+    width: 100%;
+    text-align: start;
+  }
+  .homeHeroPera {
+    font-size: 16px;
+    color: #292d32;
+  }
+  .homeHeroGetButton {
+    background: linear-gradient(to bottom, #6cc17b, #46ba85);
+    padding: 0.5rem 1rem;
+    color: #ffffff;
+    font-size: 1rem;
+    border: 1.5px solid #6cc17b;
+    border-radius: 2.5rem;
+    transition: all 0.3s ease-in-out;
+  }
+  .homeHeroGetButton:hover {
+    background: #f6f6f6;
+    padding: 0.5rem 1rem;
+    color: black;
+    box-shadow: gainsboro 2px 8px 4px;
+    font-size: 1rem;
+    border: 1.5px solid #6cc17b;
+    border-radius: 2.5rem;
+  }
+  .homeScheduleButton {
+    border: 1.5px solid #6cc17b;
+    padding: 0.3rem 1rem;
+    color: #292d32;
+    font-size: 1rem;
+    border-radius: 2.25rem;
+    transition: all 0.3s ease-in-out;
+  }
+  .homeScheduleButton:hover {
+    background: linear-gradient(to bottom, #6cc17b, #46ba85);
+    border: 1.5px solid #6cc17b;
+    padding: 0.5rem 1rem;
+    color: #ffffff;
+    font-size: 1rem;
+    border-radius: 2.25rem;
+    box-shadow: gainsboro 2px 8px 4px;
+  }
+  .homeHeroImgaDiv {
+    width: 100%;
+    height: 45vh;
+  }
+  .homeHeroImga {
+    width: 100%;
+    height: 100%;
+  }
+  /* client logo */
+  .trustedText {
+    font-size: 18px;
+    color: #292d32;
+    font-weight: 500;
+  }
+  .trustLogoDiv {
+    width: 100%;
+    height: 40px;
+  }
+  .trustLogo {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* homeIntreget */
+  .intregeteDivBG {
+    background-image: url("/images/integrations.png");
+    background-repeat: no-repeat;
+    background-position: center center; /* Center both horizontally & vertically */
+    background-size: contain; /* Ensures the full image is visible */
+    height: 366px;
+    width: 100%;
+  }
+  .integrationsText {
+    font-size: 16px;
+  }
+  .intregeteHeadline {
+    font-size: 1.5rem;
+    /* font-size: 3.375rem; */
+    font-weight: 600;
+    width: 420px;
+  }
+
+  /* home  blogs */
+  .homeBlogsBg {
+    background-color: #f6f6f6;
+  }
+  .homeBlogsHeadline {
+    font-size: 2rem;
+    font-weight: 600;
+  }
+  .homeBlogsHeadPera {
+    font-size: 1.2rem;
+    width: 690px;
+  }
+  .homeBlogsCols2ImgDiv {
+    width: 100%;
+    height: 20vh;
+  }
+  .homeBlogsCols2Img {
+    width: 100%;
+    height: 100%;
+  }
+  .homeBlogsCols1-1stImgDiv {
+    width: 100%;
+    height: 20vh;
+  }
+  .homeBlogsCols1-1stImg {
+    width: 100%;
+    height: 100%;
+  }
+  .homeBlogCardHeadline {
+    font-size: 1.25rem;
+    font-weight: 600;
+    width: 85%;
+  }
+  .dayOrCounttext {
+    font-size: 1rem;
+    color: #7a7a7a;
+  }
+  .homeBlogCard2ndHeadline {
+    font-size: 1.375rem;
+    font-weight: 600;
+    width: 85%;
+  }
+  .homeBlogsCols1-2ndImgDiv {
+    width: 100%;
+    height: 25vh;
+  }
+  /* getting start */
+  .gettingBg {
+    background-color: black;
+    height: 39.26vh;
+  }
+  .gettingHeadlin {
+    font-size: 28px;
+    font-weight: 600;
+    color: #f4f4f4;
+    width: 300px;
+  }
+  .gettingPera {
+    font-size: 1rem;
+    color: #f4f4f4;
+    width: 80%;
+  }
+  .gettingGetButton {
+    background: linear-gradient(to bottom, #6cc17b, #46ba85);
+    color: white;
+  }
+
+  /* heigh perfomer */
+  .heighPrfomerLogoDiv {
+    width: 100%;
+    height: 68px;
+  }
+  .heighPrfomerLogo {
+    width: 100%;
+    height: 100%;
+  }
+  /* happyclients */
+  .HappyClientSaysBg {
+    background-color: #292d32;
+    height: 50vh;
+  }
+  .happyClientsSaysText {
+    font-size: 1.85rem;
+    font-weight: 600;
+  }
+  .happyClientsSaysImgDiv {
+    width: 40px;
+    height: 40px;
+  }
+  .happyClientsSaysImg {
+    width: 100%;
+    height: 100%;
+  }
+  .clientSaySliderPera {
+    font-size: 13px;
+    font-weight: 400;
+  }
+  .whaychooseWathetabg {
+    background-color: #f1f0ff;
+  }
+  .whyChooseWaThetaText {
+    font-size: 1.75rem;
+    font-weight: 600;
+    width: 100%;
+  }
+  .whyChooseWaThetaPera {
+    font-size: 14px;
+    width: 100%;
+  }
+  .whyChooseWathetaCardImgDiv {
+    width: 70px;
+    height: 70px;
+  }
+  .whyChooseCardImg {
+    width: 100%;
+    height: 100%;
+  }
+  .whyChooseCardHeadline {
+    font-size: 20px;
+    font-weight: 600;
+    width: 100%;
+  }
+
+  /* features */
+  .featuresHeroDiv {
+    width: 100%;
+    height: 450px;
+  }
+  .featuresHeroBg {
+    position: absolute;
+    width: 100%;
+    height: 450px;
+  }
+  .featuresHeadlineDiv {
+    position: relative;
+    height: 450px;
+  }
+  .featuresHeadline {
+    font-size: 2.375rem;
+    font-weight: 600;
+  }
+  .featuresPera {
+    font-size: 1rem;
+    line-height: 25px;
+    width: 96%;
+  }
+  .cardHover {
+    cursor: pointer;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+  }
+  .cardHover:hover {
+    cursor: pointer;
+    box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.1);
+  }
+  .featuresCardLogoDiv {
+    width: 8vw;
+    height: 8vw;
+  }
+  .featuresCardLogo {
+    width: 100%;
+    height: 100%;
+  }
+  .featuresCardHeadline {
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  .FeaturesCardDiv {
+    height: 15vh;
+    border-radius: 15px;
+  }
+
+  /* blogs */
+  .blogsHeroBg {
+    background-image: url("/images/image 314.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 550px;
+  }
+  .blogsHeroBgImg {
+    width: 100%;
+    height: 550px;
+  }
+  .blogsHeroHeadline {
+    font-size: 38px;
+    font-weight: 600;
+  }
+  .blogsHeroHeadPera {
+    font-size: 1rem;
+    width: 385px;
+  }
+  .blogs2ndHeroBgImgDiv {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+  }
+  .blogs2ndHeroBgImg {
+    position: absolute;
+    width: 100%;
+    height: 500px;
+  }
+  .blogs2ndHeroContectDiv {
+    position: relative;
+    height: 500px;
+  }
+  .blogsStartupsButton {
+    background: #4f4f4f;
+    backdrop-filter: blur(10px);
+    color: white;
+    font-size: 12px;
+  }
+  .blogs2ndHeroHealdline {
+    font-size: 1.4rem;
+    color: white;
+    width: 100%;
+  }
+  .blogs2ndHeroPera {
+    font: 1rem;
+    color: white;
+    width: 100%;
+  }
+  .blogsReadArticleButton {
+    background-color: white;
+    font-size: 0.9rem;
+  }
+  .blogPageImgeDiv {
+    width: 100%;
+    height: 268px;
+  }
+  .blogPageImge {
+    width: 100%;
+    height: 100%;
+  }
+  .blogProductText {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .blogProductMinText {
+    font-size: 14px;
+    font-weight: 400;
+    color: #292d32;
+  }
+  .blogPageHeadline {
+    font-size: 1.25rem;
+    color: #000000;
+    font-weight: 500;
+    /* width: 96%; */
+    width: 300px;
+  }
+  .blogReadMoreText {
+    font-size: 1rem;
+    color: #292d32;
+  }
+  .blogRecentBlog {
+    background-color: #e9f8e3;
+  }
+  .blogPageReasentHeadline {
+    font-size: 1.75rem;
+    font-weight: 600;
+  }
+  .blogePageResentBlogsImgDiv {
+    width: 100%;
+    height: 310px;
+  }
+  .blogePageResentBlogsImg {
+    width: 100%;
+    height: 100%;
+  }
+  .blogPageResentImgDiv2nd {
+    /* width: 13vw; */
+    width: 100%;
+    height: 140px;
+  }
+  .blogPageResent2Img {
+    width: 100%;
+    height: 100%;
+  }
+  .joinOurNewsletterbgImgDiv {
+    position: relative;
+    width: 100%;
+    height: 404px;
+  }
+  .joinOurNewsletterbgImg {
+    position: absolute;
+    width: 100%;
+    height: 404px;
+  }
+  .joinOurNewsletterContentDiv {
+    position: relative;
+    height: 404px;
+  }
+  .JoinournewsletterText {
+    font-size: 2rem;
+    font-weight: 500;
+  }
+  .joinournewsletterPeraText {
+    color: white;
+    font-size: 1rem;
+  }
+  .joinournewsletterInputDiv {
+    position: relative;
+    width: 100%;
+    height: 60px;
+  }
+  .joinournewsletterInput {
+    position: absolute;
+    background: rgba(46, 51, 57, 0.6);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 10px;
+    padding-left: 20px;
+    border-radius: 50px;
+    outline: none;
+    font-size: 16px;
+    width: 100%;
+    height: 100%;
+  }
+  .joinournewsletterSubscribeButton {
+    position: relative;
+    /* left: 76%; */
+    float: right;
+    background: #46ba85;
+    color: white;
+    height: 60px;
+  }
+
+  /* Interget */
+  /* Integrations */
+  .integrateHeroBg {
+    background-image: url("/images/imageIntreget 314.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 434px;
+  }
+  .inregrationPageButton {
+    font-size: 1rem;
+  }
+  .integrationsPageHeadLine {
+    font-size: 2.375rem;
+    font-weight: 600;
+    width: 100%;
+    text-align: center;
+    line-height: 50px;
+  }
+  .integetSearchInputDiv {
+    position: relative;
+    width: 100%;
+    height: 60px;
+  }
+  .integetSearchInput {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    outline: none;
+  }
+  .searchIconButton {
+    position: relative;
+    top: 0;
+    height: 60px;
+  }
+  .searchInconDiv {
+    width: 24px;
+    height: 24px;
+  }
+  .searchIncon {
+    width: 100%;
+    height: 100%;
+  }
+  .integetCategoryText {
+    font-size: 1.75rem;
+    font-weight: 500;
+  }
+  .integratonCard {
+    box-shadow: 1px 5px 4px #888f98;
+  }
+  .intreInconDiv {
+    width: 48px;
+    height: 40px;
+  }
+  .intreIncon {
+    width: 100%;
+    height: 100%;
+  }
+  .interCategoryPera {
+    font-size: 15px;
+    color: #292d32;
+  }
+  .interCategoryLearnButton {
+    border-bottom: 1px solid #000000;
+    color: #292d32;
+  }
+  .interCategoryLearnButton:hover {
+    border-bottom: 1px solid #7d10d1;
+    color: #7d10d1;
+  }
+  .categoryButtonBg {
+    background-color: #ededed;
+  }
+  .categoryButtonBgActive {
+    background-color: #e4c1ff;
+  }
+
+  /* conversational */
+
+  .conversationalbg {
+    background-color: #f6f6f6;
+  }
+  .conversationalHeadline {
+    font-size: 1.75rem;
+    font-weight: 600;
+    width: 100%;
+  }
+  .conversationalCardTitle {
+    font-size: 20px;
+    font-weight: 500;
+    color: #000000;
+  }
+  .conversationallearnMoreButton {
+    font-size: 16px;
+    color: #292d32;
+  }
+  .conversationalArrowDiv {
+    width: 6vw;
+    height: 6vw;
+    max-width: 30px;
+    max-height: 30px;
+  }
+  .conversationalArrow {
+    width: 100%;
+    height: 100%;
+  }
+  .conversationalIconDiv {
+    width: 8vw;
+    height: 8vw;
+    max-width: 38px;
+    max-height: 38px;
+  }
+  .conversationalIcon {
+    width: 100%;
+    height: 100%;
+  }
+  .viewallindustryButtonText {
+    font-size: 0.9rem;
+  }
+
+   /* rescon to switch */
+   .resonToSwitchHeadline {
+    font-size: 2rem;
+    font-weight: 600;
+    width: 98%;
+  }
+  .resonIconDiv {
+    width: 10vw;
+    height: 10vw;
+  }
+  .resonIcon {
+    width: 100%;
+    height: 100%;
+  }
+  .resonCardHeadline {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .resonCardPera {
+    font-size: 0.8rem;
+    color: #7a7a7a;
+  }
+  .HomeReasonToSwitchCard {
+    width: 100%;
+    height: 255px;
+  }
+
+  /*  */
+  .dedicatedText{
+    font-size: 2rem;
+    font-weight: 600;
+    color: #292D32;
+    text-align: center;
+  }
+  /* chat bot */
+  .chatbotImgDivMain{
+    width: 100%;
+  }
+  .chatbotTextDivMain{
+    width: 100%;
+  }
 }

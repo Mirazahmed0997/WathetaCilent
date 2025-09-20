@@ -8,12 +8,25 @@
     "start": "next start"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
+    "aos": "^2.3.4",
+    "axios": "^1.12.1",
+    "html-react-parser": "^5.2.6",
+    "lucide-react": "^0.544.0",
+    "next": "15.5.3",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "next": "15.5.3"
+    "react-fast-marquee": "^1.6.5",
+    "swiper": "^11.2.6"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "cross-env": "^7.0.3",
+    "daisyui": "^5.0.19",
+    "eslint": "^9",
+    "eslint-config-next": "15.3.0",
     "tailwindcss": "^4"
   }
 }
