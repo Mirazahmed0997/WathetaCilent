@@ -43,7 +43,7 @@ export default async function BlogDetailsPage({ params }) {
             src={`http://localhost:3000${blog.image}`}
             alt={blog.title}
             fill
-            className="object-cover rounded-lg shadow-md"
+            className="object-contain w-full h-full rounded-lg shadow-md"
           />
         </div>
       )}
