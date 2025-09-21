@@ -13,6 +13,99 @@ function getLocale(language) {
   }
 }
 
+export async function generateMetadata({ params }) {
+  const { id } = params;
+
+  // Fetch blog metadata
+  const blogData = await fetchDataAsServer(apiConfig.GET_BLOG_PUBLIC_BY_SLUG + id);
+  const metadata = blogData?.metadata;
+
+  if (!metadata) {
+    // Fallback if no metadata exists
+    return {
+      title: blogData?.title || "Blog - WaTheta",
+      description: blogData?.description
+        ? blogData.description.replace(/<[^>]+>/g, "").slice(0, 160)
+        : "Read this blog on WaTheta.",
+      openGraph: {
+        title: blogData?.title || "Blog - WaTheta",
+        description: blogData?.description
+          ? blogData.description.replace(/<[^>]+>/g, "").slice(0, 160)
+          : "Read this blog on WaTheta.",
+        url: `https://watheta.com/blog/${id}`,
+        siteName: "WaTheta",
+        images: [
+          {
+            url: blogData?.image
+              ? `https://watheta.com${blogData.image}`
+              : "/images/wathetahome.jpg",
+            alt: blogData?.title || "WaTheta Blog",
+          },
+        ],
+        locale: metadata?.ogLocale || "en_US",
+        type: "article",
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: blogData?.title || "Blog - WaTheta",
+        description: blogData?.description
+          ? blogData.description.replace(/<[^>]+>/g, "").slice(0, 160)
+          : "Read this blog on WaTheta.",
+        images: [
+          blogData?.image
+            ? `https://watheta.com${blogData.image}`
+            : "/images/wathetahome.jpg",
+        ],
+      },
+      keywords: blogData?.metadata?.keywords || [],
+    };
+  }
+
+  return {
+    title: metadata.metaTitle || blogData?.title || "Blog - WaTheta",
+    description:
+      metadata.metaDescription ||
+      blogData?.description.replace(/<[^>]+>/g, "").slice(0, 160) ||
+      "Read this blog on WaTheta.",
+    keywords: metadata.keywords || [],
+
+    openGraph: {
+      title: metadata.ogTitle || metadata.metaTitle || blogData?.title,
+      description:
+        metadata.ogDescription ||
+        metadata.metaDescription ||
+        blogData?.description.replace(/<[^>]+>/g, "").slice(0, 160),
+      url: metadata.ogUrl || `https://watheta.com/blog/${id}`,
+      siteName: metadata.ogSiteName || "WaTheta",
+      images: [
+        {
+          url: metadata.ogImages?.startsWith("http")
+            ? metadata.ogImages
+            : `${process.env.NEXT_PUBLIC_API_URL}${metadata.ogImages}`,
+          alt: metadata.ogTitle || metadata.metaTitle || blogData?.title,
+        },
+      ],
+      locale: metadata.ogLocale || "en_US",
+      type: metadata.ogType || "article",
+    },
+
+    twitter: {
+      card: metadata.twitterCard || "summary_large_image",
+      title: metadata.twitterTitle || metadata.metaTitle || blogData?.title,
+      description:
+        metadata.twitterDescription ||
+        metadata.metaDescription ||
+        blogData?.description.replace(/<[^>]+>/g, "").slice(0, 160),
+      images: [
+        metadata.twitterImages?.startsWith("http")
+          ? metadata.twitterImages
+          : `${process.env.NEXT_PUBLIC_API_URL}${metadata.twitterImages}`,
+      ],
+    },
+  };
+}
+
+
 export default async function BlogDetailsPage({ params }) {
   const { id } = await params;
 
@@ -28,6 +121,7 @@ export default async function BlogDetailsPage({ params }) {
   }
 
   const blog = blogData;
+  const metadata = blogData?.metadata
   const locale = getLocale(blog.language);
 
   return (
