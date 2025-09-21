@@ -76,8 +76,8 @@ export default function PricingPlan({ plans }) {
         };
 
         try {
-            // const response = await fetch(`https://payapi.watheta.com/api/postByDefaultAbandoned`, {
-            const response = await fetch(`http://localhost:5000/api/postByDefaultAbandoned`, {
+            const response = await fetch(`https://payapi.watheta.com/api/postByDefaultAbandoned`, {
+            // const response = await fetch(`http://localhost:5000/api/postByDefaultAbandoned`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(submittedData),
