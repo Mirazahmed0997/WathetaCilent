@@ -4,13 +4,19 @@ export default function PaymentForm({ plan, formData, handleChange }) {
     return (
         <div className="space-y-4">
             {/* Plan Info */}
-            <h3 className="font-bold text-xl text-gray-800">{plan?.name}</h3>
-            <p className="text-gray-600">
-                Price:{" "}
-                {plan?.priceOfferBDT
-                    ? `৳${plan.priceOfferBDT}`
-                    : `$${plan.priceOfferUSD}`}
-            </p>
+            <div>
+                <h3 className="text-xs text-center text-gray-800">Payment For</h3>
+            <h3 className="font-bold text-2xl text-center text-gray-800">{plan?.name}</h3>
+            </div>
+            <div className="border-b text-gray-600 flex items-center justify-between">
+                <p>
+                    Price:{" "}
+                    {plan?.priceOfferBDT
+                        ? `৳${plan.priceOfferBDT}`
+                        : `$${plan.priceOfferUSD}`}
+                </p>
+                <p>Duration: {plan?.duration} {plan?.durationType}</p>
+            </div>
 
             {/* Input Fields */}
             <div>

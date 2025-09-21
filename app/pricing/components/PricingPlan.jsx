@@ -33,15 +33,34 @@ export default function PricingPlan({ plans }) {
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
+    const handleRest = () => {
+        setFormData({
+            name: '',
+            email: '',
+            businessName: '',
+            number: '',
+            amount: '',
+            packageName: '',
+            paymentStatus: '',
+            date: '',
+            paymentType: '',
+            invoiceNumber: '',
+            paymentNumber: '',
+            paymentID: '',
+            trxID: '',
+            userId: '',
+            refund: '',
+        });
+    }
+
     const openPaymentForm = (plan) => {
         setSelectedPlan(plan);
         document.getElementById('payment_modal').showModal();
     };
 
-    const handlePayment = (e) => {
+    const handlePayment = async (e) => {
         e.preventDefault();
 
-        // Merge selectedPlan into formData (ensures latest info is attached)
         const submittedData = {
             ...formData,
             amount: selectedPlan?.priceOfferBDT || selectedPlan?.priceRegularBDT,
@@ -55,27 +74,31 @@ export default function PricingPlan({ plans }) {
             trxID: "N/A",
             userId: Math.floor(Math.random() * 10000),
         };
-        fetch(`https://payapi.watheta.com/api/postByDefaultAbandoned`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(submittedData),
-        })
-            .then((response) => {
-                if (response.ok) {
-                    const paymentUrl = `https://payment.watheta.com/?name=${submittedData?.name}&email=${submittedData?.email}&businessName=${submittedData?.businessName}&contactNumber=${submittedData?.number}&packageName=${submittedData?.planName}&amount=${submittedData?.packegPrice}&currency=${'৳'}`;
-                    window.location.href = paymentUrl;
-                    setIsLoading(false);
-                    form.reset();
-                }
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-            .finally(() => {
-                setIsLoading(false);
+
+        try {
+            // const response = await fetch(`https://payapi.watheta.com/api/postByDefaultAbandoned`, {
+            const response = await fetch(`http://localhost:5000/api/postByDefaultAbandoned`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(submittedData),
             });
+
+            if (response.ok) {
+                // ✅ Close modal
+                document.getElementById("payment_modal").close();
+
+                // ✅ Reset form data
+                handleRest()
+
+                // ✅ Redirect to payment page
+                const paymentUrl = `https://payment.watheta.com/?name=${submittedData?.name}&email=${submittedData?.email}&businessName=${submittedData?.businessName}&contactNumber=${submittedData?.number}&packageName=${submittedData?.packageName}&amount=${submittedData?.amount}&currency=৳`;
+                window.location.href = paymentUrl;
+            } else {
+                console.error("❌ Payment API failed");
+            }
+        } catch (error) {
+            console.error("❌ Error:", error);
+        }
     };
 
     return (
@@ -230,11 +253,11 @@ export default function PricingPlan({ plans }) {
 
                 {/* Modal (only once) */}
                 <dialog id="payment_modal" className="modal">
-                    <form onSubmit={handlePayment} className="modal-box bg-[#defaed]">
+                    <form onSubmit={handlePayment} className="modal-box bg-white">
                         <PaymentForm plan={selectedPlan} formData={formData} handleChange={handleChange} />
                         <div className="modal-action flex items-center space-x-2">
                             <form method="dialog">
-                                <button className="btn bg-[#46ba85]">Close</button>
+                                <button onClick={handleRest} className="btn bg-[#46ba85]">Close</button>
                             </form>
                             <button type="submit" className="btn bg-blue-600 text-white">
                                 Proceed to Payment
