@@ -9,6 +9,7 @@ import { BadgeInfo, CheckCircle, XCircle } from "lucide-react";
 
 const PricePage = ({ plans }) => {
   const [isToggle, setIsToggle] = useState("month");
+  const [isHideOld, setHideOld] = useState(true);
   return (
     // </div>
     <div className="pt-20">
@@ -159,7 +160,8 @@ const PricePage = ({ plans }) => {
           </h2>
           <p className="mt-3 text-lg text-gray-600">
             Choose the right plan that fits your needs.
-          </p><div className="flex justify-center py-10">
+          </p>
+          <div className="flex justify-center py-10">
             <div className="pricingButtonTaggoleDiv ps-1 pe-1 py-1 space-x-1 rounded-full ">
               <button
                 onClick={() => setIsToggle("month")}
@@ -210,10 +212,10 @@ const PricePage = ({ plans }) => {
                 {/* Price */}
                 <div className="mt-4">
                   <span className="text-3xl font-extrabold text-gray-900">
-                    {isToggle === 'month' ? `$${plan.priceOfferUSD}` : `৳${plan?.priceOfferBDT}`}
+                    {isToggle === 'month' ? `৳${plan.priceOfferBDT}` : `$${plan?.priceOfferUSD}`}
                   </span>
                   <span className="ml-2 line-through text-gray-400 text-lg">
-                    {isToggle === 'month' ? `$${plan.priceRegularUSD}` : `৳${plan?.priceRegularBDT}`}
+                    {isToggle === 'month' ? `৳${plan.priceRegularBDT}` : `$${plan?.priceRegularUSD}`}
                   </span>
                   <span className="block text-sm text-gray-500">
                     per {plan.duration} {plan.durationType.toLowerCase()}
@@ -222,7 +224,7 @@ const PricePage = ({ plans }) => {
               </div>
 
               {/* Features */}
-              <div className="p-6 flex-1 overflow-y-auto">
+              <div className="p-6 flex-1 overflow-visible">
                 {Object.entries(plan.featureGroups || {}).map(
                   ([groupName, features]) => (
                     <div key={groupName} className="mb-5">
@@ -266,11 +268,11 @@ const PricePage = ({ plans }) => {
                               </div>
 
                               <p>
-                                {feature.limitValue !== null && feature.limitValue !== undefined && (
+                                {/* {feature.limitValue !== null && feature.limitValue !== undefined && (
                                   <span className="text-xs text-gray-500">
                                     (Limit: {feature.limitValue})
                                   </span>
-                                )}
+                                )} */}
                                 {feature.planDescription && (
                                   <span className="text-xs text-gray-500">
                                     {feature.planDescription}
@@ -303,10 +305,13 @@ const PricePage = ({ plans }) => {
       </section>
 
 
+      <button onClick={() => setHideOld(p => !p)}> 
+        {isHideOld ? 'View' : 'Hide'} Previous Pricing
+      </button>
 
 
 
-      <section className="mx-5 lg:mx-40 xl:mx-40 md:mx-16">
+      <section className={`${isHideOld && 'hidden'} mx-5 lg:mx-40 xl:mx-40 md:mx-16`}>
         {/* toggole button */}
         {/* <div className="flex justify-center py-10">
           <div className="pricingButtonTaggoleDiv ps-3 pe-1 py-1 space-x-3 rounded-full">
@@ -1158,7 +1163,7 @@ const PricePage = ({ plans }) => {
       </section>
       {/* explore pricing */}
       {/* pricing for phone */}
-      <section className="mx-5 md:mx-16 block lg:hidden xl:hidden">
+      <section className={`${isHideOld && 'hidden'} mx-5 md:mx-16 block lg:hidden xl:hidden`}>
         <div className="pb-10 grid grid-cols-1">
           {/* price dive */}
           {/* silver */}
