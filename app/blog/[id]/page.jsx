@@ -14,7 +14,7 @@ function getLocale(language) {
 }
 
 export async function generateMetadata({ params }) {
-  const { id } = params;
+  const { id } = await params;
 
   // Fetch blog metadata
   const blogData = await fetchDataAsServer(apiConfig.GET_BLOG_PUBLIC_BY_SLUG + id);

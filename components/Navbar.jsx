@@ -84,8 +84,8 @@ const Navbar = () => {
               <Link
                 prefetch={false}
                 href="/blog/en"
-                className={`nav-item ${pathname === "/blog/en" || "/blog/en" ? "active" : ""}`}
-                aria-current={pathname === "/blog/en" ? "page" : undefined}
+                className={`nav-item ${pathname.startsWith("/blog/") ? "active" : ""}`}
+                aria-current={pathname.startsWith("/blog/") ? "page" : undefined}
               >
                 Blog
               </Link>
