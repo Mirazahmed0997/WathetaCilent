@@ -4,6 +4,8 @@ import { useState } from 'react'
 import OldPricing from './OldPricing';
 import PaymentForm from './PaymentForm';
 import { v4 as uuidv4 } from 'uuid';
+import LimitedOfferBanner from './LimitedOfferBanner';
+import PricingMiniBanner from './PricingMiniBanner';
 
 export default function PricingPlan({ plans }) {
     const [isToggle, setIsToggle] = useState("month");
@@ -77,7 +79,7 @@ export default function PricingPlan({ plans }) {
 
         try {
             const response = await fetch(`https://payapi.watheta.com/api/postByDefaultAbandoned`, {
-            // const response = await fetch(`http://localhost:5000/api/postByDefaultAbandoned`, {
+                // const response = await fetch(`http://localhost:5000/api/postByDefaultAbandoned`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(submittedData),
@@ -103,26 +105,10 @@ export default function PricingPlan({ plans }) {
 
     return (
         <div className='h-auto'>
-            <div className="mx-3 lg:mx-60 xl:mx-96 pt-6">
-                <div className="lmitedBgDiv p-1 mx-5">
-                    <h1 className="text-center text-sm text-white blink-background">
-                        Limited Period Offer - Price Can Increase Anytime!
-                    </h1>
-                </div>
-            </div>
+            <LimitedOfferBanner />
             <section className="bg-gray-50 py-16 px-6 h-auto">
                 <div className="max-w-7xl mx-auto text-center mb-12">
-                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-                        Pricing Plans
-                    </h2>
-                    <p className="mt-3 text-lg text-gray-600">
-                        Choose the right plan that fits your needs.
-                    </p>
-                    <div className='w-full flex item-center justify-center'>
-                        <button onClick={() => setHideOld(p => !p)} className={`cursor-pointer text-sm ${isHideOld ? 'text-amber-500' : 'text-teal-500'}`}>
-                            Show {isHideOld ? 'Previous' : 'Current'} Pricing
-                        </button>
-                    </div>
+                    <PricingMiniBanner isHideOld={isHideOld} setHideOld={setHideOld}/>
                     <div className="flex justify-center py-10">
                         <div className="pricingButtonTaggoleDiv ps-1 pe-1 py-1 space-x-1 rounded-full ">
                             <button
