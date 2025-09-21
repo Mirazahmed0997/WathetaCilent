@@ -305,9 +305,11 @@ const PricePage = ({ plans }) => {
       </section>
 
 
-      <button onClick={() => setHideOld(p => !p)}> 
-        {isHideOld ? 'View' : 'Hide'} Previous Pricing
-      </button>
+      <div className='w-full flex item-center justify-center cursor-pointer text-sm text-amber-500'>
+        <button onClick={() => setHideOld(p => !p)}> 
+          {isHideOld ? 'View' : 'Hide'} Previous Pricing
+        </button>
+      </div>
 
 
 
