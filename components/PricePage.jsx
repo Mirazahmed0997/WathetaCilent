@@ -153,7 +153,7 @@ const PricePage = ({ plans }) => {
 
 
 
-      <section className="bg-gray-50 py-16 px-6">
+      <section className="bg-gray-50 py-16 px-6 h-auto">
         <div className="max-w-7xl mx-auto text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
             Pricing Plans
@@ -161,6 +161,11 @@ const PricePage = ({ plans }) => {
           <p className="mt-3 text-lg text-gray-600">
             Choose the right plan that fits your needs.
           </p>
+          <div className='w-full flex item-center justify-center'>
+            <button onClick={() => setHideOld(p => !p)} className={`cursor-pointer text-sm ${ isHideOld ? 'text-amber-500' : 'text-teal-500'}`}>
+              Show {isHideOld ? 'Previous' : 'Current'}  Pricing
+            </button>
+          </div>
           <div className="flex justify-center py-10">
             <div className="pricingButtonTaggoleDiv ps-1 pe-1 py-1 space-x-1 rounded-full ">
               <button
@@ -186,7 +191,15 @@ const PricePage = ({ plans }) => {
         </div>
 
         {/* Grid */}
-        <div className="flex items-center justify-around gap-8 max-w-7xl mx-auto">
+        <div
+          className={`
+            ${isHideOld 
+              ? "opacity-100 translate-x-0 max-h-[1000px]" 
+              : "opacity-0 translate-x-4 max-h-0 overflow-hidden pointer-events-none"} 
+            grid grid-cols-1 md:flex md:items-center md:justify-around gap-8 max-w-7xl mx-auto
+            transition-all duration-500 ease-in-out
+          `}
+        >
           {plans && plans?.data.map((plan) => (
             <div
               key={plan.id}
@@ -305,15 +318,16 @@ const PricePage = ({ plans }) => {
       </section>
 
 
-      <div className='w-full flex item-center justify-center cursor-pointer text-sm text-amber-500'>
-        <button onClick={() => setHideOld(p => !p)}> 
-          {isHideOld ? 'View' : 'Hide'} Previous Pricing
-        </button>
-      </div>
 
-
-
-      <section className={`${isHideOld && 'hidden'} mx-5 lg:mx-40 xl:mx-40 md:mx-16`}>
+      <section
+        className={`
+          ${isHideOld 
+            ? "opacity-0 -translate-x-4 max-h-0 overflow-hidden pointer-events-none" 
+            : "opacity-100 translate-x-0 max-h-[1000px]"} 
+          mx-5 lg:mx-40 xl:mx-40 md:mx-16
+          transition-all duration-500 ease-in-out
+        `}
+      >
         {/* toggole button */}
         {/* <div className="flex justify-center py-10">
           <div className="pricingButtonTaggoleDiv ps-3 pe-1 py-1 space-x-3 rounded-full">

@@ -1,10 +1,14 @@
-import PriceFAQ from "@/components/PriceFAQ";
-import PricePage from "@/components/PricePage";
-import apiConfig from "@/configs/api.config";
-import usePricingMetaData from "@/utility/usePricingMetaData";
-import { fetchDataAsServer } from "@/utils/axiosServer";
 import React from "react";
-import { CheckCircle, XCircle } from "lucide-react";
+import apiConfig from "@/configs/api.config";
+import { fetchDataAsServer } from "@/utils/axiosServer";
+import PricingHero from "./components/PricingHero";
+import PricingPlan from "./components/PricingPlan";
+import ExplorePricing from "./components/ExplorePricing";
+import CustomPricing from "./components/CustomPricing";
+import Addons from "./components/Addons";
+import SupportService from "./components/SupportService";
+import ScheduleADemo from "@/components/ScheduleADemo";
+import PriceFAQ from "@/components/PriceFAQ";
 
 
 // export async function generateMetadata() {
@@ -30,7 +34,14 @@ const PricingPage = async () => {
   const plans = await fetchDataAsServer(apiConfig?.GET_PRICING)
   return (
     <div className="">
-      <PricePage plans={plans}/>
+      {/* <PricePage plans={plans}/> */}
+      <PricingHero/>
+      <PricingPlan plans={plans}/>
+      <ExplorePricing/>
+      {/* <CustomPricing/> */}
+      <Addons/>
+      <SupportService/>
+      <ScheduleADemo />
       <PriceFAQ/>
     </div>
   );
