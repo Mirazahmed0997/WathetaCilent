@@ -22,6 +22,7 @@ const apiConfig = {
   //? API: ---- Pricing ----
   //────────────────────────────────────────────
   GET_PRICING: '/price/public',
+  GET_PRICING_SEO: '/price/seo',
   CREATE_PAYMENT: 'https://payapi.watheta.com/api/postByDefaultAbandoned'
 };
 
