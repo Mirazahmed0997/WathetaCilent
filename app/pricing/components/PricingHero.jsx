@@ -128,15 +128,6 @@ export default function PricingHero() {
                     </div>
                 </div>
             </div>
-            {/* pricing */}
-            {/* Limited time offer section */}
-            <div className="mx-3 lg:mx-60 xl:mx-96 pt-6">
-                <div className="lmitedBgDiv p-1 mx-5">
-                    <h1 className="text-center text-sm text-white blink-background">
-                        Limited Period Offer - Price Can Increase Anytime!
-                    </h1>
-                </div>
-            </div>
         </section>
     )
 }

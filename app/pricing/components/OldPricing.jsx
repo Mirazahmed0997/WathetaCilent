@@ -1,17 +1,9 @@
 import React from 'react'
 
-export default function OldPricing({ isToggle, setIsToggle, isHideOld, setHideOld }) {
+export default function OldPricing({ isToggle }) {
     return (
         <div>
-            <section
-                className={`
-                    ${isHideOld
-                        ? "opacity-0 -translate-x-4 max-h-0 overflow-hidden pointer-events-none"
-                        : "opacity-100 translate-x-0 max-h-[1000px]"} 
-                    mx-5 lg:mx-40 xl:mx-40 md:mx-16
-                    transition-all duration-500 ease-in-out
-                    `}
-            >
+            <section className={` mx-5 lg:mx-40 xl:mx-40 md:mx-16 transition-all duration-500 ease-in-out`}>
                 {/* toggole button */}
                 {/* <div className="flex justify-center py-10">
           <div className="pricingButtonTaggoleDiv ps-3 pe-1 py-1 space-x-3 rounded-full">
@@ -863,7 +855,7 @@ export default function OldPricing({ isToggle, setIsToggle, isHideOld, setHideOl
             </section>
             {/* explore pricing */}
             {/* pricing for phone */}
-            <section className={`${isHideOld && 'hidden'} mx-5 md:mx-16 block lg:hidden xl:hidden`}>
+            <section className={`mx-5 md:mx-16 block lg:hidden xl:hidden`}>
                 <div className="pb-10 grid grid-cols-1">
                     {/* price dive */}
                     {/* silver */}
