@@ -34,7 +34,7 @@ export default function Testimonials() {
         {
             name: "Sarah Smith",
             role: "Marketing Manager, BrandX",
-            video: "https://www.youtube.com/embed/QBlFQuDzoQE",
+            video: "https://youtu.be/c1VinHqToUY?si=u6CwuVc7TuznAnjQ",
             thumbnail: "/images/client2.jpg",
         },
         {
@@ -108,7 +108,7 @@ function VideoCard({ testimonial }) {
             ) : (
                 <iframe
                     className="w-full h-full"
-                    src={`${testimonial.video}?autoplay=1`}
+                    src={`${testimonial.video}`}
                     title={testimonial.name}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
