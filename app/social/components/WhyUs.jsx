@@ -1,5 +1,8 @@
+'use client'
 import Image from 'next/image'
 import React from 'react'
+import { motion } from 'framer-motion';
+import transitionsIndexed from '@/animations/transitionsIndexed';
 
 export default function WhyUs() {
     return (
@@ -8,7 +11,13 @@ export default function WhyUs() {
                 <h1 className='text-2xl sm:text-3xl md:text-5xl font-bold'>Why Facebook Messenger?</h1>
             </div>
             <div className='grid grid-cols-1 md:grid-cols-3 gap-10'>
-                <div className='flex flex-col items-center space-y-3 px-2 py-6 bg-gray-100 rounded-2xl'>
+                <motion.div 
+                    variants={transitionsIndexed.FadeInFromBottomIndexed}
+                    initial="initial"
+                    whileInView="animate"
+                    viewport={{ once: false, amount: 0.5 }}
+                    custom={1}
+                    className='flex flex-col items-center space-y-3 px-2 py-6 bg-gray-100 rounded-2xl'>
                     <Image
                         src="/social/fb-dm.png"
                         height={100}
@@ -18,9 +27,15 @@ export default function WhyUs() {
                     />
                     <p className='text-5xl font-bold text-blue-500'>80%</p>
                     <p className='text-sm text-gray-700'>Mobile Users Use Messenger App Daily</p>
-                </div>
+                </motion.div>
                 
-                <div className='flex flex-col items-center space-y-3 px-2 py-6 bg-blue-500 rounded-2xl'>
+                <motion.div 
+                    variants={transitionsIndexed.FadeInFromBottomIndexed}
+                    initial="initial"
+                    whileInView="animate"
+                    viewport={{ once: false, amount: 0.5 }}
+                    custom={2}
+                className='flex flex-col items-center space-y-3 px-2 py-6 bg-blue-500 rounded-2xl'>
                     <Image
                         src="/social/fb-dm.png"
                         height={100}
@@ -30,9 +45,15 @@ export default function WhyUs() {
                     />
                     <p className='text-5xl font-bold text-gray-100'>2 BN</p>
                     <p className='text-sm text-gray-100'>Active Users World Wide</p>
-                </div>
+                </motion.div>
                 
-                <div className='flex flex-col items-center space-y-3 px-2 py-6 bg-gray-100 rounded-2xl'>
+                <motion.div 
+                    variants={transitionsIndexed.FadeInFromBottomIndexed}
+                    initial="initial"
+                    whileInView="animate"
+                    viewport={{ once: false, amount: 0.5 }}
+                    custom={3}
+                className='flex flex-col items-center space-y-3 px-2 py-6 bg-gray-100 rounded-2xl'>
                     <Image
                         src="/social/fb-dm.png"
                         height={100}
@@ -42,7 +63,7 @@ export default function WhyUs() {
                     />
                     <p className='text-5xl font-bold text-blue-500'>8X</p>
                     <p className='text-sm text-gray-700'>More Response Rate than Email</p>
-                </div>
+                </motion.div>
             </div>
         </section>
     )
