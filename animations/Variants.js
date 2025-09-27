@@ -7,7 +7,7 @@ export const FadeInFromLeft = {
         opacity: 1,
         x: 0,
         transition: {
-            type: 'easeIn',
+            type: 'easeIn', //spring, easeIn
             duration: 0.5,
             delay: 0.5,
         },
@@ -23,7 +23,7 @@ export const FadeInFromRight = {
         opacity: 1,
         x: 0,
         transition: {
-            type: 'easeIn',
+            type: 'easeIn', //spring, easeIn
             duration: 0.5,
             delay: 0.5,
         },
@@ -182,3 +182,37 @@ export const FlipIn = {
         },
     }
 }
+
+export const BounceInFromLeft = {
+  initial: {
+    opacity: 0,
+    x: "-100vw", // start fully off-screen to the left
+  },
+  animate: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      type: "spring",
+      stiffness: 120, // higher = faster snap
+      damping: 15,    // lower = more bounce
+      duration: 0.8,
+    },
+  },
+};
+
+export const BounceInFromRight = {
+  initial: {
+    opacity: 0,
+    x: "100vw", // start fully off-screen to the right
+  },
+  animate: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      type: "spring",
+      stiffness: 120,
+      damping: 15,
+      duration: 0.8,
+    },
+  },
+};
