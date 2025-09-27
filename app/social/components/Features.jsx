@@ -63,15 +63,9 @@ function FeatureItem({ feature, reverse }) {
             </motion.div>
 
             {/* text column */}
-            <div className="w-full md:w-1/2 space-y-4 text-center md:text-left">
+            <div className={`w-full md:w-1/2 space-y-4 text-center md:text-left ${reverse ? 'md:text-right' : 'md:text-left'}`}>
                 <h3 className="font-bold text-lg sm:text-2xl md:text-3xl">{feature.title}</h3>
                 <p className="text-gray-600">{feature.description}</p>
-                <Link
-                    href={`#`}
-                    className="inline-block px-6 py-3 border border-[#6cc17b] rounded-full hover:bg-[#6cc17b] hover:text-white transition"
-                >
-                    Read More
-                </Link>
             </div>
         </div>
     );

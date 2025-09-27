@@ -90,6 +90,16 @@ const Navbar = () => {
                 Blog
               </Link>
             </li>
+            <li>
+              <Link
+                prefetch={false}
+                href="/social"
+                className={`nav-item ${pathname === "/social" ? "active" : ""}`}
+                aria-current={pathname === "/social" ? "page" : undefined}
+              >
+                Social
+              </Link>
+            </li>
 
             <li className="block lg:hidden xl:hidden">
               <Link href="https://dash.watheta.com/login" passHref aria-label="Login">
