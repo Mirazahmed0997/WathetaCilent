@@ -1,8 +1,7 @@
 'use client'
-import React, { useMemo, useState } from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Play } from 'lucide-react'
-import getYoutubeVideo from '@/utils/getYoutubeVideo'
 
 // Variants for stagger container
 const container = {
@@ -28,19 +27,19 @@ export default function Testimonials() {
         {
             name: "John Doe",
             role: "CEO, Example Corp",
-            video: "https://www.youtube.com/embed/QBlFQuDzoQE",
+            video: "/social/video/review.mp4",
             thumbnail: "/images/client1.jpg",
         },
         {
             name: "Sarah Smith",
             role: "Marketing Manager, BrandX",
-            video: "https://youtu.be/c1VinHqToUY?si=u6CwuVc7TuznAnjQ",
+            video: "/social/video/review.mp4",
             thumbnail: "/images/client2.jpg",
         },
         {
             name: "David Lee",
             role: "Entrepreneur",
-            video: "https://www.youtube.com/embed/QBlFQuDzoQE",
+            video: "/social/video/review.mp4",
             thumbnail: "/images/client3.jpg",
         },
     ]
@@ -80,12 +79,6 @@ export default function Testimonials() {
 function VideoCard({ testimonial }) {
     const [play, setPlay] = useState(false)
 
-    const { videoId, thumbnailUrl } = useMemo(() => {
-        const id = getYoutubeVideo.id(testimonial.video);
-        const thumbnail = getYoutubeVideo.thumbnail(id);
-        return { videoId: id, thumbnailUrl: thumbnail };
-    }, [testimonial.video]);
-
     return (
         <div
             className="relative w-full sm:w-64 md:w-72 lg:w-80 h-[450px] bg-black rounded-2xl overflow-hidden cursor-pointer group"
@@ -95,7 +88,7 @@ function VideoCard({ testimonial }) {
                 <>
                     {/* Thumbnail */}
                     <img
-                        src={thumbnailUrl}
+                        src={testimonial.thumbnail}
                         alt={testimonial.name}
                         className="w-full h-full object-cover"
                     />
@@ -105,12 +98,11 @@ function VideoCard({ testimonial }) {
                     </div>
                 </>
             ) : (
-                <iframe
-                    className="w-full h-full"
-                    src={`https://www.youtube.com/embed/${videoId}?autoplay=1&controls=0&modestbranding=1&rel=0&playsinline=0`}
-                    title={testimonial.name}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
+                <video
+                    className="w-full h-full object-cover"
+                    src={testimonial.video}
+                    autoPlay
+                    controls
                 />
             )}
         </div>
