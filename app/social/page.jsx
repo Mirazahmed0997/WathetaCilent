@@ -4,6 +4,7 @@ import MetaCertified from './components/MetaCertified'
 import Features from './components/Features'
 import Addons from './components/Addons'
 import WhyUs from './components/WhyUs'
+import Testimonials from './components/Testimonials'
 
 export default function SocialPage() {
   return (
@@ -13,6 +14,7 @@ export default function SocialPage() {
         <Features/>
         <MetaCertified/>
         <Addons/>
+        <Testimonials/>
     </div>
   )
 }
