@@ -88,7 +88,7 @@ function VideoCard({ testimonial }) {
 
     return (
         <div
-            className="relative w-full h-64 bg-black cursor-pointer group"
+            className="relative w-full sm:w-64 md:w-72 lg:w-80 h-[450px] bg-black rounded-2xl overflow-hidden cursor-pointer group"
             onClick={() => setPlay(true)}
         >
             {!play ? (
@@ -99,7 +99,7 @@ function VideoCard({ testimonial }) {
                         alt={testimonial.name}
                         className="w-full h-full object-cover"
                     />
-                    {/* Overlay with Play Icon */}
+                    {/* Overlay Play Icon */}
                     <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
                         <Play size={50} className="text-white" />
                     </div>
@@ -107,7 +107,7 @@ function VideoCard({ testimonial }) {
             ) : (
                 <iframe
                     className="w-full h-full"
-                    src={`https://www.youtube.com/embed/${videoId}?autoplay=1&controls=0&modestbranding=1&rel=0`}
+                    src={`https://www.youtube.com/embed/${videoId}?autoplay=1&controls=0&modestbranding=1&rel=0&playsinline=0`}
                     title={testimonial.name}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
