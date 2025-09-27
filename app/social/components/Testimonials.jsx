@@ -1,7 +1,8 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Play } from 'lucide-react'
+import getYoutubeVideo from '@/utils/getYoutubeVideo'
 
 // Variants for stagger container
 const container = {
@@ -27,19 +28,19 @@ export default function Testimonials() {
         {
             name: "John Doe",
             role: "CEO, Example Corp",
-            video: "https://youtube.com/shorts/QBlFQuDzoQE?si=3r3J57qLkGZ2WjQj",
+            video: "https://www.youtube.com/embed/QBlFQuDzoQE",
             thumbnail: "/images/client1.jpg",
         },
         {
             name: "Sarah Smith",
             role: "Marketing Manager, BrandX",
-            video: "https://youtube.com/shorts/QBlFQuDzoQE?si=3r3J57qLkGZ2WjQj",
+            video: "https://www.youtube.com/embed/QBlFQuDzoQE",
             thumbnail: "/images/client2.jpg",
         },
         {
             name: "David Lee",
             role: "Entrepreneur",
-            video: "https://youtube.com/shorts/QBlFQuDzoQE?si=3r3J57qLkGZ2WjQj",
+            video: "https://www.youtube.com/embed/QBlFQuDzoQE",
             thumbnail: "/images/client3.jpg",
         },
     ]
@@ -79,6 +80,13 @@ export default function Testimonials() {
 function VideoCard({ testimonial }) {
     const [play, setPlay] = useState(false)
 
+    // Memoize video ID and thumbnail generation
+    const { videoId, thumbnailUrl } = useMemo(() => {
+        const id = getYoutubeVideo.id(testimonial.video);
+        const thumbnail = getYoutubeVideo.thumbnail(id);
+        return { videoId: id, thumbnailUrl: thumbnail };
+    }, [testimonial.video]);
+
     return (
         <div
             className="relative w-full h-64 bg-black cursor-pointer group"
@@ -88,21 +96,22 @@ function VideoCard({ testimonial }) {
                 <>
                     {/* Thumbnail */}
                     <img
-                        src={testimonial.thumbnail}
+                        src={thumbnailUrl}
                         alt={testimonial.name}
                         className="w-full h-full object-cover"
                     />
-                    {/* Overlay */}
+                    {/* Overlay with Play Icon */}
                     <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
                         <Play size={50} className="text-white" />
                     </div>
                 </>
             ) : (
-                <video
-                    src={testimonial.video}
-                    autoPlay
-                    controls
-                    className="w-full h-full object-cover"
+                <iframe
+                    className="w-full h-full"
+                    src={`${testimonial.video}?autoplay=1`}
+                    title={testimonial.name}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
                 />
             )}
         </div>
