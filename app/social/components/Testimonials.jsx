@@ -80,7 +80,6 @@ export default function Testimonials() {
 function VideoCard({ testimonial }) {
     const [play, setPlay] = useState(false)
 
-    // Memoize video ID and thumbnail generation
     const { videoId, thumbnailUrl } = useMemo(() => {
         const id = getYoutubeVideo.id(testimonial.video);
         const thumbnail = getYoutubeVideo.thumbnail(id);
@@ -108,7 +107,7 @@ function VideoCard({ testimonial }) {
             ) : (
                 <iframe
                     className="w-full h-full"
-                    src={`${testimonial.video}`}
+                    src={`https://www.youtube.com/embed/${videoId}?autoplay=1&controls=0&modestbranding=1&rel=0`}
                     title={testimonial.name}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
