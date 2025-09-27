@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Play } from 'lucide-react'
 
@@ -28,19 +28,16 @@ export default function Testimonials() {
             name: "John Doe",
             role: "CEO, Example Corp",
             video: "/social/video/review.mp4",
-            thumbnail: "/images/client1.jpg",
         },
         {
             name: "Sarah Smith",
             role: "Marketing Manager, BrandX",
             video: "/social/video/review.mp4",
-            thumbnail: "/images/client2.jpg",
         },
         {
             name: "David Lee",
             role: "Entrepreneur",
             video: "/social/video/review.mp4",
-            thumbnail: "/images/client3.jpg",
         },
     ]
 
@@ -78,6 +75,25 @@ export default function Testimonials() {
 
 function VideoCard({ testimonial }) {
     const [play, setPlay] = useState(false)
+    const [thumbnail, setThumbnail] = useState(null)
+    const videoRef = useRef(null)
+
+    useEffect(() => {
+        if (!videoRef.current) return
+
+        const video = videoRef.current
+        video.currentTime = 1 // capture at 1 second
+        video.addEventListener("loadeddata", () => {
+            const canvas = document.createElement("canvas")
+            canvas.width = video.videoWidth
+            canvas.height = video.videoHeight
+            const ctx = canvas.getContext("2d")
+            if (ctx) {
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
+                setThumbnail(canvas.toDataURL("image/png"))
+            }
+        })
+    }, [])
 
     return (
         <div
@@ -86,24 +102,24 @@ function VideoCard({ testimonial }) {
         >
             {!play ? (
                 <>
-                    {/* Thumbnail */}
-                    <img
-                        src={testimonial.thumbnail}
-                        alt={testimonial.name}
-                        className="w-full h-full object-cover"
-                    />
+                    {thumbnail ? (
+                        <img src={thumbnail} alt={testimonial.name} className="w-full h-full object-cover" />
+                    ) : (
+                        <div className="w-full h-full bg-gray-800 flex items-center justify-center text-white">
+                            Loading thumbnail...
+                        </div>
+                    )}
+
                     {/* Overlay Play Icon */}
                     <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
                         <Play size={50} className="text-white" />
                     </div>
+
+                    {/* Hidden video to extract thumbnail */}
+                    <video ref={videoRef} src={testimonial.video} className="hidden" />
                 </>
             ) : (
-                <video
-                    className="w-full h-full object-cover"
-                    src={testimonial.video}
-                    autoPlay
-                    controls
-                />
+                <video className="w-full h-full object-cover" src={testimonial.video} autoPlay controls />
             )}
         </div>
     )
