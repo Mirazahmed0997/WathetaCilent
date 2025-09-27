@@ -1,5 +1,5 @@
 // Fade In from Left with Index-based Animation
-export const FadeInFromLeftIndexed = {
+const FadeInFromLeftIndexed = {
     initial: {
         opacity: 0,
         x: -100,
@@ -16,7 +16,7 @@ export const FadeInFromLeftIndexed = {
 };
 
 // Fade In from Right with Index-based Animation
-export const FadeInFromRightIndexed = {
+const FadeInFromRightIndexed = {
     initial: {
         opacity: 0,
         x: 100,
@@ -33,7 +33,7 @@ export const FadeInFromRightIndexed = {
 };
 
 // Fade In from Top with Index-based Animation
-export const FadeInFromTopIndexed = {
+const FadeInFromTopIndexed = {
     initial: {
         opacity: 0,
         y: -100,
@@ -50,7 +50,7 @@ export const FadeInFromTopIndexed = {
 };
 
 // Fade In from Bottom with Index-based Animation
-export const FadeInFromBottomIndexed = {
+const FadeInFromBottomIndexed = {
     initial: {
         opacity: 0,
         y: 100,
@@ -67,7 +67,7 @@ export const FadeInFromBottomIndexed = {
 };
 
 // Scale In with Index-based Animation
-export const ScaleInIndexed = {
+const ScaleInIndexed = {
     initial: {
         opacity: 0,
         scale: 0.8,
@@ -84,7 +84,7 @@ export const ScaleInIndexed = {
 };
 
 // Rotate In with Index-based Animation
-export const RotateInIndexed = {
+const RotateInIndexed = {
     initial: {
         opacity: 0,
         rotate: -90,
@@ -101,7 +101,7 @@ export const RotateInIndexed = {
 };
 
 // Zoom In with Index-based Animation
-export const ZoomInIndexed = {
+const ZoomInIndexed = {
     initial: {
         opacity: 0,
         scale: 1.5,
@@ -117,8 +117,8 @@ export const ZoomInIndexed = {
     }),
 };
 
-// Zoom In with Index-based Animation
-export const ZoomOutIndexed = {
+// Zoom Out with Index-based Animation
+const ZoomOutIndexed = {
     initial: {
         opacity: 0,
         scale: 0.5,
@@ -135,7 +135,7 @@ export const ZoomOutIndexed = {
 };
 
 // Bounce In with Index-based Animation
-export const BounceInIndexed = {
+const BounceInIndexed = {
     initial: {
         opacity: 0,
         y: -100,
@@ -153,16 +153,16 @@ export const BounceInIndexed = {
 };
 
 // Stagger Container with Index-based Animation
-export const StaggerContainerIndexed = {
+const StaggerContainerIndexed = {
     animate: (index) => ({
         transition: {
-            staggerChildren: 0.3 * index,index
+            staggerChildren: 0.3 * index,
         },
     }),
 };
 
 // Slide Out Left with Index-based Animation
-export const SlideOutLeftIndexed = {
+const SlideOutLeftIndexed = {
     initial: {
         opacity: 1,
         x: 0,
@@ -179,7 +179,7 @@ export const SlideOutLeftIndexed = {
 };
 
 // Flip In with Index-based Animation
-export const FlipInIndexed = {
+const FlipInIndexed = {
     initial: {
         opacity: 0,
         rotateY: -90,
@@ -194,3 +194,20 @@ export const FlipInIndexed = {
         },
     }),
 };
+
+const transitionsIndexed = {
+    FadeInFromLeftIndexed,
+    FadeInFromRightIndexed,
+    FadeInFromTopIndexed,
+    FadeInFromBottomIndexed,
+    ScaleInIndexed,
+    RotateInIndexed,
+    ZoomInIndexed,
+    ZoomOutIndexed,
+    BounceInIndexed,
+    StaggerContainerIndexed,
+    SlideOutLeftIndexed,
+    FlipInIndexed,
+};
+
+export default transitionsIndexed;

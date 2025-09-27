@@ -3,7 +3,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from 'framer-motion'
-import { BounceInFromLeft, BounceInFromRight, FadeInFromLeft, FadeInFromRight } from "@/animations/Variants";
+import transitions from "@/animations/transitions";
 
 export default function Features() {
     const socialFeatures = [
@@ -48,7 +48,7 @@ function FeatureItem({ feature, reverse }) {
         <div className={`h-screen flex flex-col md:flex-row items-center gap-8 md:gap-16 ${reverse ? "md:flex-row-reverse" : ""}`}>
             {/* image column */}
             <motion.div
-                variants={reverse ? FadeInFromRight : FadeInFromLeft}
+                variants={reverse ? transitions.FadeInFromRight : transitions.FadeInFromLeft}
                 initial="initial"
                 whileInView="animate"
                 viewport={{ once: true, amount: 0.2 }} // trigger when 20% visible
