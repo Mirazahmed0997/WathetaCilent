@@ -1,16 +1,24 @@
 'use client'
-import { BadgeInfo, CheckCircle, XCircle } from 'lucide-react';
+import { BadgeInfo, CheckCircle, Star, XCircle } from 'lucide-react';
 import { useState } from 'react'
 import OldPricing from './OldPricing';
 import PaymentForm from './PaymentForm';
 import { v4 as uuidv4 } from 'uuid';
 import LimitedOfferBanner from './LimitedOfferBanner';
 import PricingMiniBanner from './PricingMiniBanner';
+import Link from 'next/link';
 
 export default function PricingPlan({ plans }) {
     const [isToggle, setIsToggle] = useState("month");
     const [isHideOld, setHideOld] = useState(true);
     const [selectedPlan, setSelectedPlan] = useState(null);
+
+    const isNumeric = (value) => !isNaN(value) && !isNaN(parseFloat(value));
+
+    const getDisplayPrice = (value, currency) => {
+        if (!value) return null;
+        return isNumeric(value) ? `${currency}${value}` : value;
+    };
 
     const [formData, setFormData] = useState({
         name: '',
@@ -108,7 +116,7 @@ export default function PricingPlan({ plans }) {
             <LimitedOfferBanner />
             <section className="bg-gray-50 py-16 px-6 h-auto">
                 <div className="max-w-7xl mx-auto text-center mb-12">
-                    <PricingMiniBanner isHideOld={isHideOld} setHideOld={setHideOld}/>
+                    <PricingMiniBanner isHideOld={isHideOld} setHideOld={setHideOld} />
                     <div className="flex justify-center py-10">
                         <div className="pricingButtonTaggoleDiv ps-1 pe-1 py-1 space-x-1 rounded-full ">
                             <button
@@ -129,7 +137,7 @@ export default function PricingPlan({ plans }) {
 
                 {/* Grid */}
                 {isHideOld ? (
-                    <div className="grid grid-cols-1 md:flex md:items-center md:justify-around gap-8 max-w-7xl mx-auto">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mx-5 md:mx-16 lg:mx-48 xl:mx-48">
                         {plans?.data.map((plan) => (
                             <div
                                 key={plan.id}
@@ -139,33 +147,64 @@ export default function PricingPlan({ plans }) {
                                     }`}
                             >
                                 {/* Header */}
-                                <div className="p-6 border-b border-gray-400">
+                                <div className="relative p-6 border-b border-gray-400">
                                     <div className="flex items-center justify-between">
                                         <h3 className="text-xl font-bold text-gray-900 mt-2">
                                             {plan.name}
                                         </h3>
                                         {plan.isPopular && (
-                                            <span className="px-3 py-1 text-xs font-semibold bg-yellow-100 text-yellow-700 rounded-full">
-                                                Popular
-                                            </span>
+                                            <p className="absolute top-1 right-1 flex items-center space-x-1 px-3 py-1 text-xs font-semibold bg-yellow-100 text-yellow-700 rounded-full">
+                                                <Star className='w-4 h-4' />
+                                                <span>Popular</span>
+                                            </p>
                                         )}
                                     </div>
                                     <p className="text-sm text-gray-600">{plan.description}</p>
 
                                     {/* Price */}
                                     <div className="mt-4">
-                                        <span className="text-3xl font-extrabold text-gray-900">
-                                            {isToggle === "month"
-                                                ? `৳${plan.priceOfferBDT}`
-                                                : `$${plan?.priceOfferUSD}`}
-                                        </span>
-                                        <span className="ml-2 line-through text-gray-400 text-lg">
-                                            {isToggle === "month"
-                                                ? `৳${plan.priceRegularBDT}`
-                                                : `$${plan?.priceRegularUSD}`}
-                                        </span>
+                                        {isToggle === "month" ? (
+                                            plan.priceOfferBDT ? (
+                                                <>
+                                                    {/* Offer Price */}
+                                                    <span className="text-3xl font-extrabold text-gray-900">
+                                                        {getDisplayPrice(plan.priceOfferBDT, "৳")}
+                                                    </span>
+                                                    {/* Regular Price (line-through) */}
+                                                    <span className="ml-2 line-through text-gray-400 text-lg">
+                                                        {getDisplayPrice(plan.priceRegularBDT, "৳")}
+                                                    </span>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    {/* Only Regular Price (no line-through) */}
+                                                    <span className="text-3xl font-extrabold text-gray-900">
+                                                        {getDisplayPrice(plan.priceRegularBDT, "৳")}
+                                                    </span>
+                                                </>
+                                            )
+                                        ) : plan.priceOfferUSD ? (
+                                            <>
+                                                {/* Offer Price */}
+                                                <span className="text-3xl font-extrabold text-gray-900">
+                                                    {getDisplayPrice(plan.priceOfferUSD, "$")}
+                                                </span>
+                                                {/* Regular Price (line-through) */}
+                                                <span className="ml-2 line-through text-gray-400 text-lg">
+                                                    {getDisplayPrice(plan.priceRegularUSD, "$")}
+                                                </span>
+                                            </>
+                                        ) : (
+                                            <>
+                                                {/* Only Regular Price (no line-through) */}
+                                                <span className="text-3xl font-extrabold text-gray-900">
+                                                    {getDisplayPrice(plan.priceRegularUSD, "$")}
+                                                </span>
+                                            </>
+                                        )}
+
                                         <span className="block text-sm text-gray-500">
-                                            per {plan.duration} {plan.durationType.toLowerCase()}
+                                            Per {plan.duration} {plan.durationType.toLowerCase()}
                                         </span>
                                     </div>
                                 </div>
@@ -220,15 +259,24 @@ export default function PricingPlan({ plans }) {
 
                                 {/* CTA */}
                                 <div className="p-6 border-t border-gray-400">
-                                    <button
-                                        onClick={() => openPaymentForm(plan)}
-                                        className={`w-full py-3 px-4 rounded-xl font-semibold transition ${plan.isRecommended
-                                            ? "bg-blue-600 text-white hover:bg-blue-700"
-                                            : "bg-gray-100 text-gray-800 hover:bg-gray-200"
-                                            }`}
-                                    >
-                                        {plan.isRecommended ? "Get Started" : "Choose Plan"}
-                                    </button>
+                                    {isNumeric(plan.priceOfferBDT || plan.priceRegularBDT) ? (
+                                        <button
+                                            onClick={() => openPaymentForm(plan)}
+                                            className={`w-full py-3 px-4 rounded-xl font-semibold transition ${plan.isRecommended
+                                                    ? "bg-blue-600 text-white hover:bg-blue-700"
+                                                    : "bg-gray-100 text-gray-800 hover:bg-gray-200"
+                                                }`}
+                                        >
+                                            {plan.isRecommended ? "Get Started" : "Choose Plan"}
+                                        </button>
+                                    ) : (
+                                        <Link
+                                            href="/contact"
+                                            className="block text-center w-full py-3 px-4 rounded-xl font-semibold bg-gray-100 text-gray-800 hover:bg-gray-200 transition"
+                                        >
+                                            Contact
+                                        </Link>
+                                    )}
                                 </div>
                             </div>
                         ))}
@@ -243,9 +291,9 @@ export default function PricingPlan({ plans }) {
                         <PaymentForm plan={selectedPlan} formData={formData} handleChange={handleChange} />
                         <div className="modal-action flex items-center space-x-2">
                             <form method="dialog">
-                                <button onClick={handleRest} className="btn bg-[#46ba85]">Close</button>
+                                <button onClick={handleRest} className="btn border-0 bg-[#ba4646] hover:bg-[#c05f5f] rounded-full">Close</button>
                             </form>
-                            <button type="submit" className="btn bg-blue-600 text-white">
+                            <button type="submit" className="btn border-0 bg-[#46ba85] hover:bg-[#6ccea2] rounded-full">
                                 Proceed to Payment
                             </button>
                         </div>
