@@ -8,7 +8,7 @@ export default function WhyUs() {
     return (
         <section className='max-w-7xl mx-auto p-6 sm:p-8 md:p-10 space-y-10 mb-20'>
             <div className='text-center'>
-                <h1 className='text-2xl sm:text-3xl md:text-5xl font-bold'>Why Facebook Messenger?</h1>
+                <h1 className='text-2xl sm:text-3xl md:text-5xl font-bold'>Why Facebook & Instagram?</h1>
             </div>
             <div className='grid grid-cols-1 md:grid-cols-3 gap-10'>
                 <motion.div 
@@ -19,11 +19,11 @@ export default function WhyUs() {
                     custom={1}
                     className='flex flex-col items-center space-y-3 px-2 py-6 bg-gray-100 rounded-2xl'>
                     <Image
-                        src="/social/fb-dm.png"
+                        src="/social/fb-dm.gif"
                         height={100}
                         width={100}
                         alt="Mobile Chat"
-                        className="w-20 aspect-square"
+                        className="w-40 aspect-square rounded-full"
                     />
                     <p className='text-5xl font-bold text-blue-500'>80%</p>
                     <p className='text-sm text-gray-700'>Mobile Users Use Messenger App Daily</p>
@@ -35,13 +35,13 @@ export default function WhyUs() {
                     whileInView="animate"
                     viewport={{ once: true, amount: 0.5 }}
                     custom={2}
-                className='flex flex-col items-center space-y-3 px-2 py-6 bg-blue-500 rounded-2xl'>
+                className='flex flex-col items-center space-y-3 px-2 py-6 bg-blue-400 rounded-2xl'>
                     <Image
-                        src="/social/fb-dm.png"
+                        src="/social/world.gif"
                         height={100}
                         width={100}
                         alt="Mobile Chat"
-                        className="w-20 aspect-square"
+                        className="w-40 aspect-square"
                     />
                     <p className='text-5xl font-bold text-gray-100'>2 BN</p>
                     <p className='text-sm text-gray-100'>Active Users World Wide</p>
@@ -55,11 +55,11 @@ export default function WhyUs() {
                     custom={3}
                 className='flex flex-col items-center space-y-3 px-2 py-6 bg-gray-100 rounded-2xl'>
                     <Image
-                        src="/social/fb-dm.png"
+                        src="/social/chart.gif"
                         height={100}
                         width={100}
                         alt="Mobile Chat"
-                        className="w-20 aspect-square"
+                        className="w-40 aspect-square"
                     />
                     <p className='text-5xl font-bold text-blue-500'>8X</p>
                     <p className='text-sm text-gray-700'>More Response Rate than Email</p>
