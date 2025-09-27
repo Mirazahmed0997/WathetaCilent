@@ -15,7 +15,7 @@ export default function WhyUs() {
                     variants={transitionsIndexed.FadeInFromBottomIndexed}
                     initial="initial"
                     whileInView="animate"
-                    viewport={{ once: false, amount: 0.5 }}
+                    viewport={{ once: true, amount: 0.5 }}
                     custom={1}
                     className='flex flex-col items-center space-y-3 px-2 py-6 bg-gray-100 rounded-2xl'>
                     <Image
@@ -33,7 +33,7 @@ export default function WhyUs() {
                     variants={transitionsIndexed.FadeInFromBottomIndexed}
                     initial="initial"
                     whileInView="animate"
-                    viewport={{ once: false, amount: 0.5 }}
+                    viewport={{ once: true, amount: 0.5 }}
                     custom={2}
                 className='flex flex-col items-center space-y-3 px-2 py-6 bg-blue-500 rounded-2xl'>
                     <Image
@@ -51,7 +51,7 @@ export default function WhyUs() {
                     variants={transitionsIndexed.FadeInFromBottomIndexed}
                     initial="initial"
                     whileInView="animate"
-                    viewport={{ once: false, amount: 0.5 }}
+                    viewport={{ once: true, amount: 0.5 }}
                     custom={3}
                 className='flex flex-col items-center space-y-3 px-2 py-6 bg-gray-100 rounded-2xl'>
                     <Image
