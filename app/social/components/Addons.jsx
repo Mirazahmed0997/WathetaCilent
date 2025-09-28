@@ -31,7 +31,7 @@ export default function Addons() {
     return (
         <section className="bg-[url('/social/svg/dot.svg')]">
             <div className='bg-white/50'>
-                <div className="max-w-7xl mx-auto p-6 sm:p-8 md:p-10 space-y-10 my-10">
+                <div className="max-w-7xl mx-auto p-6 sm:p-8 md:p-10 space-y-10 mb-10">
                     <div className='text-center'>
                         <h1 className='text-2xl sm:text-3xl md:text-5xl font-bold'>Additional Services</h1>
                         <p className='text-lg sm:text-xl'>Customize your plan with these add-ons</p>
@@ -50,6 +50,7 @@ export default function Addons() {
                                     src={a?.icon}
                                     height={50}
                                     width={50}
+                                    unoptimized
                                     alt="Instagram- Commerce-icon"
                                     className="bg-blue-500/30 p-2 m-2 rounded-full aspect-square"
                                 />

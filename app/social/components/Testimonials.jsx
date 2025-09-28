@@ -59,7 +59,7 @@ export default function Testimonials() {
                     <motion.div
                         key={i}
                         variants={item}
-                        className="bg-gray-100 rounded-2xl shadow-lg hover:shadow-xl transition overflow-hidden"
+                        className="rounded-2xl flex flex-col items-center shadow-lg hover:shadow-xl transition overflow-hidden"
                     >
                         <VideoCard testimonial={t} />
                         <div className="p-4 text-center">
@@ -97,7 +97,7 @@ function VideoCard({ testimonial }) {
 
     return (
         <div
-            className="relative w-full sm:w-64 md:w-72 lg:w-80 h-[450px] bg-black rounded-2xl overflow-hidden cursor-pointer group"
+            className="relative w-full sm:w-64 md:w-72 lg:w-80 h-[450px] bg-black flex rounded-2xl overflow-hidden cursor-pointer group"
             onClick={() => setPlay(true)}
         >
             {!play ? (
