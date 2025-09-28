@@ -41,39 +41,12 @@ export default async function BlogsPage({ searchParams }) {
 
           {/* Categories */}
           <li className="hidden md:flex items-center flex-wrap gap-2">
-            {category?.map((cat) => (
+            {category && category?.map((cat) => (
               <div
                 key={cat.id}
                 className="relative group text-gray-300 hover:text-white rounded-full px-3 py-1 text-sm cursor-pointer"
               >
-                <span>{cat.name}</span>
-
-                {/* Subcategories expand absolutely inside */}
-                {cat.subCategories?.length > 0 && (
-                  <ul
-                    className="
-                    absolute left-0 top-full pt-3
-                    shadow-lg z-10 min-w-[160px]
-                    max-h-0 overflow-hidden opacity-0 scale-y-0 origin-top
-                    transition-all duration-300 ease-in-out
-                    group-hover:max-h-60 group-hover:opacity-100 group-hover:scale-y-100
-                  "
-                  >
-                    {cat.subCategories.map((sub, index) => (
-                      <li key={index}>
-                        <Link
-                          href={`/blog/bn?categoryId=${cat.id}&subcategoryId=${sub.id}`}
-                          className={`block px-3 py-2 text-sm bg-teal-900 text-white hover:bg-teal-800
-                          ${index === 0 ? "rounded-t-md" : ""}
-                          ${index === cat.subCategories.length - 1 ? "rounded-b-md" : ""}
-                        `}
-                        >
-                          {sub.name}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                )}
+                <Link href={`/blog/bn?categoryId=${cat.id}`}> {cat.name} </Link>
               </div>
             ))}
           </li>
