@@ -204,7 +204,7 @@ export default function PricingPlan({ plans }) {
                                         )}
 
                                         <span className="block text-sm text-gray-500">
-                                            Per {plan.duration} {plan.durationType.toLowerCase()}
+                                            {plan?.durationType === 'CUSTOM' ? plan?.duration : `Per ${plan.duration} ${plan.durationType.toLowerCase()}`}
                                         </span>
                                     </div>
                                 </div>
@@ -263,8 +263,8 @@ export default function PricingPlan({ plans }) {
                                         <button
                                             onClick={() => openPaymentForm(plan)}
                                             className={`w-full py-3 px-4 rounded-xl font-semibold transition ${plan.isRecommended
-                                                    ? "bg-blue-600 text-white hover:bg-blue-700"
-                                                    : "bg-gray-100 text-gray-800 hover:bg-gray-200"
+                                                ? "bg-blue-600 text-white hover:bg-blue-700"
+                                                : "bg-gray-100 text-gray-800 hover:bg-gray-200"
                                                 }`}
                                         >
                                             {plan.isRecommended ? "Get Started" : "Choose Plan"}
