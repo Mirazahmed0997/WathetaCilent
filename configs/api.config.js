@@ -23,6 +23,8 @@ const apiConfig = {
   //────────────────────────────────────────────
   GET_SITE_SEO: '/setting/site-seo',
 
+  GET_ADDONS: '/price/addons/public',
+
   GET_PRICING: '/price/public',
   GET_PRICING_SEO: '/price/seo',
   CREATE_PAYMENT: 'https://payapi.watheta.com/api/postByDefaultAbandoned'
