@@ -409,7 +409,7 @@ const SassPage = () => {
             
             <p className="text-5xl font-semibold text-center pt-10 pb-2">
               {
-                isToggle === "BDT" ? "৳65000" : "$500"
+                isToggle === "BDT" ? "৳40000" : "$320"
               }
               
             </p>

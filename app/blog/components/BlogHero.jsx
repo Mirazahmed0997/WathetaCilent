@@ -29,7 +29,7 @@ export default function BlogHero({heroBlog}) {
 
                 <div className="col-span-7 overflow-hidden">
                     <img
-                        src={`http://localhost:3000${heroBlog?.image}`}
+                        src={CONSTANT?.API_URL + heroBlog?.image}
                         height={500} width={500}
                         alt={heroBlog?.title}
                         className="w-full h-96 object-cover hover:scale-105 transform transition duration-200" />

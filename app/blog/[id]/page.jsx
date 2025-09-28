@@ -2,6 +2,7 @@ import Image from "next/image";
 import apiConfig from "@/configs/api.config";
 import { fetchDataAsServer } from "@/utils/axiosServer";
 import parse from "html-react-parser";
+import CONSTANT from "@/configs/constant.config";
 
 function getLocale(language) {
   switch (language?.toLowerCase()) {
@@ -129,7 +130,7 @@ export default async function BlogDetailsPage({ params }) {
       {/* Category & Subcategory */}
       <div className="text-sm text-gray-500 mb-2 flex gap-2">
         <span>{blog.category?.name}</span>
-        {blog.subcategory && <span>&gt; {blog.subcategory.name}</span>}
+        {/* {blog.subcategory && <span>&gt; {blog.subcategory.name}</span>} */}
       </div>
 
       {/* Title */}
@@ -151,7 +152,7 @@ export default async function BlogDetailsPage({ params }) {
       {blog.image && (
         <div className="mb-6 w-full h-64 sm:h-96 relative">
           <img
-            src={`http://localhost:3000${blog.image}`}
+            src={CONSTANT?.API_URL + blog?.image}
             alt={blog.title}
             fill
             className="object-contain w-full h-full rounded-lg shadow-md"

@@ -1,14 +1,15 @@
+import CONSTANT from '@/configs/constant.config'
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
 export default function BlogCard({ blog }) {
     return (
-        <Link key={blog?.id} href={`/blog/${blog?.slug}`} className="w-full bg-teal-800 rounded-3xl overflow-hidden hover:scale-105">
+        <Link key={blog?.id} href={`/blog/${blog?.slug}`} className="w-full bg-teal-800 rounded-3xl overflow-hidden">
             <article>
                 <div className="col-span-7 overflow-hidden">
                     <img
-                        src={`http://localhost:3000${blog?.image}`}
+                        src={CONSTANT?.API_URL + blog?.image}
                         height={500} width={500}
                         alt={blog?.title}
                         className="w-full h-72 object-cover hover:scale-105 transform transition duration-200" />
