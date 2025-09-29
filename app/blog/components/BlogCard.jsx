@@ -3,9 +3,9 @@ import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
-export default function BlogCard({ blog }) {
+export default function BlogCard({ blog, hreflang = 'en'}) {
     return (
-        <Link key={blog?.id} href={`/blog/${blog?.slug}`} className="w-full bg-teal-800 rounded-3xl overflow-hidden">
+        <Link key={blog?.id}  rel="alternate" hreflang={hreflang} href={`/blog/${blog?.slug}`} className="w-full bg-teal-800 rounded-3xl overflow-hidden">
             <article>
                 <div className="col-span-7 overflow-hidden">
                     <img

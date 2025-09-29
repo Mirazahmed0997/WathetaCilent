@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import apiConfig from "@/configs/api.config";
-import HomeFAQ from "@/components/HomeFAQ";
 import JoinOurNewsLetter from "@/components/JoinOurNewsLetter";
 import { fetchDataAsServer } from "@/utils/axiosServer";
 import { Languages } from "lucide-react";
@@ -25,7 +24,7 @@ export default async function BlogsPage({ searchParams }) {
           <h1 className=" text-teal-800 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">Blog</h1>
           <span className="text-gray-600 text-xs">/BN</span>
         </div>
-        <Link href={'en'} className="flex items-center space-x-1.5 rounded-full border px-4 h-10 text-sm">
+        <Link rel="alternate" hreflang="en" href={'en'} className="flex items-center space-x-1.5 rounded-full border px-4 h-10 text-sm">
           <Languages className="w-4 h-4" />
           <span>EN</span>
         </Link>
@@ -34,7 +33,7 @@ export default async function BlogsPage({ searchParams }) {
         <ul className="flex items-center flex-wrap gap-2">
           {/* All blogs button */}
           <li className="w-fit rounded-full px-3 py-1 text-sm bg-white">
-            <Link href="/blog/bn">All</Link>
+            <Link rel="alternate" hreflang="bn-BD" href="/blog/bn">All</Link>
           </li>
 
           <li> <BlogSearch language='bn' /> </li>
@@ -46,7 +45,7 @@ export default async function BlogsPage({ searchParams }) {
                 key={cat.id}
                 className="relative group text-gray-300 hover:text-white rounded-full px-3 py-1 text-sm cursor-pointer"
               >
-                <Link href={`/blog/bn?categoryId=${cat.id}`}> {cat.name} </Link>
+                <Link rel="alternate" hreflang="bn-BD" href={`/blog/bn?categoryId=${cat.id}`}> {cat.name} </Link>
               </div>
             ))}
           </li>
@@ -56,7 +55,7 @@ export default async function BlogsPage({ searchParams }) {
         {heroBlog && <BlogHero heroBlog={heroBlog} />}
         <div className="grid md:grid-cols-3 gap-4">
           {blogs?.data ? (blogs?.data?.map(blog => (
-            <BlogCard key={blog?.id} blog={blog} />
+            <BlogCard key={blog?.id} blog={blog} hreflang="bn-BD"/>
           ))) : (
             <div>No blog found !!</div>
           )}
