@@ -5,13 +5,6 @@ Disallow: /admin
 Disallow: /dashboard
 Disallow: /api
 Disallow: /images/svg.png
-Disallow: https://platform.openai.com/
-Disallow: https://webhook.site/
-Disallow: https://docs.google.com/document/d/1WqvyMpAJ04r6LztFCC7wczeCuijdO9rIj90hLxhFFG4/edit?usp=sharing
-Disallow: https://static.xx.fbcdn.net/rsrc.php/yv/r/B8BxsscfVBr.ico
-Disallow: https://dash.watheta.com/
-Disallow: /images/svg.png
-Disallow: https://websiteapi.watheta.com/
 
 # black-listed-bot
 User-agent: black-listed-bot
