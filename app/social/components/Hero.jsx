@@ -22,6 +22,7 @@ export default function Hero() {
                                 src="/social/fb.png"
                                 height={200}
                                 width={200}
+                                unoptimized
                                 className="w-full h-full"
                             />
                         </TiltCardAnimation>
@@ -37,6 +38,7 @@ export default function Hero() {
                                 src="/social/insta.png"
                                 height={200}
                                 width={200}
+                                unoptimized
                                 className="w-full h-full"
                             />
                         </TiltCardAnimation>
@@ -52,6 +54,7 @@ export default function Hero() {
                                 src="/social/fb-dm.png"
                                 height={200}
                                 width={200}
+                                unoptimized
                                 alt="Facebook DM"
                                 className="w-full h-full"
                             />
