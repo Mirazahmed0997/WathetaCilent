@@ -90,7 +90,7 @@ const Navbar = () => {
                 Blog
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link
                 prefetch={false}
                 href="/social"
@@ -99,7 +99,7 @@ const Navbar = () => {
               >
                 Social
               </Link>
-            </li>
+            </li> */}
 
             <li className="block lg:hidden xl:hidden">
               <Link href="https://dash.watheta.com/login" passHref aria-label="Login">
