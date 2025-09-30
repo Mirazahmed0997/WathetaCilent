@@ -1,6 +1,6 @@
 'use client'
 import { BadgeInfo, CheckCircle, Star, XCircle } from 'lucide-react';
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react';
 import OldPricing from './OldPricing';
 import PaymentForm from './PaymentForm';
 import { v4 as uuidv4 } from 'uuid';
@@ -12,6 +12,26 @@ export default function PricingPlan({ plans }) {
     const [isToggle, setIsToggle] = useState("month");
     const [isHideOld, setHideOld] = useState(true);
     const [selectedPlan, setSelectedPlan] = useState(null);
+    const [openTooltip, setOpenTooltip] = useState(null);
+    const tooltipRefs = useRef({}); // store refs for tooltips
+
+    useEffect(() => {
+        function handleClickOutside(e) {
+            // if the currently open tooltip exists and click is outside it → close
+            if (
+                openTooltip &&
+                tooltipRefs.current[openTooltip] &&
+                !tooltipRefs.current[openTooltip].contains(e.target)
+            ) {
+                setOpenTooltip(null);
+            }
+        }
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [openTooltip]);
 
     const isNumeric = (value) => !isNaN(value) && !isNaN(parseFloat(value));
 
@@ -233,13 +253,21 @@ export default function PricingPlan({ plans }) {
                                                                         } flex items-center space-x-1`}
                                                                 >
                                                                     <p>{feature.name}</p>
-                                                                    <div className="relative flex items-center group">
+                                                                    <div
+                                                                        onClick={() =>
+                                                                            setOpenTooltip(openTooltip === feature.id ? null : feature.id)
+                                                                        }
+                                                                        ref={(el) => (tooltipRefs.current[feature.id] = el)} // assign ref here
+                                                                        className="relative flex items-center group"
+                                                                    >
                                                                         <BadgeInfo className="w-4 h-4 text-gray-500 cursor-pointer" />
                                                                         <span
-                                                                            className="absolute left-6 top-1/2 -translate-y-1/2
-                                        w-52 text-xs text-white bg-gray-800 rounded-md shadow-lg px-3 py-2
-                                        opacity-0 group-hover:opacity-100 transition-opacity duration-200
-                                        pointer-events-none z-50"
+                                                                            className={`absolute left-6 top-1/2 -translate-y-1/2
+                                                                                w-52 text-xs text-white bg-gray-800 rounded-md shadow-lg px-3 py-2
+                                                                                transition-opacity duration-200 z-50
+                                                                                group-hover:opacity-100
+                                                                                ${openTooltip === feature.id ? "opacity-100" : "opacity-0"}
+                                                                            `}
                                                                         >
                                                                             {feature.description}
                                                                         </span>
