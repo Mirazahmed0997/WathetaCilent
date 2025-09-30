@@ -59,7 +59,7 @@ export default function WhyUs() {
                         height={100}
                         width={100}
                         alt="Mobile Chat"
-                        className="w-40 aspect-square"
+                        className="w-40 aspect-square rounded-full"
                     />
                     <p className='text-5xl font-bold text-blue-500'>8X</p>
                     <p className='text-sm text-gray-700'>More Response Rate than Email</p>
