@@ -20,7 +20,7 @@ export default function PromoVideo({ url }) {
       initial="initial"
       whileInView="animate"
       viewport={{ once: true }}
-      className="mt-12 w-full px-6 sm:px-10"
+      className="mt-12 w-full max-w-full md:max-w-[80vw] px-6 sm:px-10"
     >
       <div className="relative w-full overflow-hidden rounded-2xl shadow-lg aspect-video">
         {!isPlaying ? (

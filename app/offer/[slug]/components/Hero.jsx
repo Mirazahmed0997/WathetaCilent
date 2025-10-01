@@ -45,9 +45,9 @@ export default function Hero() {
                 <button className="px-8 py-4 bg-[#6cc17b] text-white rounded-full">
                     Start Now
                 </button>
-                {/* Promotional Video Section */}
-                <PromoVideo url={'https://youtu.be/c1VinHqToUY?si=k0LpRozNVm1XkgSD'}/>
             </motion.div>
+            {/* Promotional Video Section */}
+            <PromoVideo url={'https://youtu.be/c1VinHqToUY?si=k0LpRozNVm1XkgSD'} />
 
         </section>
     )
