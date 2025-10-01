@@ -55,7 +55,8 @@ const FadeInFromBottom = {
         opacity: 1,
         y: 0,
         transition: {
-            type: 'easeIn',
+            type: 'tween',
+            ease: "easeOut",
             duration: 0.5,
             delay: 0.2,
         },
