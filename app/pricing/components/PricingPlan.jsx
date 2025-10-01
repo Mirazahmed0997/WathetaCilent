@@ -164,162 +164,158 @@ export default function PricingPlan({ plans }) {
                 </div>
 
                 {/* Grid */}
-                {isHideOld ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mx-5 md:mx-16 lg:mx-48 xl:mx-48">
-                        {plans?.data.map((plan) => (
-                            <div
-                                key={plan.id}
-                                className={`rounded-2xl w-full shadow-md border bg-white flex flex-col transition hover:shadow-xl ${plan.isRecommended
-                                    ? "border-blue-500 ring-2 ring-blue-300"
-                                    : "border-gray-200"
-                                    }`}
-                            >
-                                {/* Header */}
-                                <div className="relative p-6 border-b border-gray-400">
-                                    <div className="flex items-center justify-between">
-                                        <h3 className="text-xl font-bold text-gray-900 mt-2">
-                                            {plan.name}
-                                        </h3>
-                                        {plan.isPopular && (
-                                            <p className="absolute top-1 right-1 flex items-center space-x-1 px-3 py-1 text-xs font-semibold bg-yellow-100 text-yellow-700 rounded-full">
-                                                <Star className='w-4 h-4' />
-                                                <span>Popular</span>
-                                            </p>
-                                        )}
-                                    </div>
-                                    <p className="text-sm text-gray-600">{plan.description}</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mx-5 md:mx-16 lg:mx-48 xl:mx-48">
+                    {plans?.data.map((plan) => (
+                        <div
+                            key={plan.id}
+                            className={`rounded-2xl w-full shadow-md border bg-white flex flex-col transition hover:shadow-xl ${plan.isRecommended
+                                ? "border-blue-500 ring-2 ring-blue-300"
+                                : "border-gray-200"
+                                }`}
+                        >
+                            {/* Header */}
+                            <div className="relative p-6 border-b border-gray-400">
+                                <div className="flex items-center justify-between">
+                                    <h3 className="text-xl font-bold text-gray-900 mt-2">
+                                        {plan.name}
+                                    </h3>
+                                    {plan.isPopular && (
+                                        <p className="absolute top-1 right-1 flex items-center space-x-1 px-3 py-1 text-xs font-semibold bg-yellow-100 text-yellow-700 rounded-full">
+                                            <Star className='w-4 h-4' />
+                                            <span>Popular</span>
+                                        </p>
+                                    )}
+                                </div>
+                                <p className="text-sm text-gray-600">{plan.description}</p>
 
-                                    {/* Price */}
-                                    <div className="mt-4">
-                                        {isToggle === "month" ? (
-                                            plan.priceOfferBDT ? (
-                                                <>
-                                                    {/* Offer Price */}
-                                                    <span className="text-3xl font-extrabold text-gray-900">
-                                                        {getDisplayPrice(plan.priceOfferBDT, "৳")}
-                                                    </span>
-                                                    {/* Regular Price (line-through) */}
-                                                    <span className="ml-2 line-through text-gray-400 text-lg">
-                                                        {getDisplayPrice(plan.priceRegularBDT, "৳")}
-                                                    </span>
-                                                </>
-                                            ) : (
-                                                <>
-                                                    {/* Only Regular Price (no line-through) */}
-                                                    <span className="text-3xl font-extrabold text-gray-900">
-                                                        {getDisplayPrice(plan.priceRegularBDT, "৳")}
-                                                    </span>
-                                                </>
-                                            )
-                                        ) : plan.priceOfferUSD ? (
+                                {/* Price */}
+                                <div className="mt-4">
+                                    {isToggle === "month" ? (
+                                        plan.priceOfferBDT ? (
                                             <>
                                                 {/* Offer Price */}
                                                 <span className="text-3xl font-extrabold text-gray-900">
-                                                    {getDisplayPrice(plan.priceOfferUSD, "$")}
+                                                    {getDisplayPrice(plan.priceOfferBDT, "৳")}
                                                 </span>
                                                 {/* Regular Price (line-through) */}
                                                 <span className="ml-2 line-through text-gray-400 text-lg">
-                                                    {getDisplayPrice(plan.priceRegularUSD, "$")}
+                                                    {getDisplayPrice(plan.priceRegularBDT, "৳")}
                                                 </span>
                                             </>
                                         ) : (
                                             <>
                                                 {/* Only Regular Price (no line-through) */}
                                                 <span className="text-3xl font-extrabold text-gray-900">
-                                                    {getDisplayPrice(plan.priceRegularUSD, "$")}
+                                                    {getDisplayPrice(plan.priceRegularBDT, "৳")}
                                                 </span>
                                             </>
-                                        )}
-
-                                        <span className="block text-sm text-gray-500">
-                                            {plan?.durationType === 'CUSTOM' ? plan?.duration : `Per ${plan.duration} ${plan.durationType.toLowerCase()}`}
-                                        </span>
-                                    </div>
-                                </div>
-
-                                {/* Features */}
-                                <div className="p-6 flex-1 overflow-visible">
-                                    {Object.entries(plan.featureGroups || {}).map(
-                                        ([groupName, features]) => (
-                                            <div key={groupName} className="mb-5">
-                                                <h4 className="text-sm font-semibold text-gray-700 mb-2 border-b border-gray-400 pb-1">
-                                                    {groupName}
-                                                </h4>
-                                                <ul className="space-y-2">
-                                                    {features.map((feature) => (
-                                                        <li key={feature.id} className="flex items-start text-sm">
-                                                            {feature.included ? (
-                                                                <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5" />
-                                                            ) : (
-                                                                <XCircle className="h-4 w-4 text-red-400 mr-2 mt-0.5" />
-                                                            )}
-                                                            <div>
-                                                                <div
-                                                                    className={`${feature.included
-                                                                        ? "text-gray-700"
-                                                                        : "text-gray-400 line-through"
-                                                                        } flex items-center space-x-1`}
-                                                                >
-                                                                    <p>{feature.name}</p>
-                                                                    <div
-                                                                        onClick={() =>
-                                                                            setOpenTooltip(openTooltip === feature.id ? null : feature.id)
-                                                                        }
-                                                                        ref={(el) => (tooltipRefs.current[feature.id] = el)} // assign ref here
-                                                                        className="relative flex items-center group"
-                                                                    >
-                                                                        <BadgeInfo className="w-4 h-4 text-gray-500 cursor-pointer" />
-                                                                        <span
-                                                                            className={`absolute left-6 top-1/2 -translate-y-1/2
-                                                                                w-52 text-xs text-white bg-gray-800 rounded-md shadow-lg px-3 py-2
-                                                                                transition-opacity duration-200 z-50
-                                                                                group-hover:opacity-100
-                                                                                ${openTooltip === feature.id ? "opacity-100" : "opacity-0"}
-                                                                            `}
-                                                                        >
-                                                                            {feature.description}
-                                                                        </span>
-                                                                    </div>
-                                                                </div>
-                                                                {feature.planDescription && (
-                                                                    <p className="text-xs text-gray-500">{feature.planDescription}</p>
-                                                                )}
-                                                            </div>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </div>
                                         )
-                                    )}
-                                </div>
-
-                                {/* CTA */}
-                                <div className="p-6 border-t border-gray-400">
-                                    {isNumeric(plan.priceOfferBDT || plan.priceRegularBDT) ? (
-                                        <button
-                                            onClick={() => openPaymentForm(plan)}
-                                            className={`w-full py-3 px-4 rounded-xl font-semibold transition ${plan.isRecommended
-                                                ? "bg-blue-600 text-white hover:bg-blue-700"
-                                                : "bg-gray-100 text-gray-800 hover:bg-gray-200"
-                                                }`}
-                                        >
-                                            {plan.isRecommended ? "Get Started" : "Choose Plan"}
-                                        </button>
+                                    ) : plan.priceOfferUSD ? (
+                                        <>
+                                            {/* Offer Price */}
+                                            <span className="text-3xl font-extrabold text-gray-900">
+                                                {getDisplayPrice(plan.priceOfferUSD, "$")}
+                                            </span>
+                                            {/* Regular Price (line-through) */}
+                                            <span className="ml-2 line-through text-gray-400 text-lg">
+                                                {getDisplayPrice(plan.priceRegularUSD, "$")}
+                                            </span>
+                                        </>
                                     ) : (
-                                        <Link
-                                            href="/contact"
-                                            className="block text-center w-full py-3 px-4 rounded-xl font-semibold bg-gray-100 text-gray-800 hover:bg-gray-200 transition"
-                                        >
-                                            Contact
-                                        </Link>
+                                        <>
+                                            {/* Only Regular Price (no line-through) */}
+                                            <span className="text-3xl font-extrabold text-gray-900">
+                                                {getDisplayPrice(plan.priceRegularUSD, "$")}
+                                            </span>
+                                        </>
                                     )}
+
+                                    <span className="block text-sm text-gray-500">
+                                        {plan?.durationType === 'CUSTOM' ? plan?.duration : `Per ${plan.duration} ${plan.durationType.toLowerCase()}`}
+                                    </span>
                                 </div>
                             </div>
-                        ))}
-                    </div>
-                ) : (
-                    <OldPricing isToggle={isToggle} />
-                )}
+
+                            {/* Features */}
+                            <div className="p-6 flex-1 overflow-visible">
+                                {Object.entries(plan.featureGroups || {}).map(
+                                    ([groupName, features]) => (
+                                        <div key={groupName} className="mb-5">
+                                            <h4 className="text-sm font-semibold text-gray-700 mb-2 border-b border-gray-400 pb-1">
+                                                {groupName}
+                                            </h4>
+                                            <ul className="space-y-2">
+                                                {features.map((feature) => (
+                                                    <li key={feature.id} className="flex items-start text-sm">
+                                                        {feature.included ? (
+                                                            <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5" />
+                                                        ) : (
+                                                            <XCircle className="h-4 w-4 text-red-400 mr-2 mt-0.5" />
+                                                        )}
+                                                        <div>
+                                                            <div
+                                                                className={`${feature.included
+                                                                    ? "text-gray-700"
+                                                                    : "text-gray-400 line-through"
+                                                                    } flex items-center space-x-1`}
+                                                            >
+                                                                <p>{feature.name}</p>
+                                                                <div
+                                                                    onClick={() =>
+                                                                        setOpenTooltip(openTooltip === feature.id ? null : feature.id)
+                                                                    }
+                                                                    ref={(el) => (tooltipRefs.current[feature.id] = el)} // assign ref here
+                                                                    className="relative flex items-center group"
+                                                                >
+                                                                    <BadgeInfo className="w-4 h-4 text-gray-500 cursor-pointer" />
+                                                                    <span
+                                                                        className={`absolute left-6 top-1/2 -translate-y-1/2
+                                                                            w-52 text-xs text-white bg-gray-800 rounded-md shadow-lg px-3 py-2
+                                                                            transition-opacity duration-200 z-50
+                                                                            group-hover:opacity-100
+                                                                            ${openTooltip === feature.id ? "opacity-100" : "opacity-0"}
+                                                                        `}
+                                                                    >
+                                                                        {feature.description}
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            {feature.planDescription && (
+                                                                <p className="text-xs text-gray-500">{feature.planDescription}</p>
+                                                            )}
+                                                        </div>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    )
+                                )}
+                            </div>
+
+                            {/* CTA */}
+                            <div className="p-6 border-t border-gray-400">
+                                {isNumeric(plan.priceOfferBDT || plan.priceRegularBDT) ? (
+                                    <button
+                                        onClick={() => openPaymentForm(plan)}
+                                        className={`w-full py-3 px-4 rounded-xl font-semibold transition ${plan.isRecommended
+                                            ? "bg-blue-600 text-white hover:bg-blue-700"
+                                            : "bg-gray-100 text-gray-800 hover:bg-gray-200"
+                                            }`}
+                                    >
+                                        {plan.isRecommended ? "Get Started" : "Choose Plan"}
+                                    </button>
+                                ) : (
+                                    <Link
+                                        href="/contact"
+                                        className="block text-center w-full py-3 px-4 rounded-xl font-semibold bg-gray-100 text-gray-800 hover:bg-gray-200 transition"
+                                    >
+                                        Contact
+                                    </Link>
+                                )}
+                            </div>
+                        </div>
+                    ))}
+                </div>
 
                 {/* Modal (only once) */}
                 <dialog id="payment_modal" className="modal">

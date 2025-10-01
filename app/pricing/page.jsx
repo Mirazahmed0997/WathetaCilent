@@ -9,6 +9,7 @@ import Addons from "./components/Addons";
 import SupportService from "./components/SupportService";
 import ScheduleADemo from "@/components/ScheduleADemo";
 import PriceFAQ from "@/components/PriceFAQ";
+import Offer from "./components/Offer";
 
 
 export async function generateMetadata() {
@@ -82,6 +83,7 @@ const PricingPage = async () => {
       <PricingHero/>
       <PricingPlan plans={plans}/>
       <ExplorePricing/>
+      <Offer/>
       <Addons addons={addons}/>
       <SupportService/>
       <ScheduleADemo />
