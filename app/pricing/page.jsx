@@ -4,12 +4,11 @@ import { fetchDataAsServer } from "@/utils/axiosServer";
 import PricingHero from "./components/PricingHero";
 import PricingPlan from "./components/PricingPlan";
 import ExplorePricing from "./components/ExplorePricing";
-import CustomPricing from "./components/CustomPricing";
 import Addons from "./components/Addons";
 import SupportService from "./components/SupportService";
 import ScheduleADemo from "@/components/ScheduleADemo";
 import PriceFAQ from "@/components/PriceFAQ";
-import Offer from "./components/Offer";
+import OfferCards from "../offer/components/OfferCards";
 
 
 export async function generateMetadata() {
@@ -83,7 +82,7 @@ const PricingPage = async () => {
       <PricingHero/>
       <PricingPlan plans={plans}/>
       <ExplorePricing/>
-      <Offer/>
+      <OfferCards/>
       <Addons addons={addons}/>
       <SupportService/>
       <ScheduleADemo />
