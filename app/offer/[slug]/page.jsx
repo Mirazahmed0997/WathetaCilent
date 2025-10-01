@@ -6,11 +6,13 @@ import Addons from './components/Addons'
 import WhyUs from './components/WhyUs'
 import Testimonials from './components/Testimonials'
 import Start from './components/Start'
+import Clients from './components/Clients'
 
 export default function SocialPage() {
   return (
-    <div className='px-2 sm:px-4 md:px-6'>
+    <div className='w-screen px-2 sm:px-4 md:px-6'>
         <Hero/>
+        <Clients/>
         <WhyUs/>
         <MetaCertified/>
         <Features/>
