@@ -2,6 +2,7 @@
 import transitions from '@/animations/transitions'
 import React from 'react'
 import { motion } from 'framer-motion'
+import PromoVideo from './PromoVideo'
 
 export default function Hero() {
     const title = 'Grow Your Business with the power of Facebook & Instagram API'
@@ -18,6 +19,7 @@ export default function Hero() {
                 viewport={{ once: true }}
                 className="flex flex-col items-center space-y-10 max-w-6xl"
             >
+                <p>AI-Powered✨</p>
                 <h1 className="px-6 sm:px-10 md:px-20 text-center text-2xl sm:text-3xl md:text-5xl font-bold">
                     {words.map((word, idx) => {
                         if (word.toLowerCase().includes("facebook")) {
@@ -43,7 +45,10 @@ export default function Hero() {
                 <button className="px-8 py-4 bg-[#6cc17b] text-white rounded-full">
                     Start Now
                 </button>
+                {/* Promotional Video Section */}
+                <PromoVideo url={'https://youtu.be/c1VinHqToUY?si=k0LpRozNVm1XkgSD'}/>
             </motion.div>
+
         </section>
     )
 }
