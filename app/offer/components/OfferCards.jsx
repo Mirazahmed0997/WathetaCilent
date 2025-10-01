@@ -16,7 +16,13 @@ export default function OfferCards() {
 
         {/* Content Section */}
         <div className='md:w-1/2 p-6'>
-          <h3 className='text-2xl font-bold text-gray-800 mb-4'>Social Starter Pack</h3>
+          <div className='mb-4 flex items-end justify-between'>
+            <h3 className='text-2xl font-bold text-gray-800'>Social Starter Pack</h3>
+            <p>
+              <span className='text-3xl font-bold'>৳ 5000</span>
+              <span> /Per month</span>
+            </p>
+          </div>
           <p className='text-gray-600 mb-4'>
             Perfect for businesses starting out on Facebook and Instagram. Includes essential tools to grow your brand, engage customers, and drive sales through Meta platforms.
           </p>
