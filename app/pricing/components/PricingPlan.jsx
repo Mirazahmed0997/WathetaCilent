@@ -133,10 +133,18 @@ export default function PricingPlan({ plans }) {
 
     return (
         <div className='h-auto'>
-            <LimitedOfferBanner />
+            {/* <LimitedOfferBanner /> */}
             <section className="bg-gray-50 py-16 px-6 h-auto">
                 <div className="max-w-7xl mx-auto text-center mb-12">
-                    <PricingMiniBanner isHideOld={isHideOld} setHideOld={setHideOld} />
+                    {/* <PricingMiniBanner isHideOld={isHideOld} setHideOld={setHideOld} /> */}
+                    <div>
+                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+                            Our Pricing Plans
+                        </h2>
+                        <p className="mt-3 text-lg text-gray-600">
+                            Choose the right plan that fits your needs.
+                        </p>
+                    </div>
                     <div className="flex justify-center py-10">
                         <div className="pricingButtonTaggoleDiv ps-1 pe-1 py-1 space-x-1 rounded-full ">
                             <button
