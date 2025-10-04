@@ -8,21 +8,6 @@ const features = [
     { title: "Smart Bot + Human Handover", desc1: "Let AI bots answer FAQs instantly.", desc2: "Seamlessly transfer to human agents when complex issues arise." },
     { title: "Multi-Channel Inbox", desc1: "Manage WhatsApp, Facebook, Instagram, and email in one place.", desc2: "No more juggling between apps and devices." },
     { title: "Data Security", desc1: "Keep your customer data safe with enterprise-grade security.", desc2: "GDPR-compliant and encrypted end-to-end." },
-    { title: "Role-Based Access", desc1: "Give team members access based on their roles.", desc2: "Control permissions and keep sensitive data secure." },
-    { title: "Integration Ready", desc1: "Easily integrate with CRM, ERP, and third-party apps.", desc2: "No complex setup required." },
-    { title: "Integration Ready", desc1: "Easily integrate with CRM, ERP, and third-party apps.", desc2: "No complex setup required." },
-    { title: "Integration Ready", desc1: "Easily integrate with CRM, ERP, and third-party apps.", desc2: "No complex setup required." },
-    { title: "Integration Ready", desc1: "Easily integrate with CRM, ERP, and third-party apps.", desc2: "No complex setup required." },
-    { title: "Integration Ready", desc1: "Easily integrate with CRM, ERP, and third-party apps.", desc2: "No complex setup required." },
-    { title: "Integration Ready", desc1: "Easily integrate with CRM, ERP, and third-party apps.", desc2: "No complex setup required." },
-    { title: "Integration Ready", desc1: "Easily integrate with CRM, ERP, and third-party apps.", desc2: "No complex setup required." },
-    { title: "Integration Ready", desc1: "Easily integrate with CRM, ERP, and third-party apps.", desc2: "No complex setup required." },
-    { title: "Integration Ready", desc1: "Easily integrate with CRM, ERP, and third-party apps.", desc2: "No complex setup required." },
-    { title: "Integration Ready", desc1: "Easily integrate with CRM, ERP, and third-party apps.", desc2: "No complex setup required." },
-    { title: "Integration Ready", desc1: "Easily integrate with CRM, ERP, and third-party apps.", desc2: "No complex setup required." },
-    { title: "Integration Ready", desc1: "Easily integrate with CRM, ERP, and third-party apps.", desc2: "No complex setup required." },
-    { title: "Integration Ready", desc1: "Easily integrate with CRM, ERP, and third-party apps.", desc2: "No complex setup required." },
-    { title: "Integration Ready", desc1: "Easily integrate with CRM, ERP, and third-party apps.", desc2: "No complex setup required." },
 ];
 
 // Correct grouping logic:
@@ -30,14 +15,14 @@ const features = [
 // after that, we form groups of 2 indices: [1,2], [3,4], [5,6], ...
 // these groups alternate between col-2 and col-1. Group 0 ([1,2]) => col-2, group 1 ([3,4]) => col-1, group 2 ([5,6]) => col-2, etc.
 function getColSpan(index) {
-    if (index === 0) return "col-span-1 bg-purple-100";
+    if (index === 0) return "col-span-1 bg-purple-50";
 
     const group = Math.floor((index - 1) / 2); // 0 -> covers 1,2 ; 1 -> covers 3,4 ; etc.
     const isEvenGroup = group % 2 === 0; // even groups -> col-2, odd groups -> col-1
 
     return isEvenGroup
-        ? "col-span-2 bg-indigo-100 h-[60dvh]"
-        : "col-span-1 bg-purple-100";
+        ? "col-span-2 bg-indigo-50"
+        : "col-span-1 bg-purple-50";
 }
 
 export default function AdvanceFeature() {
@@ -56,18 +41,18 @@ export default function AdvanceFeature() {
                 {features.map((feature, index) => (
                     <div
                         key={index}
-                        className={`w-full h-full p-4 rounded-2xl ${getColSpan(index)}`}
+                        className={`w-full h-full p-4 rounded-2xl ${getColSpan(index)} hover:ring ring-gray-300 hover:shadow-2xl`}
                     >
-                        <article className="space-y-2">
-                            <h3 className="text-2xl font-bold">{feature.title}</h3>
-                            <p className="text-sm text-gray-600">{feature.desc1}</p>
-                            <p className="text-sm text-gray-600">{feature.desc2}</p>
-                        </article>
+                        <div className="flex flex-col justify-between w-full h-full">
+                            <article className="space-y-2">
+                                <h3 className="text-2xl font-bold">{feature.title}</h3>
+                                <p className="text-sm text-gray-600">{feature.desc1}</p>
+                                <p className="text-sm text-gray-600">{feature.desc2}</p>
+                            </article>
 
-                        <aside className="w-full h-full flex justify-center items-center mt-4">
-                            <div className="w-full">
+                            <aside className="w-full flex mt-4 rounded-md">
                                 <video
-                                    className="aspect-video w-full rounded-md"
+                                    className="w-full h-auto aspect-video object-cover rounded-md"
                                     src="/images/Boardsvideo.mp4"
                                     autoPlay
                                     loop
@@ -75,8 +60,8 @@ export default function AdvanceFeature() {
                                     playsInline
                                     aria-label="Demo video"
                                 />
-                            </div>
-                        </aside>
+                            </aside>
+                        </div>
                     </div>
                 ))}
             </div>
