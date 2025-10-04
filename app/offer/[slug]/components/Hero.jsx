@@ -3,13 +3,9 @@ import transitions from '@/animations/transitions'
 import React from 'react'
 import { motion } from 'framer-motion'
 import PromoVideo from './PromoVideo'
-import Link from 'next/link'
 
-export default function Hero() {
-    const title = 'Grow Your Business with the power of Facebook & Instagram API'
-
-    // split title into words while keeping spaces
-    const words = title.split(/(\s+)/)
+export default function Hero({ data }) {
+    const words = data?.title.split(/(\s+)/)
 
     return (
         <section className="w-full gap-10 place-items-center pt-24">
@@ -20,7 +16,7 @@ export default function Hero() {
                 viewport={{ once: true }}
                 className="flex flex-col items-center space-y-10 max-w-6xl"
             >
-                <p>AI-Powered✨</p>
+                <p>{data?.header}</p>
                 <div className='text-center space-y-4'>
                     <h1 className="px-6 sm:px-10 md:px-20 text-center text-2xl sm:text-3xl md:text-5xl font-bold">
                         {words.map((word, idx) => {
@@ -44,15 +40,16 @@ export default function Hero() {
                             return <span key={idx}>{word}</span>
                         })}
                     </h1>
-                    <p> Broadcast, Automate, Engage, Sell - Do Everything with the Smartest WhatsApp Engagement Platform  </p>
-                    <p>Powered by meta Official APIs⚡</p>
+                    {data?.description.map((txt, idx)=>( 
+                        <p key={idx}>{txt}</p> 
+                    ))}
                 </div>
                 <a href={'#start'} className="px-8 py-4 bg-[#6cc17b] text-white rounded-full">
                     Start Now
                 </a>
             </motion.div>
             {/* Promotional Video Section */}
-            <PromoVideo url={'https://youtu.be/c1VinHqToUY?si=k0LpRozNVm1XkgSD'} />
+            <PromoVideo url={data?.youtubeUrl} />
 
         </section>
     )
