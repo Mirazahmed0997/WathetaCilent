@@ -9,6 +9,7 @@ import Start from './components/Start'
 import Clients from './components/Clients'
 import Summary from './components/Summary'
 import AdvanceFeature from './components/AdvanceFeature'
+import FAQ from './components/FAQ'
 
 export default function SocialPage() {
   return (
@@ -22,6 +23,7 @@ export default function SocialPage() {
         <Start/>
         <AdvanceFeature/>
         <Addons/>
+        <FAQ/>
         <Testimonials/>
     </div>
   )
