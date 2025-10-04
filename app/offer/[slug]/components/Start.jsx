@@ -103,7 +103,7 @@ export default function Start() {
         }
     };
     return (
-        <section className="relative flex items-center justify-center rounded-4xl min-h-[30vh] bg-gradient-to-r from-blue-500 via-sky-400 to-teal-400 overflow-hidden">
+        <section id='start' className="scroll-mt-40 relative flex items-center justify-center rounded-4xl min-h-[30vh] bg-gradient-to-r from-blue-500 via-sky-400 to-teal-400 overflow-hidden">
             {/* Vignette overlay */}
             <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle,transparent_70%,rgba(0,0,0,0.5)_100%)]"></div>
 

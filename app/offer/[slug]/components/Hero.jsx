@@ -3,6 +3,7 @@ import transitions from '@/animations/transitions'
 import React from 'react'
 import { motion } from 'framer-motion'
 import PromoVideo from './PromoVideo'
+import Link from 'next/link'
 
 export default function Hero() {
     const title = 'Grow Your Business with the power of Facebook & Instagram API'
@@ -46,9 +47,9 @@ export default function Hero() {
                     <p> Broadcast, Automate, Engage, Sell - Do Everything with the Smartest WhatsApp Engagement Platform  </p>
                     <p>Powered by meta Official APIs⚡</p>
                 </div>
-                <button className="px-8 py-4 bg-[#6cc17b] text-white rounded-full">
+                <a href={'#start'} className="px-8 py-4 bg-[#6cc17b] text-white rounded-full">
                     Start Now
-                </button>
+                </a>
             </motion.div>
             {/* Promotional Video Section */}
             <PromoVideo url={'https://youtu.be/c1VinHqToUY?si=k0LpRozNVm1XkgSD'} />
