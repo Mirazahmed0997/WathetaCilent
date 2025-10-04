@@ -33,7 +33,7 @@ export default function OfferCards() {
             <li>Basic Automation Tools</li>
           </ul>
           <Link href={`/offer/social`} className='bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition'>
-            Get Started
+            Get Offer
           </Link>
         </div>
       </div>

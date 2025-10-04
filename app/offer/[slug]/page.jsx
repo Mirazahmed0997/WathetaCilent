@@ -7,16 +7,20 @@ import WhyUs from './components/WhyUs'
 import Testimonials from './components/Testimonials'
 import Start from './components/Start'
 import Clients from './components/Clients'
+import Summary from './components/Summary'
+import AdvanceFeature from './components/AdvanceFeature'
 
 export default function SocialPage() {
   return (
     <div className='w-screen px-2 sm:px-4 md:px-6'>
         <Hero/>
         <Clients/>
-        <WhyUs/>
+        <Summary/>
+        {/* <WhyUs/> */}
         <MetaCertified/>
         <Features/>
         <Start/>
+        <AdvanceFeature/>
         <Addons/>
         <Testimonials/>
     </div>

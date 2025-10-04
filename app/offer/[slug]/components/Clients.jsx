@@ -36,10 +36,7 @@ export default async function Clients() {
                     className="gap-12"
                 >
                     {clients.map((client, idx) => (
-                        <div
-                            key={idx}
-                            className="flex items-center justify-center mx-10 grayscale hover:grayscale-0 transition duration-300"
-                        >
+                        <div key={idx} className="flex items-center justify-center mx-10 grayscale hover:grayscale-0 transition duration-300">
                             <img
                                 src={client.src}
                                 alt={client.alt}

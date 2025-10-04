@@ -20,28 +20,32 @@ export default function Hero() {
                 className="flex flex-col items-center space-y-10 max-w-6xl"
             >
                 <p>AI-Powered✨</p>
-                <h1 className="px-6 sm:px-10 md:px-20 text-center text-2xl sm:text-3xl md:text-5xl font-bold">
-                    {words.map((word, idx) => {
-                        if (word.toLowerCase().includes("facebook")) {
-                            return (
-                                <span key={idx} className="text-[#1877F2]">
-                                    {word}
-                                </span>
-                            )
-                        }
-                        if (word.toLowerCase().includes("instagram")) {
-                            return (
-                                <span
-                                    key={idx}
-                                    className="bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-600 bg-clip-text text-transparent"
-                                >
-                                    {word}
-                                </span>
-                            )
-                        }
-                        return <span key={idx}>{word}</span>
-                    })}
-                </h1>
+                <div className='text-center space-y-4'>
+                    <h1 className="px-6 sm:px-10 md:px-20 text-center text-2xl sm:text-3xl md:text-5xl font-bold">
+                        {words.map((word, idx) => {
+                            if (word.toLowerCase().includes("facebook")) {
+                                return (
+                                    <span key={idx} className="text-[#1877F2]">
+                                        {word}
+                                    </span>
+                                )
+                            }
+                            if (word.toLowerCase().includes("instagram")) {
+                                return (
+                                    <span
+                                        key={idx}
+                                        className="bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-600 bg-clip-text text-transparent"
+                                    >
+                                        {word}
+                                    </span>
+                                )
+                            }
+                            return <span key={idx}>{word}</span>
+                        })}
+                    </h1>
+                    <p> Broadcast, Automate, Engage, Sell - Do Everything with the Smartest WhatsApp Engagement Platform  </p>
+                    <p>Powered by meta Official APIs⚡</p>
+                </div>
                 <button className="px-8 py-4 bg-[#6cc17b] text-white rounded-full">
                     Start Now
                 </button>
