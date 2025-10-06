@@ -4,30 +4,7 @@ import React from 'react'
 import { motion } from 'framer-motion';
 import transitionsIndexed from '@/animations/transitionsIndexed';
 
-export default function Addons() {
-    const addons = [
-        {
-            icon: '/social/addons/Instagram- Commerce-icon.png',
-            title: 'Team Member',
-            description: 'Additional team member access',
-            price: 10,
-            priceDuration: 'Per month'
-        },
-        {
-            icon: '/social/addons/Instagram- Commerce-icon.png',
-            title: 'Team Member',
-            description: 'Additional team member access',
-            price: 5,
-            priceDuration: 'Per month'
-        },
-        {
-            icon: '/social/addons/Instagram- Commerce-icon.png',
-            title: 'Team Member',
-            description: 'Additional team member access',
-            price: 5,
-            priceDuration: 'Per month'
-        },
-    ]
+export default function Addons({ data }) {
     return (
         <section className="bg-[url('/social/svg/dot.svg')]">
             <div className='bg-white/50'>
@@ -37,7 +14,7 @@ export default function Addons() {
                         <p className='text-lg sm:text-xl'>Customize your plan with these add-ons</p>
                     </div>
                     <div className='grid grid-cols-1 md:grid-cols-3 gap-10'>
-                        {addons.map((a, index) => (
+                        {data.map((a, index) => (
                             <motion.div
                                 key={index}
                                 variants={transitionsIndexed.FadeInFromBottomIndexed}

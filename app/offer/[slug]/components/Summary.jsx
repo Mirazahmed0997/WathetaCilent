@@ -3,7 +3,7 @@ import { Megaphone, MessageCircle, Calendar, MousePointerClick } from "lucide-re
 
 export default function Summary({ data }) {
     return (
-        <section className="w-full max-w-7xl mx-auto px-4 py-12 grid grid-cols-2 gap-2 items-center">
+        <section className="w-full max-w-7xl mx-auto px-4 py-20 grid grid-cols-2 gap-2 items-center">
             <div>
                 <div className="space-y-1.5">
                     <h1 className="text-xl sm:text-3xl font-bold">{data?.title}</h1>

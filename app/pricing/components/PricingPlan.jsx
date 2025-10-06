@@ -192,7 +192,7 @@ export default function PricingPlan({ plans }) {
                                 <div className="mt-4">
                                     {isToggle === "month" ? (
                                         plan.priceOfferBDT ? (
-                                            <>
+                                            <div className='flex flex-col text-center'>
                                                 {/* Offer Price */}
                                                 <span className="text-3xl font-extrabold text-gray-900">
                                                     {getDisplayPrice(plan.priceOfferBDT, "৳")}
@@ -201,7 +201,7 @@ export default function PricingPlan({ plans }) {
                                                 <span className="ml-2 line-through text-gray-400 text-lg">
                                                     {getDisplayPrice(plan.priceRegularBDT, "৳")}
                                                 </span>
-                                            </>
+                                            </div>
                                         ) : (
                                             <>
                                                 {/* Only Regular Price (no line-through) */}
@@ -211,7 +211,7 @@ export default function PricingPlan({ plans }) {
                                             </>
                                         )
                                     ) : plan.priceOfferUSD ? (
-                                        <>
+                                        <div className='flex flex-col text-center'>
                                             {/* Offer Price */}
                                             <span className="text-3xl font-extrabold text-gray-900">
                                                 {getDisplayPrice(plan.priceOfferUSD, "$")}
@@ -220,7 +220,7 @@ export default function PricingPlan({ plans }) {
                                             <span className="ml-2 line-through text-gray-400 text-lg">
                                                 {getDisplayPrice(plan.priceRegularUSD, "$")}
                                             </span>
-                                        </>
+                                        </div>
                                     ) : (
                                         <>
                                             {/* Only Regular Price (no line-through) */}

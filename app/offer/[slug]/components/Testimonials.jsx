@@ -15,25 +15,7 @@ const item = {
     show: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 120, damping: 20 } },
 }
 
-export default function Testimonials() {
-    const testimonials = [
-        {
-            name: "John Doe",
-            role: "CEO, Example Corp",
-            video: "/social/video/review.mp4",
-        },
-        {
-            name: "Sarah Smith",
-            role: "Marketing Manager, BrandX",
-            video: "/social/video/review.mp4",
-        },
-        {
-            name: "David Lee",
-            role: "Entrepreneur",
-            video: "/social/video/review.mp4",
-        },
-    ]
-
+export default function Testimonials({ data }) {
     return (
         <section className="max-w-6xl mx-auto px-4 py-24">
             {/* Header */}
@@ -50,7 +32,7 @@ export default function Testimonials() {
                 viewport={{ once: true, amount: 0.2 }}
                 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
             >
-                {testimonials.map((t, i) => (
+                {data.map((t, i) => (
                     <motion.div
                         key={i}
                         variants={item}

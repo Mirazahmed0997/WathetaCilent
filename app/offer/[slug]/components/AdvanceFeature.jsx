@@ -1,19 +1,6 @@
 "use client";
 import React from "react";
 
-const features = [
-    { title: "Multiple Human Live Chat", desc1: "Have multiple team members to drive Live Chat Support on the Same WhatsApp Business Number.", desc2: "Filter Chats according to tags, campaigns and attributes for Smart Agent Chat Routing." },
-    { title: "Powerful Analytics", desc1: "Get deep insights into your customer interactions and agent performance.", desc2: "Track KPIs and conversion funnels in real time." },
-    { title: "Campaign Automation", desc1: "Automate WhatsApp campaigns with triggers, segments and scheduling.", desc2: "Save time and drive higher engagement automatically." },
-    { title: "Smart Bot + Human Handover", desc1: "Let AI bots answer FAQs instantly.", desc2: "Seamlessly transfer to human agents when complex issues arise." },
-    { title: "Multi-Channel Inbox", desc1: "Manage WhatsApp, Facebook, Instagram, and email in one place.", desc2: "No more juggling between apps and devices." },
-    { title: "Data Security", desc1: "Keep your customer data safe with enterprise-grade security.", desc2: "GDPR-compliant and encrypted end-to-end." },
-];
-
-// Correct grouping logic:
-// index 0 -> single group (col-span-1)
-// after that, we form groups of 2 indices: [1,2], [3,4], [5,6], ...
-// these groups alternate between col-2 and col-1. Group 0 ([1,2]) => col-2, group 1 ([3,4]) => col-1, group 2 ([5,6]) => col-2, etc.
 function getColSpan(index) {
     if (index === 0) return "col-span-1 bg-purple-50";
 
@@ -25,7 +12,7 @@ function getColSpan(index) {
         : "col-span-1 bg-purple-50";
 }
 
-export default function AdvanceFeature() {
+export default function AdvanceFeature({ data }) {
     return (
         <section className="w-full max-w-[70vw] mx-auto px-4 py-20 space-y-14 text-center">
 
@@ -38,7 +25,7 @@ export default function AdvanceFeature() {
                 </p>
             </div>
             <div className="grid grid-cols-3 gap-6 items-stretch">
-                {features.map((feature, index) => (
+                {data.map((feature, index) => (
                     <div
                         key={index}
                         className={`w-full h-full p-4 rounded-2xl ${getColSpan(index)} hover:ring ring-gray-300 hover:shadow-2xl`}

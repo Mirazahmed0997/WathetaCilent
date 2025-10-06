@@ -2,34 +2,7 @@
 import { Plus } from "lucide-react";
 import React from "react";
 
-export default function FAQ() {
-  const faqs = [
-    {
-      question: "What is Watheta?",
-      answer:
-        "Watheta is a marketing and communication platform designed to help businesses connect with their customers via WhatsApp, Facebook, Instagram, and more — all in one unified inbox.",
-    },
-    {
-      question: "How does Live Chat work on Watheta?",
-      answer:
-        "Multiple team members can manage live WhatsApp chats from a single business number. You can also filter chats by tags, campaigns, or customer attributes for smart agent routing.",
-    },
-    {
-      question: "Can I automate my campaigns?",
-      answer:
-        "Yes! With Watheta you can schedule WhatsApp campaigns, create triggers, and use audience segmentation to deliver messages at the right time — automatically.",
-    },
-    {
-      question: "Is Watheta secure?",
-      answer:
-        "Absolutely. Watheta follows enterprise-grade security protocols, ensuring your data is encrypted end-to-end and fully GDPR compliant.",
-    },
-    {
-      question: "Do I need technical skills to integrate Watheta?",
-      answer:
-        "Not at all. Watheta offers ready-to-use integrations with CRMs, ERPs, and third-party tools. No complex setup required.",
-    },
-  ];
+export default function FAQ({ data }) {
 
   return (
     <section className="w-full bg-amber-50">
@@ -47,7 +20,7 @@ export default function FAQ() {
 
       {/* FAQ List */}
       <div className="space-y-4">
-        {faqs.map((faq, index) => (
+        {data.map((faq, index) => (
           <details
             key={index}
             className="group border border-gray-200 rounded-lg p-5 bg-white shadow-sm"

@@ -1,11 +1,31 @@
 import { CircleCheck } from 'lucide-react'
 import React from 'react'
 
-export default function MetaCertified() {
+export default function MetaCertified({ data }) {
+  const words = data?.text.split(/(\s+)/)
+  const isNumeric = (value) => !isNaN(value) && !isNaN(parseFloat(value));
   return (
     <section className='max-w-7xl md:mx-auto rounded-4xl text-4xl flex flex-col gap-4 md:flex-row items-center md:justify-between text-white bg-gradient-to-r from-[#1877F2] to-[#6aa7f8] p-6 sm:p-8 md:p-10'>
-        <h2 className='text-center md:text-start font-bold'><span className='text-amber-400'>100%</span> Meta Approved Direct Integration</h2>
-        <CircleCheck className='w-28 h-28'/>
+      <h2 className='text-center md:text-start font-bold'>
+        {words.map((word, idx) => {
+          if (isNumeric(word)) {
+            return (
+              <span key={idx} className="text-amber-400">
+                {word}
+              </span>
+            )
+          }
+          if (word.includes("%")) {
+            return (
+              <span key={idx} className="text-amber-400">
+                {word}
+              </span>
+            )
+          }
+          return <span key={idx}>{word}</span>
+        })}
+      </h2>
+      <CircleCheck className='w-28 h-28' />
     </section>
   )
 }
