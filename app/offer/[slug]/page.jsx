@@ -226,7 +226,8 @@ export default function SocialPage() {
   return (
     <div className="px-2 sm:px-4 md:px-6">
       {offerData.sections
-        .sort((a, b) => a.order - b.order) // Sort by order
+        .filter((section) => section.active)     // ✅ only active ones
+        .sort((a, b) => a.order - b.order)      // ✅ sort by order
         .map((section, index) => (
           <div key={index}>{renderSection(section)}</div>
         ))}
