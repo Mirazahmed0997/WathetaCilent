@@ -1,16 +1,12 @@
 'use client'
 import { BadgeInfo, CheckCircle, Star, XCircle } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
-import OldPricing from './OldPricing';
 import PaymentForm from './PaymentForm';
 import { v4 as uuidv4 } from 'uuid';
-import LimitedOfferBanner from './LimitedOfferBanner';
-import PricingMiniBanner from './PricingMiniBanner';
 import Link from 'next/link';
 
 export default function PricingPlan({ plans }) {
     const [isToggle, setIsToggle] = useState("month");
-    const [isHideOld, setHideOld] = useState(true);
     const [selectedPlan, setSelectedPlan] = useState(null);
     const [openTooltip, setOpenTooltip] = useState(null);
     const tooltipRefs = useRef({}); // store refs for tooltips
