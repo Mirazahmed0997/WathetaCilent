@@ -241,47 +241,57 @@ export default function PricingPlan({ plans }) {
                                                 {groupName}
                                             </h4>
                                             <ul className="space-y-2">
-                                                {features.map((feature) => (
-                                                    <li key={feature.id} className="flex items-start text-sm">
-                                                        {feature.included ? (
-                                                            <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5" />
-                                                        ) : (
-                                                            <XCircle className="h-4 w-4 text-red-400 mr-2 mt-0.5" />
-                                                        )}
-                                                        <div>
-                                                            <div
-                                                                className={`${feature.included
-                                                                    ? "text-gray-700"
-                                                                    : "text-gray-400 line-through"
-                                                                    } flex items-center space-x-1`}
-                                                            >
-                                                                <p>{feature.name}</p>
-                                                                <div
-                                                                    onClick={() =>
-                                                                        setOpenTooltip(openTooltip === feature.id ? null : feature.id)
-                                                                    }
-                                                                    ref={(el) => (tooltipRefs.current[feature.id] = el)} // assign ref here
-                                                                    className="relative flex items-center group"
-                                                                >
-                                                                    <BadgeInfo className="w-4 h-4 text-gray-500 cursor-pointer" />
-                                                                    <span
-                                                                        className={`absolute left-6 top-1/2 -translate-y-1/2
-                                                                            w-52 text-xs text-white bg-gray-800 rounded-md shadow-lg px-3 py-2
-                                                                            transition-opacity duration-200 z-50
-                                                                            group-hover:opacity-100
-                                                                            ${openTooltip === feature.id ? "opacity-100" : "opacity-0"}
-                                                                        `}
-                                                                    >
-                                                                        {feature.description}
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            {feature.planDescription && (
-                                                                <p className="text-xs text-gray-500">{feature.planDescription}</p>
+                                                {features.map((feature) => {
+                                                    // ✅ unique tooltip key per plan-feature
+                                                    const tooltipKey = `${plan.id}-${feature.id}`;
+                                                    return (
+                                                        <li key={feature.id} className="flex items-start text-sm">
+                                                            {feature.included ? (
+                                                                <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5" />
+                                                            ) : (
+                                                                <XCircle className="h-4 w-4 text-red-400 mr-2 mt-0.5" />
                                                             )}
-                                                        </div>
-                                                    </li>
-                                                ))}
+                                                            <div>
+                                                                <div
+                                                                    className={`${feature.included
+                                                                        ? "text-gray-700"
+                                                                        : "text-gray-400 line-through"
+                                                                        } flex items-center space-x-1`}
+                                                                >
+                                                                    <p>{feature.name}</p>
+
+                                                                    {/* ✅ Tooltip Trigger */}
+                                                                    <div
+                                                                        onClick={() =>
+                                                                            setOpenTooltip(openTooltip === tooltipKey ? null : tooltipKey)
+                                                                        }
+                                                                        onMouseOver={() => setOpenTooltip(tooltipKey)}
+                                                                        onMouseLeave={() => setOpenTooltip(null)} // ✅ closes on hover out
+                                                                        ref={(el) => (tooltipRefs.current[tooltipKey] = el)}
+                                                                        className="relative flex items-center group"
+                                                                    >
+                                                                        <BadgeInfo className="w-4 h-4 text-gray-500 cursor-pointer" />
+
+                                                                        {/* ✅ Tooltip Content */}
+                                                                        <span
+                                                                            className={`absolute left-6 top-1/2 -translate-y-1/2
+                                                                                w-52 text-xs text-white bg-gray-800 rounded-md shadow-lg px-3 py-2
+                                                                                transition-opacity duration-200 z-50 pointer-events-none
+                                                                                ${openTooltip === tooltipKey ? "opacity-100" : "opacity-0"}
+                                                                            `}
+                                                                        >
+                                                                            {feature.description}
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+
+                                                                {feature.planDescription && (
+                                                                    <p className="text-xs text-gray-500">{feature.planDescription}</p>
+                                                                )}
+                                                            </div>
+                                                        </li>
+                                                    );
+                                                })}
                                             </ul>
                                         </div>
                                     )
