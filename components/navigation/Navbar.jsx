@@ -1,203 +1,231 @@
-'use client'
+"use client"
 
-import * as React from 'react'
-import Link from 'next/link'
-import { cn } from '@/lib/utils'
+import * as React from "react"
+import Link from "next/link"
+import { BotMessageSquare, Boxes, Building2, CircleCheckIcon, CircleHelpIcon, CircleIcon, GraduationCap, Landmark, MessageCircleQuestionMark, ShoppingBag } from "lucide-react"
+
 import {
-    NavigationMenu,
-    NavigationMenuContent,
-    NavigationMenuItem,
-    NavigationMenuLink,
-    NavigationMenuList,
-    NavigationMenuTrigger,
-    navigationMenuTriggerStyle,
-} from '@/components/ui/navigation-menu'
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu"
 
-// Lucide icons
-import {
-    Smartphone,
-    Laptop,
-    Camera,
-    Headphones,
-    Refrigerator,
-    Microwave,
-    WashingMachine,
-    Sofa,
-    BedDouble,
-    Table,
-    Armchair,
-    Wrench,
-    Cog,
-    Plug,
-    Info,
-    Phone,
-} from 'lucide-react'
 
-// icon mapping
-const iconMap = {
-    Phones: Smartphone,
-    Laptops: Laptop,
-    Cameras: Camera,
-    Accessories: Headphones,
-    Refrigerators: Refrigerator,
-    Microwaves: Microwave,
-    'Washing Machines': WashingMachine,
-    Sofas: Sofa,
-    Beds: BedDouble,
-    Tables: Table,
-    Chairs: Armchair,
-    'Electronics Setup': Plug,
-    'Furniture Assembly': Wrench,
-    'AC Servicing': Cog,
-    Plumbing: Wrench,
-    Electrical: Plug,
-    About: Info,
-    Contact: Phone,
-}
+// Products with icons
+const products = [
+  {
+    title: "WaTheta Solution",
+    href: "/product/watheta-solution",
+    description:
+      "All-in-one communication automation and CRM solution.",
+    icon: BotMessageSquare,
+  },
+  {
+    title: "E-commerce Panel",
+    href: "/product/ecommerce-panel",
+    description:
+      "Seamless e-commerce management with integrated chat & AI tools.",
+    icon: ShoppingBag,
+  },
+]
+
+// Industries with icons
+const industries = [
+  {
+    title: "All Industries",
+    href: "/industry/all",
+    description: "Industry-wise use cases and automation solutions.",
+    icon: Boxes,
+  },
+  {
+    title: "E-commerce",
+    href: "/industry/ecommerce",
+    description: "Smart retail automation for online stores.",
+    icon: ShoppingBag,
+  },
+  {
+    title: "Education",
+    href: "/industry/education",
+    description: "Edtech, institutions & coaching automation.",
+    icon: GraduationCap,
+  },
+  {
+    title: "Finance & Insurance",
+    href: "/industry/finance",
+    description: "Fintech, banking & insurance communication tools.",
+    icon: Landmark,
+  },
+  {
+    title: "Corporate",
+    href: "/industry/corporate",
+    description: "Internal automation and lead management tools.",
+    icon: Building2,
+  },
+]
 
 export default function Navbar() {
-    const menuItems = [
-        { name: 'Home', link: '/' },
-        { name: 'Pricing', link: '/pricing' },
-        {
-            name: 'Products',
-            categories: [
-                {
-                    title: 'Electronics',
-                    subcategories: [
-                        { name: 'Phones', link: '/products/phones' },
-                        { name: 'Laptops', link: '/products/laptops' },
-                        { name: 'Cameras', link: '/products/cameras' },
-                        { name: 'Accessories', link: '/products/accessories' },
-                    ],
-                },
-                {
-                    title: 'Home Appliances',
-                    subcategories: [
-                        { name: 'Refrigerators', link: '/products/refrigerators' },
-                        { name: 'Microwaves', link: '/products/microwaves' },
-                        { name: 'Washing Machines', link: '/products/washing-machines' },
-                    ],
-                },
-                {
-                    title: 'Furniture',
-                    subcategories: [
-                        { name: 'Sofas', link: '/products/sofas' },
-                        { name: 'Beds', link: '/products/beds' },
-                        { name: 'Tables', link: '/products/tables' },
-                        { name: 'Chairs', link: '/products/chairs' },
-                    ],
-                },
-            ],
-        },
-        {
-            name: 'Services',
-            categories: [
-                {
-                    title: 'Installation',
-                    subcategories: [
-                        { name: 'Electronics Setup', link: '/services/electronics-setup' },
-                        { name: 'Furniture Assembly', link: '/services/furniture-assembly' },
-                    ],
-                },
-                {
-                    title: 'Maintenance',
-                    subcategories: [
-                        { name: 'AC Servicing', link: '/services/ac-servicing' },
-                        { name: 'Plumbing', link: '/services/plumbing' },
-                        { name: 'Electrical', link: '/services/electrical' },
-                    ],
-                },
-            ],
-        },
-        { name: 'About', link: '/about' },
-        { name: 'Contact', link: '/contact' },
-    ]
+  return (
+    <nav className={'w-full h-16 px-10 fixed top-0 z-40 border-b bg-white/40 backdrop-blur-2xl shadow-sm flex items-center justify-between'}>
+      {/* Logo */}
+      <Link href="/" passHref aria-label="Home" className="hidden md:block">
+        <img className="h-10 object-contain" src="/images/logo.png" alt="Watheta Logo" />
+      </Link>
 
-    return (
-        <nav className="w-full border-b bg-white shadow-sm">
-            <div className="max-w-full mx-auto flex items-center justify-between px-6 h-16">
-                {/* Logo */}
-                <Link href="/" passHref aria-label="Home">
-                        <img className="h-10 object-contain" src="/images/logo.png" alt="Watheta Logo" />
-                </Link>
+      <NavigationMenu viewport={false}>
+        <NavigationMenuList>
 
-                {/* Navigation */}
-                <NavigationMenu>
-                    <NavigationMenuList>
-                        {menuItems.map((item, index) => (
-                            <NavigationMenuItem key={index}>
-                                {item.categories ? (
-                                    <>
-                                        <NavigationMenuTrigger className="text-gray-700 font-medium hover:text-green-600">
-                                            {item.name}
-                                        </NavigationMenuTrigger>
-                                        <NavigationMenuContent>
-                                            <div className="grid grid-cols-3 gap-6 p-6 w-[650px]">
-                                                {item.categories.map((cat, i) => (
-                                                    <div key={i}>
-                                                        <h4 className="text-gray-900 font-semibold mb-2">
-                                                            {cat.title}
-                                                        </h4>
-                                                        <ul className="space-y-2">
-                                                            {cat.subcategories.map((sub, j) => {
-                                                                const Icon = iconMap[sub.name] || Plug
-                                                                return (
-                                                                    <ListItem
-                                                                        key={j}
-                                                                        href={sub.link}
-                                                                        title={sub.name}
-                                                                        icon={<Icon size={16} />}
-                                                                    >
-                                                                        Explore our {sub.name.toLowerCase()} collection.
-                                                                    </ListItem>
-                                                                )
-                                                            })}
-                                                        </ul>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </NavigationMenuContent>
-                                    </>
-                                ) : (
-                                    <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                                        <Link
-                                            href={item.link}
-                                            className={cn(
-                                                'text-gray-700 font-medium hover:text-green-600 px-3 py-2 transition'
-                                            )}
-                                        >
-                                            {item.name}
-                                        </Link>
-                                    </NavigationMenuLink>
-                                )}
-                            </NavigationMenuItem>
-                        ))}
-                    </NavigationMenuList>
-                </NavigationMenu>
-            </div>
-        </nav>
-    )
+          <NavigationMenuItem>
+            <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+              <Link href="/">Home</Link>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+
+          <NavigationMenuItem>
+            <NavigationMenuTrigger>Products</NavigationMenuTrigger>
+            <NavigationMenuContent>
+              <ul className="grid w-[400px] gap-2 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                {products.map((product) => (
+                  <ListItem
+                    key={product.title}
+                    title={product.title}
+                    href={product.href}
+                    Icon={product.icon}
+                  >
+                    {product.description}
+                  </ListItem>
+                ))}
+              </ul>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+
+          <NavigationMenuItem>
+            <NavigationMenuTrigger>Industries</NavigationMenuTrigger>
+            <NavigationMenuContent>
+              <ul className="grid w-[400px] gap-2 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                {industries.map((industry) => (
+                  <ListItem
+                    key={industry.title}
+                    title={industry.title}
+                    href={industry.href}
+                    Icon={industry.icon}
+                  >
+                    {industry.description}
+                  </ListItem>
+                ))}
+              </ul>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+
+          <NavigationMenuItem>
+            <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+              <Link href="/pricing">Price</Link>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+
+          <NavigationMenuItem>
+            <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+              <Link href="/features">Features</Link>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+
+          <NavigationMenuItem>
+            <NavigationMenuTrigger>Resources</NavigationMenuTrigger>
+            <NavigationMenuContent>
+              <ul className="grid w-md gap-4">
+                <li>
+                  <NavigationMenuLink asChild>
+                    <Link href="https://docs.watheta.com/" target="_blank" rel="noopener noreferrer" aria-label="Watheta Documentation">
+                      <div className="font-medium flex items-center gap-2">
+                        <MessageCircleQuestionMark className="w-4 h-4" />
+                        <span>Help center</span>
+                      </div>
+                      <div className="text-muted-foreground">
+                        Full documentation about WaTheta solution.
+                      </div>
+                    </Link>
+                  </NavigationMenuLink>
+                  <NavigationMenuLink asChild>
+                    <Link href="https://docs.watheta.com/ecommerce" target="_blank" rel="noopener noreferrer" aria-label="Watheta Documentation">
+                      <div className="font-medium flex items-center gap-2">
+                        <ShoppingBag className="w-4 h-4" />
+                        <span>E-commerce</span>
+                      </div>
+                      <div className="text-muted-foreground">
+                        Getting Started With WhatsApp Commerce.
+                      </div>
+                    </Link>
+                  </NavigationMenuLink>
+                  <NavigationMenuLink asChild>
+                    <Link href="https://docs.watheta.com/ai" target="_blank" rel="noopener noreferrer" aria-label="Watheta Documentation">
+                      <div className="font-medium flex items-center gap-2">
+                        <BotMessageSquare className="w-4 h-4" />
+                        <span>AI</span>
+                      </div>
+                      <div className="text-muted-foreground">
+                        How to Create An AI Chat Bot?
+                      </div>
+                    </Link>
+                  </NavigationMenuLink>
+                </li>
+              </ul>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+
+          <NavigationMenuItem>
+            <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+              <Link href="/blog">Blog</Link>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+
+          <NavigationMenuItem>
+            <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+              <Link href="/contact">Contact</Link>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+
+        </NavigationMenuList>
+      </NavigationMenu>
+
+      <div className="flex items-center space-x-2 w-auto">
+        <Link href="https://dash.watheta.com/login" passHref aria-label="Login">
+          <button className="hidden lg:block xl:block md:hidden">
+            Log In
+          </button>
+        </Link>
+        <Link href="https://dash.watheta.com/register" passHref aria-label="Get Started">
+          <button className="get-started hidden lg:block xl:block md:hidden rounded-3xl text-sm">
+            Get Started
+          </button>
+        </Link>
+      </div>
+    </nav>
+  )
 }
 
-// Reusable ListItem component (from ShadCN docs)
-function ListItem({ title, href, icon, children }) {
-    return (
-        <li>
-            <NavigationMenuLink asChild>
-                <Link
-                    href={href}
-                    className="block select-none space-y-1 rounded-md p-2 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground"
-                >
-                    <div className="flex items-center gap-2 text-sm font-medium leading-none">
-                        {icon}
-                        {title}
-                    </div>
-                    <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                        {children}
-                    </p>
-                </Link>
-            </NavigationMenuLink>
-        </li>
-    )
+function ListItem({
+  title,
+  children,
+  href,
+  Icon,
+  ...props
+}) {
+  return (
+    <li {...props}>
+      <NavigationMenuLink asChild>
+        <Link href={href}>
+          <div className="text-sm leading-none font-medium flex items-center gap-2">
+              {Icon && <Icon className="w-4 h-4 text-green-600" />}
+              <span>{title}</span>
+            </div>
+          <p className="text-muted-foreground line-clamp-2 text-sm leading-snug">
+            {children}
+          </p>
+        </Link>
+      </NavigationMenuLink>
+    </li>
+  )
 }
