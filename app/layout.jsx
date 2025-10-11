@@ -1,10 +1,9 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-// import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Navigation from "@/components/navigation/Navigation";
 
 import Script from "next/script";
-import Navbar from "@/components/navigations/Navbar";
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 
 const inter = Inter({
@@ -72,7 +71,7 @@ export default function RootLayout({ children }) {
           </noscript>
         )}
         <script type="text/javascript" src="https://widget.1automations.com/widget/79538184-c3ed-486f-a9af-c2aae0b7c2a8.js"></script>
-        <Navbar />
+        <Navigation />
         {children}
         <Footer />
       </body>
