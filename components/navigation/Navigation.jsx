@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { BotMessageSquare, CircleCheckIcon, CircleHelpIcon, CircleIcon, MessageCircleQuestionMark, ShoppingBag } from "lucide-react"
+import { BotMessageSquare, Boxes, Building2, CircleCheckIcon, CircleHelpIcon, CircleIcon, GraduationCap, Landmark, MessageCircleQuestionMark, ShoppingBag } from "lucide-react"
 
 import {
   NavigationMenu,
@@ -14,44 +14,56 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 
+
+// Products with icons
 const products = [
   {
     title: "WaTheta Solution",
     href: "/product/watheta-solution",
     description:
-      "A modal dialog that interrupts the user with important content and expects a response.",
+      "All-in-one communication automation and CRM solution.",
+    icon: BotMessageSquare,
   },
   {
     title: "E-commerce Panel",
     href: "/product/ecommerce-panel",
     description:
-      "For sighted users to preview content available behind a link.",
+      "Seamless e-commerce management with integrated chat & AI tools.",
+    icon: ShoppingBag,
   },
 ]
 
+// Industries with icons
 const industries = [
   {
     title: "All Industries",
     href: "/industry/all",
-    description: "Industry-wise Use Cases and Solutions.",
+    description: "Industry-wise use cases and automation solutions.",
+    icon: Boxes,
   },
   {
     title: "E-commerce",
-    href: "/industry/ecommerce-panel",
-    description:
-      "For sighted users to preview content available behind a link.",
+    href: "/industry/ecommerce",
+    description: "Smart retail automation for online stores.",
+    icon: ShoppingBag,
   },
   {
     title: "Education",
     href: "/industry/education",
-    description:
-      "Edtech, Coaches, Institutes.",
+    description: "Edtech, institutions & coaching automation.",
+    icon: GraduationCap,
   },
   {
     title: "Finance & Insurance",
     href: "/industry/finance",
-    description:
-      "Fintech, Banking & more",
+    description: "Fintech, banking & insurance communication tools.",
+    icon: Landmark,
+  },
+  {
+    title: "Corporate",
+    href: "/industry/corporate",
+    description: "Internal automation and lead management tools.",
+    icon: Building2,
   },
 ]
 
@@ -81,6 +93,7 @@ export default function Navigation() {
                     key={product.title}
                     title={product.title}
                     href={product.href}
+                    Icon={product.icon}
                   >
                     {product.description}
                   </ListItem>
@@ -98,6 +111,7 @@ export default function Navigation() {
                     key={industry.title}
                     title={industry.title}
                     href={industry.href}
+                    Icon={industry.icon}
                   >
                     {industry.description}
                   </ListItem>
@@ -196,13 +210,17 @@ function ListItem({
   title,
   children,
   href,
+  Icon,
   ...props
 }) {
   return (
     <li {...props}>
       <NavigationMenuLink asChild>
         <Link href={href}>
-          <div className="text-sm leading-none font-medium">{title}</div>
+          <div className="text-sm leading-none font-medium flex items-center gap-2">
+              {Icon && <Icon className="w-4 h-4 text-green-600" />}
+              <span>{title}</span>
+            </div>
           <p className="text-muted-foreground line-clamp-2 text-sm leading-snug">
             {children}
           </p>
