@@ -28,7 +28,7 @@ export async function generateMetadata() {
 
 const FeturesPage = () => {
   return (
-    <main className="pt-16 lg:pt-20 xl:pt-20 md:pt-24">
+    <main className="">
       {/* Hero Section */}
       <section className="featuresHeroDiv">
         <img

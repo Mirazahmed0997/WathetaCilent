@@ -77,7 +77,7 @@ const PricingPage = async () => {
   const plans = await fetchDataAsServer(apiConfig?.GET_PRICING)
   const addons = await fetchDataAsServer(apiConfig?.GET_ADDONS)
   return (
-    <div className="pt-24 max-w-screen w-full overflow-x-hidden">
+    <div className="max-w-screen w-full overflow-x-hidden">
       {/* <PricePage plans={plans}/> */}
       <PricingHero/>
       <PricingPlan plans={plans}/>

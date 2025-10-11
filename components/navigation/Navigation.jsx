@@ -57,7 +57,7 @@ const industries = [
 
 export default function Navigation() {
   return (
-    <nav className={'w-full h-16 px-10 sticky top-0 z-40 border-b bg-white/40 backdrop-blur-2xl shadow-sm flex items-center justify-between'}>
+    <nav className={'w-full h-16 px-10 fixed top-0 z-40 border-b bg-white/40 backdrop-blur-2xl shadow-sm flex items-center justify-between'}>
       {/* Logo */}
       <Link href="/" passHref aria-label="Home">
         <img className="h-10 object-contain" src="/images/logo.png" alt="Watheta Logo" />
