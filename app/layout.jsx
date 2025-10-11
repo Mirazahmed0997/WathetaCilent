@@ -1,9 +1,10 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
+// import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 import Script from "next/script";
+import Navbar from "@/components/navigations/Navbar";
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 
 const inter = Inter({
