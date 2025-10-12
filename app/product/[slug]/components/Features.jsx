@@ -38,6 +38,19 @@ const features = [
         image:
             "https://images.unsplash.com/photo-1560264418-c4445382edbc?auto=format&fit=crop&w=900&q=80",
     },
+    {
+        id: 4,
+        title: "Performance Analytics Dashboard",
+        description:
+            "Visualize performance metrics, targets, and conversion insights in one place.",
+        keyPoints: [
+            "Custom KPI tracking",
+            "Downloadable reports",
+            "AI-based suggestions",
+        ],
+        image:
+            "https://images.unsplash.com/photo-1560264418-c4445382edbc?auto=format&fit=crop&w=900&q=80",
+    },
 ]
 
 export default function Features() {
@@ -93,9 +106,15 @@ export default function Features() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="flex items-center justify-center">
-                                <img src="/line.svg" alt="line" />
-                            </div>
+                            {idx < features.length - 1 && (
+                                <div className="flex items-center justify-center">
+                                    <img
+                                        src="/line.svg"
+                                        alt="connector line"
+                                        className={`${idx % 2 === 1 ? "scale-x-[-1]" : ""}`}
+                                    />
+                                </div>
+                            )}
                         </div>
                     ))}
                 </div>

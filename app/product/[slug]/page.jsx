@@ -8,6 +8,7 @@ import Hero from "./components/Hero"
 import Clients from "./components/Clients"
 import FAQ from "./components/FAQ"
 import Features from "./components/Features"
+import ProductCarousel from "./components/ProductCarousel"
 
 const productData = {
     hero: {
@@ -126,6 +127,7 @@ export default async function ProductPage({ params }) {
             {/* Clients / Logos */}
             <Clients data={product?.clients} />
             <Features/>
+            <ProductCarousel/>
             <FAQ data={product?.faqs} />
 
             {/* Features Section */}
