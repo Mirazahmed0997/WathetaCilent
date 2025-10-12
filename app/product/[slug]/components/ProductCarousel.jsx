@@ -1,5 +1,5 @@
 "use client"
-
+import Autoplay from "embla-carousel-autoplay"
 import * as React from "react"
 import {
     Carousel,
@@ -68,7 +68,7 @@ export default function ProductCarousel() {
                     Product Highlights
                 </h2>
 
-                <Carousel className="space-x-4">
+                <Carousel className="space-x-4" plugins={[Autoplay({ delay: 2000, }),]}>
                     <CarouselContent>
                         {groupedSlides.map((group, idx) => (
                             <CarouselItem key={idx} className="flex gap-6">
