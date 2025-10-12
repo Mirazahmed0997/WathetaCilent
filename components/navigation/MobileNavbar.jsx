@@ -83,9 +83,9 @@ export default function MobileNavbar() {
         <div>
             <Sheet>
                 <SheetTrigger asChild className="w-full">
-                    <div className="fixed top-0 z-40 flex items-center justify-between px-4 py-2">
+                    <div className="fixed top-0 z-40 flex items-center justify-between px-4 py-2 border-b bg-white/40 backdrop-blur-2xl shadow-sm">
                         {/* Logo */}
-                        <Link href="/" passHref aria-label="Home" className="hidden md:block">
+                        <Link href="/" passHref aria-label="Home" className="">
                             <img className="h-8 object-contain" src="/images/logo.png" alt="Watheta Logo" />
                         </Link>
                         <Button variant="ghost" size="icon" aria-label="Open menu">
@@ -107,7 +107,7 @@ export default function MobileNavbar() {
                         </SheetTitle>
                     </SheetHeader>
 
-                    <nav className="mt-6 flex flex-col space-y-4 px-4">
+                    <nav className="mt-6 flex flex-col space-y-4 px-4 overflow-y-auto">
                         <Link href="/" className="text-base font-medium hover:text-green-600">
                             Home
                         </Link>
