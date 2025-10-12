@@ -4,7 +4,7 @@ export default function PricingHero() {
     return (
         <section>
             {/* hero */}
-            <div className="pricingBg">
+            <div className="pricingBg pt-24">
                 {/* meta logo */}
                 <div className="flex justify-center items-center pricingHeroContentDiv py-5 lg:py-10 xl:py-10">
                     <div className="w-full">

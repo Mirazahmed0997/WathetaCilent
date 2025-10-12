@@ -18,7 +18,7 @@ export default async function BlogsPage({ searchParams }) {
   const category = await fetchDataAsServer(apiConfig?.GET_BLOG_CATEGORIES)
 
   return (
-    <section className="pt-24 max-w-7xl mx-auto space-y-4 px-2">
+    <section className="pt-10 md:pt-24 max-w-7xl mx-auto space-y-4 px-2">
       <div className="my-10 flex justify-between">
         <div className="flex items-end">
           <h1 className=" text-teal-800 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">Blog</h1>

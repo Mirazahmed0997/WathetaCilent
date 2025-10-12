@@ -36,7 +36,7 @@ const FeturesPage = () => {
           src="/images/featuresbg.png"
           alt="Features Background"
         />
-        <header className="featuresHeadlineDiv flex items-center">
+        <header className="featuresHeadlineDiv flex items-center pt-24">
           <div className="mx-5 lg:mx-32 xl:mx-32 md:mx-8">
             <div>
               <h1 className="featuresHeadline text-center lg:text-start xl:text-start md:text-start">
