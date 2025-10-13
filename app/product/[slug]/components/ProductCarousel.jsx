@@ -59,7 +59,7 @@ const slides = [
 
 export default function ProductCarousel() {
     return (
-        <div className="py-16 bg-green-50">
+        <div className="py-16 bg-green-100">
             <div className="w-full px-10 mx-auto flex flex-col items-center">
                 <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">
                     Product Highlights
@@ -68,7 +68,7 @@ export default function ProductCarousel() {
                 <Carousel
                     plugins={[Autoplay({ delay: 4000 })]}
                     opts={{ align: "start" }}
-                    className="w-80 sm:w-xl lg:w-7xl"
+                    className="w-60 sm:w-xl md:w-3xl lg:w-5xl"
                 >
                     <CarouselContent>
                         {slides.map((slide) => (

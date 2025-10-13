@@ -120,7 +120,7 @@ export default async function ProductPage({ params }) {
     if (!product) return notFound()
 
     return (
-        <div className="space-y-24 max-w-screen">
+        <div className="space-y-24 max-w-screen overflow-hidden">
             {/* Hero Section */}
             <Hero data={product?.hero} />
 
