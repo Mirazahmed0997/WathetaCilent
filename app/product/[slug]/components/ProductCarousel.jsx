@@ -1,4 +1,5 @@
 "use client"
+
 import Autoplay from "embla-carousel-autoplay"
 import * as React from "react"
 import {
@@ -8,7 +9,14 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from "@/components/ui/carousel"
-import { Bot, MapPin, BarChart, FileText, Navigation, MessageSquare } from "lucide-react"
+import {
+    Bot,
+    MapPin,
+    BarChart,
+    FileText,
+    Navigation,
+    MessageSquare,
+} from "lucide-react"
 
 const slides = [
     {
@@ -49,39 +57,32 @@ const slides = [
     },
 ]
 
-// Group slides in chunks of 3
-const chunkArray = (arr, size) => {
-    const result = []
-    for (let i = 0; i < arr.length; i += size) {
-        result.push(arr.slice(i, i + size))
-    }
-    return result
-}
-
 export default function ProductCarousel() {
-    const groupedSlides = chunkArray(slides, 3)
-
     return (
         <div className="py-16 bg-green-50">
-            <div className="container mx-auto px-6">
+            <div className="w-full px-10 mx-auto flex flex-col items-center">
                 <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">
                     Product Highlights
                 </h2>
 
-                <Carousel className="space-x-4" plugins={[Autoplay({ delay: 4000, }),]}>
+                <Carousel
+                    plugins={[Autoplay({ delay: 4000 })]}
+                    opts={{ align: "start" }}
+                    className="w-80 sm:w-xl lg:w-7xl"
+                >
                     <CarouselContent>
-                        {groupedSlides.map((group, idx) => (
-                            <CarouselItem key={idx} className="flex gap-6">
-                                {group.map((slide) => (
-                                    <div
-                                        key={slide.id}
-                                        className="flex-1 rounded-lg border border-gray-200 p-6 shadow hover:shadow-lg transition bg-white flex flex-col items-center text-center"
-                                    >
-                                        <div className="mb-4">{slide.icon}</div>
-                                        <h3 className="text-xl font-semibold text-gray-900 mb-2">{slide.title}</h3>
-                                        <p className="text-gray-600">{slide.description}</p>
-                                    </div>
-                                ))}
+                        {slides.map((slide) => (
+                            <CarouselItem
+                                key={slide.id}
+                                className="basis-full md:basis-1/2 lg:basis-1/3 px-4" // ✅ responsive width
+                            >
+                                <div className="rounded-lg border border-gray-200 p-6 shadow hover:shadow-lg transition bg-white flex flex-col items-center text-center">
+                                    <div className="mb-4">{slide.icon}</div>
+                                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                                        {slide.title}
+                                    </h3>
+                                    <p className="text-gray-600">{slide.description}</p>
+                                </div>
                             </CarouselItem>
                         ))}
                     </CarouselContent>
