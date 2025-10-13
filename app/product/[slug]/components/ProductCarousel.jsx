@@ -68,7 +68,7 @@ export default function ProductCarousel() {
                     Product Highlights
                 </h2>
 
-                <Carousel className="space-x-4" plugins={[Autoplay({ delay: 2000, }),]}>
+                <Carousel className="space-x-4" plugins={[Autoplay({ delay: 4000, }),]}>
                     <CarouselContent>
                         {groupedSlides.map((group, idx) => (
                             <CarouselItem key={idx} className="flex gap-6">

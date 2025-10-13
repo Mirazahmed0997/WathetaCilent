@@ -61,18 +61,17 @@ export default function Features() {
                     Powerful Features to Scale Your Sales
                 </h2>
 
-                <div className="relative">
+                <div className="relative space-y-10 md:space-y-0">
                     {features.map((feature, idx) => (
                         <div>
                             <div
                                 key={feature.id}
-                                className={`flex flex-col md:flex-row items-center gap-12 ${idx % 2 === 1 ? "md:flex-row-reverse" : ""
-                                    }`}
+                                className={`flex flex-col md:flex-row items-center gap-12 ${idx % 2 === 1 ? "md:flex-row-reverse" : "" }`}
                             >
                                 {/* Number Circle */}
                                 <div className="relative flex flex-col items-center justify-center">
                                     <div className="w-16 h-16 rounded-full bg-green-600 text-white flex items-center justify-center text-2xl font-bold shadow-lg z-10">
-                                        {feature.id}
+                                        {idx + 1}
                                     </div>
                                 </div>
 
@@ -107,7 +106,7 @@ export default function Features() {
                                 </div>
                             </div>
                             {idx < features.length - 1 && (
-                                <div className="flex items-center justify-center">
+                                <div className="hidden md:flex items-center justify-center px-20">
                                     <img
                                         src="/line.svg"
                                         alt="connector line"
