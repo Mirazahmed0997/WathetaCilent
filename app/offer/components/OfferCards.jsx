@@ -1,44 +1,55 @@
+import CONSTANT from '@/configs/constant.config'
 import Link from 'next/link'
 import React from 'react'
 
-export default function OfferCards({offers}) {
+export default function OfferCards({ offers }) {
   return (
-    <section className='max-w-7xl mx-auto px-4 py-12'>
-      {offers ? JSON.stringify(offers, null, 2) : 'no offer found'}
-      <div className='bg-white shadow-lg rounded-lg overflow-hidden md:flex md:items-center'>
-        {/* Image Section */}
-        <div className='md:w-1/2'>
-          <img
-            src='/offer/fb-insta.avif'
-            alt='Social Starter Pack'
-            className='w-full h-auto object-cover'
-          />
-        </div>
+    <section className='max-w-7xl mx-auto px-4 py-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3'>
+      {Array.isArray(offers?.data) && offers.data.length > 0 ? (
+        offers.data.map((offer) => (
+          <div key={offer.id} className='bg-white shadow-lg rounded-lg overflow-hidden flex flex-col md:flex-row'>
 
-        {/* Content Section */}
-        <div className='md:w-1/2 p-6'>
-          <div className='mb-4 flex items-end justify-between'>
-            <h3 className='text-2xl font-bold text-gray-800'>Social Starter Pack</h3>
-            <p>
-              <span className='text-3xl font-bold'>৳ 5000</span>
-              <span> /Per month</span>
-            </p>
+            {/* Image Section */}
+            <div className='md:w-1/2'>
+              <img
+                src={CONSTANT?.API_URL + offer.image}
+                alt={offer.title}
+                className='w-full h-full object-cover'
+              />
+            </div>
+
+            {/* Content Section */}
+            <div className='md:w-1/2 p-6 flex flex-col justify-between'>
+              <div>
+                <div className='mb-4 flex items-end justify-between'>
+                  <h3 className='text-2xl font-bold text-gray-800'>{offer.title}</h3>
+                  <p>
+                    <span className='text-3xl font-bold'>৳ {offer.priceBDT}</span>
+                    <span className='text-gray-600'> / {offer.duration}</span>
+                  </p>
+                </div>
+                <p className='text-gray-600 mb-4'>{offer.description}</p>
+                {offer.features?.length > 0 && (
+                  <ul className='list-disc list-inside text-gray-700 mb-6'>
+                    {offer.features.map((f) => (
+                      <li key={f.feature.id}>{f.feature.name}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+
+              <Link
+                href={`/offer/${offer.slug}`}
+                className='bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition w-max mt-4'
+              >
+                Get Offer
+              </Link>
+            </div>
           </div>
-          <p className='text-gray-600 mb-4'>
-            Perfect for businesses starting out on Facebook and Instagram. Includes essential tools to grow your brand, engage customers, and drive sales through Meta platforms.
-          </p>
-          <ul className='list-disc list-inside text-gray-700 mb-6'>
-            <li>Facebook Business Page</li>
-            <li>Instagram Business Profile</li>
-            <li>CRM Integration</li>
-            <li>Basic Automation Tools</li>
-          </ul>
-          <Link href={`/offer/social`} className='bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition'>
-            Get Offer
-          </Link>
-        </div>
-      </div>
+        ))
+      ) : (
+        <p className='text-center text-gray-500 col-span-full'>No offers available.</p>
+      )}
     </section>
-
   )
 }
