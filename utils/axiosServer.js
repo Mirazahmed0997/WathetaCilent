@@ -20,7 +20,7 @@ axiosInstanceServer.interceptors.request.use(
 
     try {
       const cookieStore = await cookies();
-      const accessToken  = cookieStore.get("access_token")?.value;
+      const accessToken = cookieStore.get("access_token")?.value;
       const refreshToken = cookieStore.get("refresh_token")?.value;
 
       // Access token (Bearer standard)
@@ -56,7 +56,7 @@ const handleAxiosErrorAsServer = (error) => {
 
     if (!error.response) console.error('No response received from server:', error.message);
     else if (code === 404) console.warn(`Resource not found (404): ${errorMessage}`);
-    else console.error(`Server error: ${code} - ${errorMessage}`);
+    else console.error(`Server error: ${code} - ${error}`);
 
   } else console.error(`Unknown error: ${error.message}`);
 

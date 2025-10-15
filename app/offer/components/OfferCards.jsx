@@ -1,9 +1,10 @@
 import Link from 'next/link'
 import React from 'react'
 
-export default function OfferCards() {
+export default function OfferCards({offers}) {
   return (
     <section className='max-w-7xl mx-auto px-4 py-12'>
+      {offers ? JSON.stringify(offers, null, 2) : 'no offer found'}
       <div className='bg-white shadow-lg rounded-lg overflow-hidden md:flex md:items-center'>
         {/* Image Section */}
         <div className='md:w-1/2'>

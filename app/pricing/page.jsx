@@ -76,13 +76,14 @@ export async function generateMetadata() {
 const PricingPage = async () => {
   const plans = await fetchDataAsServer(apiConfig?.GET_PRICING)
   const addons = await fetchDataAsServer(apiConfig?.GET_ADDONS)
+  const offers = await fetchDataAsServer(apiConfig?.GET_OFFER)
   return (
     <div className="max-w-screen w-full overflow-x-hidden">
       {/* <PricePage plans={plans}/> */}
       <PricingHero/>
       <PricingPlan plans={plans}/>
       <ExplorePricing/>
-      <OfferCards/>
+      <OfferCards offers={offers}/>
       <Addons addons={addons}/>
       <SupportService/>
       <ScheduleADemo />
