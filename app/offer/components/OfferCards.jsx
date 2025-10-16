@@ -3,17 +3,18 @@ import Link from 'next/link'
 import React from 'react'
 
 export default function OfferCards({ offers }) {
-    // ✅ Return null if offers or offers.data is missing or empty
     if (!Array.isArray(offers?.data) || offers.data.length === 0) return null
 
     return (
-        <section className='max-w-7xl mx-auto px-4 py-12 space-y-4'>
+        <section className='max-w-7xl mx-auto px-4 py-10 space-y-8'>
             <div className='text-center'>
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-                    Our current special offers
+                <h2 className='text-3xl md:text-4xl font-bold text-gray-800'>
+                    Our Current Special Offers
                 </h2>
+                <p className='text-gray-500 mt-2'>Get the best value for your needs!</p>
             </div>
-            <div className='grid gap-8 md:grid-cols-2 lg:grid-cols-3'>
+
+            <div className='grid gap-6 sm:grid-cols-2 lg:grid-cols-3'>
                 {offers.data.map((offer) => (
                     <Card key={offer.id} offer={offer} />
                 ))}
@@ -24,60 +25,54 @@ export default function OfferCards({ offers }) {
 
 function Card({ offer }) {
     return (
-        <div className='bg-white shadow-lg rounded-xl overflow-hidden transform hover:scale-105 transition duration-300 hover:shadow-2xl flex flex-col'>
+        <Link href={`/offer/${offer.slug}`} className='bg-gradient-to-br from-blue-50 to-indigo-50 border border-indigo-100 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 flex flex-col overflow-hidden'>
             {/* Image Section */}
             <div className='relative'>
                 <img
                     src={CONSTANT?.API_URL + offer.image}
                     alt={offer.title}
-                    className='w-full h-48 md:h-56 object-cover'
+                    className='w-full h-40 object-cover rounded-t-2xl'
                 />
                 {offer.status !== 'ACTIVE' && (
-                    <span className='absolute top-3 left-3 bg-red-600 text-white px-3 py-1 rounded-full text-xs font-semibold'>
+                    <span className='absolute top-3 left-3 bg-red-500/80 text-white px-2 py-0.5 rounded-full text-xs font-medium'>
                         {offer.status}
                     </span>
                 )}
                 {offer.isRecommended && (
-                    <span className='absolute top-3 right-3 bg-green-600 text-white px-3 py-1 rounded-full text-xs font-semibold'>
+                    <span className='absolute top-3 right-3 bg-green-500/80 text-white px-2 py-0.5 rounded-full text-xs font-medium'>
                         Recommended
-                    </span>
-                )}
-                {offer.isPopular && (
-                    <span className='absolute bottom-3 right-3 bg-yellow-500 text-white px-3 py-1 rounded-full text-xs font-semibold'>
-                        Popular
                     </span>
                 )}
             </div>
 
             {/* Content Section */}
-            <div className='p-6 flex flex-col justify-between flex-1'>
+            <div className='p-4 flex flex-col justify-between flex-1'>
                 <div>
-                    <h3 className='text-xl font-bold text-gray-800 mb-2'>{offer.title}</h3>
-                    <p className='text-gray-600 mb-4 line-clamp-3'>{offer.description}</p>
+                    <h3 className='text-lg font-semibold text-gray-800 mb-1'>
+                        {offer.title}
+                    </h3>
+                    <p className='text-gray-600 text-sm mb-3 line-clamp-2'>
+                        {offer.description}
+                    </p>
 
                     {offer.features?.length > 0 && (
-                        <ul className='list-disc list-inside text-gray-700 mb-4 space-y-1'>
-                            {offer.features.map((f) => (
-                                <li key={f.feature.id}>{f.feature.name}</li>
+                        <ul className='text-gray-700 text-sm space-y-1 mb-3'>
+                            {offer.features.slice(0, 3).map((f) => (
+                                <li key={f.feature.id} className='flex items-center gap-1'>
+                                    <span className='text-indigo-500'>•</span> {f.feature.name}
+                                </li>
                             ))}
                         </ul>
                     )}
                 </div>
 
                 {/* Pricing & Link */}
-                <div className='mt-auto flex items-center justify-between'>
-                    <div className='text-lg font-semibold text-gray-800'>
-                        ৳ {offer.priceBDT}{' '}
-                        <span className='text-gray-500 text-sm'>/{offer.duration}</span>
-                    </div>
-                    <Link
-                        href={`/offer/${offer.slug}`}
-                        className='bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition'
-                    >
-                        Get Offer
-                    </Link>
+                <div className='mt-auto flex items-center justify-between pt-2'>
+                    <p className='w-full text-center bg-indigo-500 text-white text-sm px-4 py-1.5 rounded-lg hover:bg-indigo-600 transition' >
+                        Explore the offer
+                    </p>
                 </div>
             </div>
-        </div>
+        </Link>
     )
 }
