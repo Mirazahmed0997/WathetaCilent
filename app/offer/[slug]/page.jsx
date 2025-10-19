@@ -10,8 +10,12 @@ import Clients from './components/Clients'
 import Summary from './components/Summary'
 import AdvanceFeature from './components/AdvanceFeature'
 import FAQ from './components/FAQ'
+import { fetchDataAsServer } from '@/utils/axiosServer'
+import apiConfig from '@/configs/api.config'
 
-export default function SocialPage() {
+export default async function SocialPage({ params }) {
+  const { slug } = await params;
+  const offersDetails = await fetchDataAsServer(apiConfig?.GET_OFFER_BY_SLUG + slug)
   const offerData = {
     sections: [
       {
@@ -198,25 +202,25 @@ export default function SocialPage() {
 
   const renderSection = (section) => {
     switch (section.type) {
-      case "hero":
+      case "HERO":
         return <Hero data={section.data} />;
-      case "clients":
+      case "CLIENTS":
         return <Clients data={section.data} />;
-      case "summary":
+      case "SUMMARY":
         return <Summary data={section.data} />;
-      case "features":
+      case "FEATURES":
         return <Features data={section.data} />;
-      case "start":
+      case "START":
         return <Start />;
-      case "metaCertified":
+      case "META_CERTIFIED":
         return <MetaCertified data={section.data} />;
-      case "addons":
+      case "ADDONS":
         return <Addons data={section.data} />;
-      case "advanceFeatures":
+      case "ADVANCE_FEATURES":
         return <AdvanceFeature data={section.data} />;
-      case "faq":
+      case "FAQS":
         return <FAQ data={section.data} />;
-      case "testimonials":
+      case "TESTIMONIALS":
         return <Testimonials data={section.data} />;
       default:
         return null;
@@ -225,7 +229,9 @@ export default function SocialPage() {
 
   return (
     <div className="px-2 sm:px-4 md:px-6">
-      {offerData.sections
+      {/* {offersDetails && JSON.stringify(offersDetails.sections[0], null, 2)}
+      {offerData && JSON.stringify(offerData.sections[0], null, 2)} */}
+      {offersDetails.sections
         .filter((section) => section.active)     // ✅ only active ones
         .sort((a, b) => a.order - b.order)      // ✅ sort by order
         .map((section, index) => (

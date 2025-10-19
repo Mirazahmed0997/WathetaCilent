@@ -32,6 +32,7 @@ const apiConfig = {
   //? API: ---- Offer ----
   //────────────────────────────────────────────
   GET_OFFER: '/offer/public',
+  GET_OFFER_BY_SLUG: '/offer/public/',
   GET_PRICING_OFFER: '/price/public/offer',
 };
 

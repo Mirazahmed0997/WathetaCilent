@@ -1,3 +1,4 @@
+import { GoogleAnalytics } from '@next/third-parties/google'
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
@@ -40,6 +41,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <head>
+        <GoogleAnalytics gaId={GTM_ID} />
         {GTM_ID && (
           <Script
             id="gtm-init"
