@@ -231,7 +231,10 @@ export default async function SocialPage({ params }) {
     <div className="px-2 sm:px-4 md:px-6">
       {/* {offersDetails && JSON.stringify(offersDetails.sections[0], null, 2)}
       {offerData && JSON.stringify(offerData.sections[0], null, 2)} */}
-      {offersDetails.sections
+      {!offersDetails && <div className='w-full h-screen flex items-center justify-center'>
+        <span>Offer not found !!</span>
+      </div>}
+      {offersDetails?.sections && offersDetails.sections
         .filter((section) => section.active)     // ✅ only active ones
         .sort((a, b) => a.order - b.order)      // ✅ sort by order
         .map((section, index) => (
