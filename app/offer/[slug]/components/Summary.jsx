@@ -1,5 +1,6 @@
 import React from "react";
 import { Megaphone, MessageCircle, Calendar, MousePointerClick } from "lucide-react";
+import CONSTANT from "@/configs/constant.config";
 
 export default function Summary({ data }) {
     return (
@@ -9,7 +10,7 @@ export default function Summary({ data }) {
                     <h1 className="text-xl sm:text-3xl font-bold">{data?.title}</h1>
                     <p className="text-sm md:text-base font-medium text-gray-600">{data?.description}</p>
                 </div>
-11
+
                 <div className="grid gap-2 mt-12">
                     {data?.features?.map((feature, index) => (
                         <div key={index} className="flex items-center gap-4 ">
@@ -25,7 +26,7 @@ export default function Summary({ data }) {
             {/* Hero Section */}
             <div className="w-full flex flex-col items-center text-center space-y-4">
                 <img
-                    src="/offer/summary.webp"
+                    src={CONSTANT?.API_URL + data?.image}
                     alt="WhatsApp Broadcast Summary"
                     className="rounded-2xl shadow-lg w-full max-h-[400px] object-cover"
                 />

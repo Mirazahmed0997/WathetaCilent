@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Play } from 'lucide-react'
+import CONSTANT from '@/configs/constant.config'
 
 // Stagger container for animation
 const container = {
@@ -103,7 +104,7 @@ function VideoCard({ testimonial }) {
                 </>
             ) : (
                 <video
-                    src={testimonial.video}
+                    src={CONSTANT?.API_URL + testimonial.video}
                     autoPlay
                     controls
                     className="w-full h-full object-cover"

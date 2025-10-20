@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from 'framer-motion'
 import transitions from "@/animations/transitions";
+import CONSTANT from "@/configs/constant.config";
 
 export default function Features({ data }) {
     return (
@@ -29,8 +30,8 @@ function FeatureItem({ feature, reverse }) {
                 whileInView="animate"
                 viewport={{ once: true, amount: 0.1 }} // trigger when 20% visible
                 className="w-full h-full md:w-1/2 flex justify-center">
-                <Image
-                    src={feature.image}
+                <img
+                    src={CONSTANT?.API_URL + feature.image}
                     alt={feature.title}
                     width={360}
                     height={360}

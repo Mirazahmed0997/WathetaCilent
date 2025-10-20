@@ -3,6 +3,7 @@ import Image from 'next/image'
 import React from 'react'
 import { motion } from 'framer-motion';
 import transitionsIndexed from '@/animations/transitionsIndexed';
+import CONSTANT from '@/configs/constant.config';
 
 export default function Addons({ data }) {
     return (
@@ -23,13 +24,13 @@ export default function Addons({ data }) {
                                 viewport={{ once: true, amount: 0.5 }}
                                 custom={index + 1}
                                 className='flex flex-col items-center p-6 rounded-lg bg-sky-50 ring ring-sky-50 hover:ring-sky-200 shadow-xl hover:shadow-2xl'>
-                                <Image
-                                    src={a?.icon}
+                                <img
+                                    src={CONSTANT?.API_URL + a?.icon}
                                     height={50}
                                     width={50}
                                     unoptimized
                                     alt="Instagram- Commerce-icon"
-                                    className="bg-blue-500/30 p-2 m-2 rounded-full aspect-square"
+                                    // className="bg-blue-500/30 p-2 m-2 rounded-full aspect-square"
                                 />
                                 <h2 className='text-2xl font-bold py-3'>{a?.title}</h2>
                                 <p>{a?.description}</p>

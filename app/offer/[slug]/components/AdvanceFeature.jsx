@@ -1,4 +1,5 @@
 "use client";
+import CONSTANT from "@/configs/constant.config";
 import React from "react";
 
 function getColSpan(index) {
@@ -40,7 +41,7 @@ export default function AdvanceFeature({ data }) {
                             <aside className="w-full flex mt-4 rounded-md">
                                 <video
                                     className="w-full h-auto aspect-video object-cover rounded-md"
-                                    src="/images/Boardsvideo.mp4"
+                                    src={CONSTANT?.API_URL + feature.video}
                                     autoPlay
                                     loop
                                     muted
