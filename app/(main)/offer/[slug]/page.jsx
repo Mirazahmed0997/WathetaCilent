@@ -16,6 +16,7 @@ import apiConfig from '@/configs/api.config'
 export default async function SocialPage({ params }) {
   const { slug } = await params;
   const offersDetails = await fetchDataAsServer(apiConfig?.GET_OFFER_BY_SLUG + slug)
+  const offersPrice = await fetchDataAsServer(apiConfig?.GET_PRICING_OFFER)
   const offerData = {
     sections: [
       {
@@ -211,7 +212,7 @@ export default async function SocialPage({ params }) {
       case "FEATURES":
         return <Features data={section.data} />;
       case "START":
-        return <Start />;
+        return <Start data={offersPrice.data}/>;
       case "META_CERTIFIED":
         return <MetaCertified data={section.data} />;
       case "ADDONS":
@@ -229,8 +230,8 @@ export default async function SocialPage({ params }) {
 
   return (
     <div className="px-2 sm:px-4 md:px-6">
-      {/* {offersDetails && JSON.stringify(offersDetails.sections[0], null, 2)}
-      {offerData && JSON.stringify(offerData.sections[0], null, 2)} */}
+      {/* {offersDetails && JSON.stringify(offersDetails.sections[0], null, 2)} */}
+      {/* {offersPrice && JSON.stringify(offersPrice, null, 2)} */}
       {!offersDetails && <div className='w-full h-screen flex items-center justify-center'>
         <span>Offer not found !!</span>
       </div>}

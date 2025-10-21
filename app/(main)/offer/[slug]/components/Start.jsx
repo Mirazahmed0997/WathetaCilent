@@ -4,8 +4,9 @@ import { Rocket } from 'lucide-react'
 import { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 import PaymentForm from './PaymentForm';
+import PricePlanCard from './PricePlanCard';
 
-export default function Start() {
+export default function Start({ data }) {
     const selectedPlan = {
         name: "Social Package",
         amount: 5000,
@@ -103,18 +104,22 @@ export default function Start() {
         }
     };
     return (
-        <section id='start' className="scroll-mt-40 my-10 relative flex items-center justify-center rounded-4xl min-h-[30vh] bg-gradient-to-r from-blue-500 via-sky-400 to-teal-400 overflow-hidden">
-            {/* Vignette overlay */}
-            <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle,transparent_70%,rgba(0,0,0,0.5)_100%)]"></div>
+        <section id='start' className="scroll-mt-40 my-10 ">
 
             <div className="relative flex flex-col items-center px-6">
-                <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-white mb-6 drop-shadow-lg">
+                <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-6 drop-shadow-lg">
                     Automate your business now
                 </h2>
-                <button onClick={() => openPaymentForm()} className="px-8 py-3 flex items-center space-x-2 cursor-pointer bg-white text-blue-600 font-semibold rounded-full shadow-md hover:tracking-widest transition-all duration-200 hover:bg-blue-50 hover:shadow-lg">
+
+                <div className="max-w-7xl mx-auto px-4 py-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                    {data && data?.map((plan) => (
+                        <PricePlanCard key={plan.id} plan={plan} />
+                    ))}
+                </div>
+                {/* <button onClick={() => openPaymentForm()} className="px-8 py-3 flex items-center space-x-2 cursor-pointer bg-white text-blue-600 font-semibold rounded-full shadow-md hover:tracking-widest transition-all duration-200 hover:bg-blue-50 hover:shadow-lg">
                     <Rocket />
                     <span>Start</span>
-                </button>
+                </button> */}
             </div>
             {/* Modal (only once) */}
             <dialog id="payment_modal" className="modal">
