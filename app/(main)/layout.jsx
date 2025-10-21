@@ -36,7 +36,6 @@ export default function Layout({ children }) {
   return (
     <main>
       <div className={`${inter.variable} antialiased`}>
-        <script type="text/javascript" src="https://widget.1automations.com/widget/79538184-c3ed-486f-a9af-c2aae0b7c2a8.js"></script>
         <Navigation />
         {children}
         <Footer />
