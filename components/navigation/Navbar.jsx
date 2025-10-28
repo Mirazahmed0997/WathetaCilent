@@ -122,7 +122,7 @@ export default function Navbar({ products = [], industries = [], resources = [] 
             Log In
           </button>
         </Link>
-        <Link href="https://dash.watheta.com/register" passHref aria-label="Get Started">
+        <Link href="/pricing#pricingPlan" passHref aria-label="Get Started">
           <button className="get-started hidden lg:block xl:block md:hidden rounded-3xl text-sm">
             Get Started
           </button>

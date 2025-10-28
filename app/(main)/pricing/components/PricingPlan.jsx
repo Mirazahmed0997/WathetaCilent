@@ -130,7 +130,7 @@ export default function PricingPlan({ plans }) {
     return (
         <div className='h-auto'>
             {/* <LimitedOfferBanner /> */}
-            <section className="bg-gray-50 py-16 px-6 h-auto">
+            <section id='pricingPlan' className="bg-gray-50 py-16 px-6 h-auto">
                 <div className="max-w-7xl mx-auto text-center mb-12">
                     {/* <PricingMiniBanner isHideOld={isHideOld} setHideOld={setHideOld} /> */}
                     <div>
@@ -301,15 +301,16 @@ export default function PricingPlan({ plans }) {
                             {/* CTA */}
                             <div className="p-6 border-t border-gray-400">
                                 {isNumeric(plan.priceOfferBDT || plan.priceRegularBDT) ? (
-                                    <button
-                                        onClick={() => openPaymentForm(plan)}
-                                        className={`w-full py-3 px-4 rounded-xl font-semibold transition ${plan.isRecommended
+                                    <Link
+                                        // onClick={() => openPaymentForm(plan)}
+                                        href={`/payment/${plan?.id}`}
+                                        className={`block text-center w-full py-3 px-4 rounded-xl font-semibold transition ${plan.isRecommended
                                             ? "bg-blue-600 text-white hover:bg-blue-700"
                                             : "bg-gray-100 text-gray-800 hover:bg-gray-200"
                                             }`}
                                     >
                                         {plan.isRecommended ? "Get Started" : "Choose Plan"}
-                                    </button>
+                                    </Link>
                                 ) : (
                                     <Link
                                         href="/contact"
