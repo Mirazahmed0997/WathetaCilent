@@ -187,7 +187,7 @@ export default function MobileNavbar({
                                     Log In
                                 </Button>
                             </Link>
-                            <Link href="https://dash.watheta.com/register" onClick={handleClose}>
+                            <Link href="/pricing#pricingPlan" onClick={handleClose}>
                                 <Button className="w-full bg-green-600 hover:bg-green-700 text-white">
                                     Get Started
                                 </Button>
