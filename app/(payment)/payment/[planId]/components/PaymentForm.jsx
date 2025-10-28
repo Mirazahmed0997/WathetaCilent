@@ -32,7 +32,7 @@ export default function PaymentForm({ plan }) {
 
         const submittedData = {
             ...formData,
-            amount: plan?.priceRegularBDT,
+            amount: Number(plan?.priceOfferBDT) || Number(plan?.priceRegularBDT),
             packageName: plan?.name,
             paymentStatus: "abandoned",
             date: new Date().toLocaleDateString(),
@@ -152,7 +152,7 @@ export default function PaymentForm({ plan }) {
                 <div>
                     <p className="text-sm text-gray-600">You are about to pay:</p>
                     <h3 className="text-xl font-bold text-blue-600">
-                        {plan?.priceRegularBDT}৳ / {plan?.priceRegularUSD}$
+                        {plan?.priceOfferBDT || plan?.priceRegularBDT}৳ / {plan?.priceOfferUSD || plan?.priceRegularUSD}$
                     </h3>
                 </div>
                 <CreditCard className="h-8 w-8 text-blue-500" />

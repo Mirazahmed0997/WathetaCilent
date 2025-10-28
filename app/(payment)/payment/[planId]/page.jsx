@@ -32,7 +32,7 @@ export default async function PaymentPage({ params }) {
                         <div className="flex items-center gap-2">
                             <TicketPercent className="h-5 w-5 text-green-500" />
                             <span className="font-semibold text-gray-700">
-                                {plan?.priceRegularBDT}৳ / {plan?.priceRegularUSD}$
+                                {plan?.priceOfferBDT || plan?.priceRegularBDT}৳ / {plan?.priceOfferUSD || plan?.priceRegularUSD}$
                             </span>
                         </div>
                         <div className="flex items-center gap-2">
