@@ -1,5 +1,6 @@
 export const dynamic = 'force-dynamic';
 
+import CONSTANT from "@/configs/constant.config";
 import Marquee from "react-fast-marquee";
 
 export default async function Clients({ data }) {
@@ -25,7 +26,7 @@ export default async function Clients({ data }) {
                     {data?.logos.map((logo, idx) => (
                         <div key={idx} className="flex items-center justify-center mx-10 grayscale hover:grayscale-0 transition duration-300">
                             <img
-                                src={logo.src}
+                                src={CONSTANT?.API_URL + logo.src}
                                 alt={logo.alt}
                                 className="h-12 sm:h-16 object-contain"
                             />
