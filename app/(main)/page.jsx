@@ -54,6 +54,12 @@ const metadata = {
 
 export async function generateMetadata() {
   const response = await fetchDataAsServer(apiConfig?.GET_SITE_SEO);
+  // Handle empty or invalid responses
+  if (!response || !response.metadata) {
+    console.warn("⚠️ SEO metadata not found, using fallback.");
+    return metadata;
+  }
+
   const data = response?.metadata;
 
   if (!data) return metadata; // fallback to static above

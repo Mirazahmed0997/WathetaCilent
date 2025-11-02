@@ -13,6 +13,29 @@ import OfferCards from "../offer/components/OfferCards";
 
 export async function generateMetadata() {
   const response = await fetchDataAsServer(apiConfig?.GET_PRICING_SEO);
+  // Handle empty or invalid responses
+  if (!response || !response.metadata) {
+    console.warn("⚠️ SEO metadata not found, using fallback.");
+    return {
+      title: "Pricing - WaTheta",
+      description: "Check our pricing plans at WaTheta",
+      openGraph: {
+        title: "Pricing - WaTheta",
+        description: "Check our pricing plans at WaTheta",
+        url: "https://watheta.com/pricing",
+        siteName: "WaTheta",
+        images: [{ url: "/images/wathetahome.jpg", alt: "WaTheta Pricing" }],
+        locale: "en_US",
+        type: "website",
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: "Pricing - WaTheta",
+        description: "Check our pricing plans at WaTheta",
+        images: ["/images/wathetahome.jpg"],
+      },
+    };;
+  }
   const data = response?.metadata;
 
   if (!data) {
@@ -80,14 +103,14 @@ const PricingPage = async () => {
   return (
     <div className="max-w-screen w-full overflow-x-hidden">
       {/* <PricePage plans={plans}/> */}
-      <PricingHero/>
-      <PricingPlan plans={plans}/>
-      <ExplorePricing/>
-      <OfferCards offers={offers}/>
-      <Addons addons={addons}/>
-      <SupportService/>
+      <PricingHero />
+      <PricingPlan plans={plans} />
+      <ExplorePricing />
+      <OfferCards offers={offers} />
+      <Addons addons={addons} />
+      <SupportService />
       <ScheduleADemo />
-      <PriceFAQ/>
+      <PriceFAQ />
     </div>
   );
 };
