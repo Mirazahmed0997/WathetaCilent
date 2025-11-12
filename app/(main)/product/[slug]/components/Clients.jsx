@@ -3,6 +3,7 @@ export const dynamic = 'force-dynamic';
 import Marquee from "react-fast-marquee";
 
 export default async function Clients({ data }) {
+    console.log("data",data)
     return (
         <section className="w-full py-16 bg-gray-50">
             <div className="text-center mb-12">

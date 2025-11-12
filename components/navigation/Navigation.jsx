@@ -15,51 +15,51 @@ import Navbar from './Navbar'
 
 export default function Navigation() {
   const products = [
-    // {
-    //   title: "WaTheta Solution",
-    //   href: "/product/watheta-solution",
-    //   description: "All-in-one communication automation and CRM solution.",
-    //   icon: BotMessageSquare,
-    // },
-    // {
-    //   title: "E-commerce Panel",
-    //   href: "/product/ecommerce-panel",
-    //   description: "Seamless e-commerce management with integrated chat & AI tools.",
-    //   icon: ShoppingBag,
-    // },
+    {
+      title: "WaTheta Solution",
+      href: "/product/watheta-solution",
+      description: "All-in-one communication automation and CRM solution.",
+      icon: BotMessageSquare,
+    },
+    {
+      title: "E-commerce Panel",
+      href: "/product/ecommerce-panel",
+      description: "Seamless e-commerce management with integrated chat & AI tools.",
+      icon: ShoppingBag,
+    },
   ]
 
   const industries = [
-    // {
-    //   title: "All Industries",
-    //   href: "/industry/all",
-    //   description: "Industry-wise use cases and automation solutions.",
-    //   icon: Boxes,
-    // },
-    // {
-    //   title: "E-commerce",
-    //   href: "/industry/ecommerce",
-    //   description: "Smart retail automation for online stores.",
-    //   icon: ShoppingBag,
-    // },
-    // {
-    //   title: "Education",
-    //   href: "/industry/education",
-    //   description: "Edtech, institutions & coaching automation.",
-    //   icon: GraduationCap,
-    // },
-    // {
-    //   title: "Finance & Insurance",
-    //   href: "/industry/finance",
-    //   description: "Fintech, banking & insurance communication tools.",
-    //   icon: Landmark,
-    // },
-    // {
-    //   title: "Corporate",
-    //   href: "/industry/corporate",
-    //   description: "Internal automation and lead management tools.",
-    //   icon: Building2,
-    // },
+    {
+      title: "All Industries",
+      href: "/industry/all",
+      description: "Industry-wise use cases and automation solutions.",
+      icon: Boxes,
+    },
+    {
+      title: "E-commerce",
+      href: "/industry/ecommerce",
+      description: "Smart retail automation for online stores.",
+      icon: ShoppingBag,
+    },
+    {
+      title: "Education",
+      href: "/industry/education",
+      description: "Edtech, institutions & coaching automation.",
+      icon: GraduationCap,
+    },
+    {
+      title: "Finance & Insurance",
+      href: "/industry/finance",
+      description: "Fintech, banking & insurance communication tools.",
+      icon: Landmark,
+    },
+    {
+      title: "Corporate",
+      href: "/industry/corporate",
+      description: "Internal automation and lead management tools.",
+      icon: Building2,
+    },
   ];
 
   const resources = [

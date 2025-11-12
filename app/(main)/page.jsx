@@ -10,6 +10,7 @@ import HomeFeatures from "@/components/HomeFeatures";
 import HomeGenerativeAI from "@/components/HomeGenerativeAI";
 import HomeHero from "@/components/HomeHero";
 import HomeIntegrations from "@/components/HomeIntegrations";
+import PriceFAQ from "@/components/PriceFAQ";
 import ResonToSwitch from "@/components/ResonToSwitch";
 import Teambox from "@/components/Teambox";
 import TrustedCustomers from "@/components/TrustedCustomers";
@@ -18,6 +19,7 @@ import WhtasAppCommerce from "@/components/WhtasAppCommerce";
 import WhyChooseWaTheta from "@/components/WhyChooseWaTheta";
 import apiConfig from "@/configs/api.config";
 import { fetchDataAsServer } from "@/utils/axiosServer";
+import OfferCards from "./offer/components/OfferCards";
 
 const metadata = {
   title:

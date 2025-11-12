@@ -23,13 +23,11 @@ function formData(currentValues, initialValues, parentKey = '') {
                     });
                 }
             }
-
             // ✅ Handle any other array
             else if (Array.isArray(currentValue)) {
                 const hasChanged =
                     !Array.isArray(initialValue) ||
                     currentValue.toString() !== initialValue.toString();
-
                 if (hasChanged) {
                     currentValue.forEach((item, index) => {
                         formData.append(`${fullKey}[${index}]`, item);
