@@ -1,104 +1,148 @@
-import Link from "next/link";
+"use client";
 
-export default function WhatsappChatBots() {
-    return (
-        <section className="bg-white py-16 sm:py-20 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-24 flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-16">
-            {/* ===== LEFT CONTENT ===== */}
-            <div className="flex-1 w-full max-w-xl text-center lg:text-left">
-                {/* Badge */}
-                <div className="inline-block bg-purple-100 text-purple-700 font-medium text-xs sm:text-sm px-3 sm:px-4 py-1 rounded-full mb-4">
-                    Ready-to-Use WhatsApp Automation Templates
-                </div>
+import {
 
-                {/* Heading */}
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-4">
-                    Start automating in minutes with <br className="hidden sm:block" /> pre-built WhatsApp templates designed for:
-                </h2>
-
-                {/* Paragraph */}
-                {/* <p className="text-gray-600 text-sm sm:text-base md:text-lg mb-8 max-w-lg mx-auto lg:mx-0">
-                    Lead Conversion – Instantly follow up with new leads and boost sales.<br/>
-                    Cart Recovery – Bring back abandoned carts with personalized reminders.<br/>
-                    Order Updates – Keep customers informed at every step.
-                    Activate, customize, and launch
-                     — no coding required.
-                </p> */}
+  MessageCircleCode,
+  ShoppingBagIcon,
+  WrenchIcon,
+  MegaphoneIcon,
+  Share2Icon,
+  NetworkIcon,
+  BrainCircuit,
+  Tv,
+} from "lucide-react";
+import { useRef } from "react";
 
 
-                <ul className="text-gray-600 text-sm sm:text-base md:text-lg mb-8 max-w-lg mx-auto lg:mx-0 list-disc list-inside space-y-2">
-                    <li>
-                        <strong>Lead Conversion</strong> – Instantly follow up with new leads and boost sales.
-                    </li>
-                    <li>
-                        <strong>Cart Recovery</strong> – Bring back abandoned carts with personalized reminders.
-                    </li>
-                    <li>
-                        <strong>Order Updates</strong> – Keep customers informed at every step.
-                    </li>
-                    <li>
-                        Activate, customize, and launch — no coding required.
-                    </li>
-                </ul>
+export default function TrustBadges() {
+  const scrollRef = useRef(null);
 
-                {/* Stats Grid */}
-                {/* <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-10">
-                    <div className="bg-yellow-100 text-yellow-800 font-bold rounded-xl p-4 text-center">
-                        <p className="text-xl sm:text-2xl mb-1">100%</p>
-                        <p className="text-xs sm:text-sm font-medium">
-                            Boost in First Response Time
-                        </p>
-                    </div>
+  const brands = [
+    {
+      backgroundImage: "/images/bg-pattern.png",
+      title: "Trusted by 2000+ Customers in 80+ Countries Since 2018",
+      logos: [
+        "https://pickyassist.com/en/img/partners/Hamad-International-Airport-logo.png",
+        "https://pickyassist.com/en/img/partners/Agappe-Diagnostics-Ltd-logo.png",
+        "https://pickyassist.com/en/img/partners/suzuki-logo.png",
+        "https://pickyassist.com/en/img/partners/religare.png",
+        "https://pickyassist.com/en/img/partners/Acumen.png",
+        "https://pickyassist.com/en/img/partners/Sayaji-Group.png"
+      ]
+    }
+  ];
 
-                    <div className="bg-green-100 text-green-800 font-bold rounded-xl p-4 text-center">
-                        <p className="text-xl sm:text-2xl mb-1">25%</p>
-                        <p className="text-xs sm:text-sm font-medium">
-                            Rise in Sales Through Instant Engagement
-                        </p>
-                    </div>
+  const services = [
+    { name: "Chatbots", icon: MessageCircleCode },
+    { name: "Modular CRM", icon: ShoppingBagIcon },
+    { name: "Teambox", icon: WrenchIcon },
+    { name: "Broadraster", icon: Tv },
+    { name: "WhatsApp Commerce", icon: MegaphoneIcon },
+    { name: "Conversational Funnel", icon: Share2Icon },
+    { name: "Connectors", icon: NetworkIcon },
+    { name: "Generative AI", icon: BrainCircuit }
+  ];
 
-                    <div className="bg-purple-100 text-purple-800 font-bold rounded-xl p-4 text-center">
-                        <p className="text-xl sm:text-2xl mb-1">30%</p>
-                        <p className="text-xs sm:text-sm font-medium">
-                            Improvement in Customer Satisfaction
-                        </p>
-                    </div>
+  const data = brands[0];
 
-                    <div className="bg-blue-100 text-blue-800 font-bold rounded-xl p-4 text-center">
-                        <p className="text-xl sm:text-2xl mb-1">34%</p>
-                        <p className="text-xs sm:text-sm font-medium">
-                            Saved in Operational Costs Y-O-Y
-                        </p>
-                    </div>
-                </div> */}
+  return (
+    <section
+      className="pt-24 md:py-20 px-4 md:px-12 text-center bg-white/80 backdrop-blur-md transition-all duration-500"
+      style={{
+        backgroundImage: `url(${data.backgroundImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      {/* Header */}
+    <div className="shadow-xl rounded-lg">
+      <div className="bg-[#3E3F58] py-4 rounded-t-lg">
+        <h2 className="text-2xl md:text-3xl font-semibold  text-white">
+          {data.title}
+        </h2>
+      </div>
 
-                {/* Buttons */}
-                <div className="flex flex-wrap justify-center lg:justify-start gap-4">
-                    <Link
-                        href="#"
-                        className="bg-white border border-gray-300 text-gray-700 px-6 py-3 rounded-full text-sm sm:text-base font-medium hover:bg-gray-50 transition"
-                    >
-                        Read More →
-                    </Link>
-                    <Link
-                        href="#"
-                        className="bg-indigo-600 text-white px-6 py-3 rounded-full text-sm sm:text-base font-medium hover:bg-indigo-700 transition"
-                    >
-                        Try for Free →
-                    </Link>
-                </div>
+      <hr class="w-1/2 mx-auto border-t-1 border-gray-300 mt-6 shadow-sm" />
+
+      {/* Logos Section */}
+      <div className="hidden sm:flex flex-wrap justify-center py-12  items-center gap-10 mb-10">
+        {data.logos.map((logo, index) => (
+          <div
+            key={index}
+            className="w-28 h-14 relative bg-white rounded-xl  hover:bg-indigo-50 hover:shadow-xl transition-all duration-300"
+          >
+            <img
+              src={logo}
+              alt={`logo-${index}`}
+              fill
+              className="object-contain rounded-md "
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+
+      {/* Mobile Logo Slider */}
+      <div className="sm:hidden overflow-x-auto no-scrollbar mb-10 p-4" ref={scrollRef}>
+        <div className="flex gap-4 w-max px-2">
+          {data.logos.map((logo, index) => (
+            <div
+              key={index}
+              className="min-w-[6rem] h-14 bg-white rounded-xl shadow-md p-2 flex items-center justify-center hover:bg-indigo-50 hover:shadow-xl transition-all duration-300"
+            >
+              <img
+                src={logo}
+                alt={`logo-${index}`}
+                width={80}
+                height={40}
+                className="object-contain rounded-md"
+              />
             </div>
+          ))}
+        </div>
+      </div>
 
-            {/* ===== RIGHT IMAGE ===== */}
-            <div className="flex-1 relative flex justify-center w-full">
-                <div className="relative w-full max-w-lg h-[400px] sm:h-[450px] md:h-[500px] lg:h-[600px] bg-white rounded-3xl shadow-xl flex items-center justify-center overflow-hidden">
-                    <img
-                        src="https://media.wired.com/photos/65c256bc5acbfbe155ad319e/2:3/w_1066,h_1599,c_limit/WhatsApp-Interoperabiltiy-Security.jpg"
-                        alt="WhatsApp Chatbot Demo"
-                        className="w-full h-full object-contain"
-                    />
-                </div>
+      {/* Services Section */}
+
+
+      {/* Desktop / Tablet Grid */}
+      <div className="hidden sm:grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-6 justify-center">
+        {services.map((service, index) => {
+          const Icon = service.icon;
+          return (
+            <div
+              key={index}
+              className="bg-gray-50 shadow-xl/20 shadow-indigo-500/50 hover:shadow-xl/30  hover:bg-purple-200 transition-all p-2 rounded-xl flex flex-col items-center "
+            >
+              <Icon className="w-12 h-12 rounded-xl  text-indigo-600 mb-2 p-2 bg-[#DEFCF1]" />
+              <div className="text-lg font-medium text-gray-700">{service.name}</div>
             </div>
-        </section>
+          );
+        })}
+      </div>
 
-    );
+      {/* Mobile Slider */}
+      <div className="sm:hidden overflow-x-auto no-scrollbar mt-4 p-4">
+        <div className="flex gap-4 w-max px-2">
+          {services.map((service, index) => {
+            const Icon = service.icon;
+            return (
+              <div
+                key={index}
+                className="min-w-[7rem] bg-gray-50 shadow-lg hover:shadow-md hover:bg-indigo-50 transition-all p-4 rounded-xl flex flex-col items-center"
+              >
+                <Icon className="w-6 h-6 text-indigo-600 mb-2" />
+                <div className="text-xs font-medium text-gray-700 text-center">
+                  {service.name}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+    </section>
+
+  );
 }
