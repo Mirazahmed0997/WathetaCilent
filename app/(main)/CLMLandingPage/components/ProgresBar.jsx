@@ -1,6 +1,10 @@
 'use client';
 import { useState, useEffect } from 'react';
 
+
+
+
+
 const steps = [
   {
     id: 1,

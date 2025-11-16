@@ -12,10 +12,14 @@ import {
   Tv,
 } from "lucide-react";
 import { useRef } from "react";
+import Brand from "./Brand";
 
 
 export default function TrustBadges() {
   const scrollRef = useRef(null);
+
+
+  
 
   const brands = [
     {
@@ -141,6 +145,25 @@ export default function TrustBadges() {
           })}
         </div>
       </div>
+
+
+          <section className="w-full flex justify-center py-8 px-4">
+      <div
+        className="
+          flex flex-wrap items-center justify-center gap-3 sm:gap-4
+          bg-indigo-50/40 rounded-full px-5 py-3
+          shadow-sm
+        "
+      >
+        {/* Label */}
+        <span className="font-semibold text-indigo-900 whitespace-nowrap">
+          Replaces
+        </span>
+
+       <Brand/>
+      </div>
+    </section>
+
 
     </section>
 

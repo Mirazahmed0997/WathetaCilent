@@ -1,16 +1,49 @@
 'use client'
 import { useState } from "react";
-import { Mail, Phone, User, Building2, CreditCard } from "lucide-react";
+import { Mail, Phone, User, Building2, CreditCard, TicketPercent } from "lucide-react";
 import { v4 as uuidv4 } from "uuid";
 
 export default function PaymentForm({ plan }) {
     if (!plan) return null;
 
+    const coupons = [
+        {
+            code: "WELCOME101",
+            discount: 10,
+            validFrom: "2025-01-01",
+            validTo: "2025-11-18",
+            planId: "cmfts8g9c0004u5l0e1e7mv9v",
+            limitUsage: 100
+        },
+        {
+            code: "SAVE20",
+            discount: 20,
+            validFrom: "2025-02-01",
+            validTo: "2025-11-30",
+            planId: "cmfts8g9c0004u5l0e1e7mv9v",
+            limitUsage: 50
+        },
+        {
+            code: "MEGA50",
+            discount: 50,
+            validFrom: "2025-03-10",
+            validTo: "2025-03-20",
+            planId: "premium_plan",
+            limitUsage: 10
+        }
+    ];
+
+
+
+    const baseAmount = Number(plan?.priceOfferBDT) || Number(plan?.priceRegularBDT);
+    // console.log("planID", plan.id)
     const [formData, setFormData] = useState({
         name: "",
         email: "",
         businessName: "",
         number: "",
+        coupon: "",
+        discountPercent: 0,
     });
 
     const handleChange = (e) => {
@@ -24,15 +57,84 @@ export default function PaymentForm({ plan }) {
             email: "",
             businessName: "",
             number: "",
+            coupon: "",
+            discountPercent: 0,
         });
     };
+
+    const applyCoupon = () => {
+        // const userPlanId = formData.planId; // your selected plan ID
+        const inputCouponCode = formData.coupon.trim().toLowerCase();
+        // console.log("inputCouponCode",inputCouponCode)
+
+        const found = coupons.find(
+            (c) => c.code.toLowerCase() === inputCouponCode
+        );
+
+        // console.log("found",found)
+
+        // If coupon not found
+        if (!found) {
+            setFormData((prev) => ({
+                ...prev,
+                discountPercent: 0,
+                couponError: "Invalid coupon code",
+            }));
+            return;
+        }
+
+        // Check plan match
+        if (found.planId !== plan.id) {
+            setFormData((prev) => ({
+                ...prev,
+                discountPercent: 0,
+                couponError: "This coupon is not valid for your selected plan",
+            }));
+            return;
+        }
+
+        // Check date validity
+        const today = new Date();
+        const start = new Date(found.validFrom);
+        const end = new Date(found.validTo);
+
+        if (today < start) {
+            setFormData((prev) => ({
+                ...prev,
+                discountPercent: 0,
+                couponError: "This coupon is not active yet",
+            }));
+            return;
+        }
+
+        if (today > end) {
+            setFormData((prev) => ({
+                ...prev,
+                discountPercent: 0,
+                couponError: "This coupon has expired",
+            }));
+            return;
+        }
+
+        // All good → Apply coupon
+        setFormData((prev) => ({
+            ...prev,
+            discountPercent: found.discount,
+            couponError: "",
+        }));
+    };
+
+
+    const finalAmount = formData.discountPercent
+        ? Math.floor(baseAmount - (baseAmount * formData.discountPercent) / 100)
+        : baseAmount;
 
     const handlePayment = async (e) => {
         e.preventDefault();
 
         const submittedData = {
             ...formData,
-            amount: Number(plan?.priceOfferBDT) || Number(plan?.priceRegularBDT),
+            amount: finalAmount,
             packageName: plan?.name,
             paymentStatus: "abandoned",
             date: new Date().toLocaleDateString(),
@@ -45,6 +147,8 @@ export default function PaymentForm({ plan }) {
             refund: "",
         };
 
+        // console.log("Submitted:", submittedData);
+
         try {
             const response = await fetch(`https://payapi.watheta.com/api/postByDefaultAbandoned`, {
                 method: "POST",
@@ -54,7 +158,7 @@ export default function PaymentForm({ plan }) {
 
             if (response.ok) {
                 handleReset();
-                const paymentUrl = `https://payment.watheta.com/?name=${submittedData?.name}&email=${submittedData?.email}&businessName=${submittedData?.businessName}&contactNumber=${submittedData?.number}&packageName=${submittedData?.packageName}&amount=${submittedData?.amount}&currency=৳`;
+                const paymentUrl = `https://payment.watheta.com/?name=${submittedData.name}&email=${submittedData.email}&businessName=${submittedData.businessName}&contactNumber=${submittedData.number}&packageName=${submittedData.packageName}&amount=${submittedData.amount}&currency=৳`;
                 window.location.href = paymentUrl;
             } else {
                 console.error("❌ Payment API failed");
@@ -88,9 +192,9 @@ export default function PaymentForm({ plan }) {
                             name="name"
                             value={formData.name}
                             onChange={handleChange}
-                            placeholder="John Doe"
                             required
-                            className="w-full pl-10 p-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition"
+                            placeholder="John Doe"
+                            className="w-full pl-10 p-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 transition"
                         />
                     </div>
                 </div>
@@ -105,14 +209,14 @@ export default function PaymentForm({ plan }) {
                             name="businessName"
                             value={formData.businessName}
                             onChange={handleChange}
-                            placeholder="My Company Ltd."
                             required
-                            className="w-full pl-10 p-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition"
+                            placeholder="My Company Ltd."
+                            className="w-full pl-10 p-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 transition"
                         />
                     </div>
                 </div>
 
-                {/* Contact Number */}
+                {/* Phone */}
                 <div className="flex flex-col">
                     <label className="text-sm font-medium text-gray-700 mb-1">Contact Number</label>
                     <div className="relative">
@@ -122,14 +226,14 @@ export default function PaymentForm({ plan }) {
                             name="number"
                             value={formData.number}
                             onChange={handleChange}
-                            placeholder="+8801XXXXXXXXX"
                             required
-                            className="w-full pl-10 p-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition"
+                            placeholder="+8801XXXXXXXXX"
+                            className="w-full pl-10 p-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 transition"
                         />
                     </div>
                 </div>
 
-                {/* Email Address */}
+                {/* Email */}
                 <div className="flex flex-col">
                     <label className="text-sm font-medium text-gray-700 mb-1">Email Address</label>
                     <div className="relative">
@@ -139,21 +243,61 @@ export default function PaymentForm({ plan }) {
                             name="email"
                             value={formData.email}
                             onChange={handleChange}
-                            placeholder="example@email.com"
                             required
-                            className="w-full pl-10 p-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition"
+                            placeholder="example@email.com"
+                            className="w-full pl-10 p-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 transition"
                         />
                     </div>
                 </div>
             </div>
 
+            {/* Coupon Field */}
+            <div className="flex flex-col">
+                <label className="text-sm font-medium text-gray-700 mb-1">Coupon Code</label>
+                <div className="relative flex gap-2">
+                    <div className="relative w-full">
+                        <TicketPercent className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
+                        <input
+                            type="text"
+                            name="coupon"
+                            value={formData.coupon}
+                            onChange={handleChange}
+                            placeholder="Enter coupon (optional)"
+                            className="w-full pl-10 p-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 transition"
+                        />
+                    </div>
+
+                    <button
+                        type="button"
+                        onClick={applyCoupon}
+                        className="px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+                    >
+                        Apply
+                    </button>
+                </div>
+
+                {formData.discountPercent > 0 ? (
+                    <p className="text-green-600 mt-1">
+                        Coupon applied! ({formData.discountPercent}% OFF)
+                    </p>
+                ) : formData.couponError ? (
+                    <p className="text-red-600 mt-1">{formData.couponError}</p>
+                ) : null}
+
+            </div>
+
             {/* Summary */}
             <div className="bg-blue-50 rounded-xl p-4 flex justify-between items-center">
                 <div>
-                    <p className="text-sm text-gray-600">You are about to pay:</p>
-                    <h3 className="text-xl font-bold text-blue-600">
-                        {plan?.priceOfferBDT || plan?.priceRegularBDT}৳ / {plan?.priceOfferUSD || plan?.priceRegularUSD}$
+                    <p className="text-sm text-gray-600">Final Amount:</p>
+                    <h3 className="text-2xl font-bold text-blue-600">
+                        ৳{finalAmount}
                     </h3>
+                    {formData.discountPercent > 0 && (
+                        <p className="text-green-600 text-sm">
+                            Saved ৳{baseAmount - finalAmount}
+                        </p>
+                    )}
                 </div>
                 <CreditCard className="h-8 w-8 text-blue-500" />
             </div>
@@ -171,9 +315,190 @@ export default function PaymentForm({ plan }) {
                     type="submit"
                     className="px-6 py-2.5 text-sm rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition shadow-sm"
                 >
-                    Proceed to Payment
+                    Proceed to Payment (৳{finalAmount})
                 </button>
             </div>
         </form>
     );
 }
+
+
+// 'use client'
+// import { useState } from "react";
+// import { Mail, Phone, User, Building2, CreditCard } from "lucide-react";
+// import { v4 as uuidv4 } from "uuid";
+
+// export default function PaymentForm({ plan }) {
+//     if (!plan) return null;
+
+//     const [formData, setFormData] = useState({
+//         name: "",
+//         email: "",
+//         businessName: "",
+//         number: "",
+//     });
+
+//     const handleChange = (e) => {
+//         const { name, value } = e.target;
+//         setFormData((prev) => ({ ...prev, [name]: value }));
+//     };
+
+//     const handleReset = () => {
+//         setFormData({
+//             name: "",
+//             email: "",
+//             businessName: "",
+//             number: "",
+//         });
+//     };
+
+//     const handlePayment = async (e) => {
+//         e.preventDefault();
+
+//         const submittedData = {
+//             ...formData,
+//             amount: Number(plan?.priceOfferBDT) || Number(plan?.priceRegularBDT),
+//             packageName: plan?.name,
+//             paymentStatus: "abandoned",
+//             date: new Date().toLocaleDateString(),
+//             paymentType: "N/A",
+//             invoiceNumber: "N/A",
+//             paymentNumber: "N/A",
+//             paymentID: uuidv4(),
+//             trxID: "N/A",
+//             userId: Math.floor(Math.random() * 10000),
+//             refund: "",
+//         };
+
+//         try {
+//             const response = await fetch(`https://payapi.watheta.com/api/postByDefaultAbandoned`, {
+//                 method: "POST",
+//                 headers: { "Content-Type": "application/json" },
+//                 body: JSON.stringify(submittedData),
+//             });
+
+//             if (response.ok) {
+//                 handleReset();
+//                 const paymentUrl = `https://payment.watheta.com/?name=${submittedData?.name}&email=${submittedData?.email}&businessName=${submittedData?.businessName}&contactNumber=${submittedData?.number}&packageName=${submittedData?.packageName}&amount=${submittedData?.amount}&currency=৳`;
+//                 window.location.href = paymentUrl;
+//             } else {
+//                 console.error("❌ Payment API failed");
+//             }
+//         } catch (error) {
+//             console.error("❌ Error:", error);
+//         }
+//     };
+
+//     return (
+//         <form
+//             onSubmit={handlePayment}
+//             className="w-full max-w-3xl mx-auto bg-white shadow-xl rounded-2xl p-8 border border-gray-100 space-y-6"
+//         >
+//             <div className="text-center space-y-2">
+//                 <h2 className="text-2xl font-semibold text-gray-800">Complete Your Payment</h2>
+//                 <p className="text-gray-500 text-sm">
+//                     Please fill in your details to proceed with payment for{" "}
+//                     <span className="font-medium text-gray-800">{plan?.name}</span>.
+//                 </p>
+//             </div>
+
+//             <div className="grid gap-5 sm:grid-cols-2">
+//                 {/* Full Name */}
+//                 <div className="flex flex-col">
+//                     <label className="text-sm font-medium text-gray-700 mb-1">Full Name</label>
+//                     <div className="relative">
+//                         <User className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
+//                         <input
+//                             type="text"
+//                             name="name"
+//                             value={formData.name}
+//                             onChange={handleChange}
+//                             placeholder="John Doe"
+//                             required
+//                             className="w-full pl-10 p-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition"
+//                         />
+//                     </div>
+//                 </div>
+
+//                 {/* Business Name */}
+//                 <div className="flex flex-col">
+//                     <label className="text-sm font-medium text-gray-700 mb-1">Business Name</label>
+//                     <div className="relative">
+//                         <Building2 className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
+//                         <input
+//                             type="text"
+//                             name="businessName"
+//                             value={formData.businessName}
+//                             onChange={handleChange}
+//                             placeholder="My Company Ltd."
+//                             required
+//                             className="w-full pl-10 p-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition"
+//                         />
+//                     </div>
+//                 </div>
+
+//                 {/* Contact Number */}
+//                 <div className="flex flex-col">
+//                     <label className="text-sm font-medium text-gray-700 mb-1">Contact Number</label>
+//                     <div className="relative">
+//                         <Phone className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
+//                         <input
+//                             type="tel"
+//                             name="number"
+//                             value={formData.number}
+//                             onChange={handleChange}
+//                             placeholder="+8801XXXXXXXXX"
+//                             required
+//                             className="w-full pl-10 p-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition"
+//                         />
+//                     </div>
+//                 </div>
+
+//                 {/* Email Address */}
+//                 <div className="flex flex-col">
+//                     <label className="text-sm font-medium text-gray-700 mb-1">Email Address</label>
+//                     <div className="relative">
+//                         <Mail className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
+//                         <input
+//                             type="email"
+//                             name="email"
+//                             value={formData.email}
+//                             onChange={handleChange}
+//                             placeholder="example@email.com"
+//                             required
+//                             className="w-full pl-10 p-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition"
+//                         />
+//                     </div>
+//                 </div>
+//             </div>
+
+//             {/* Summary */}
+//             <div className="bg-blue-50 rounded-xl p-4 flex justify-between items-center">
+//                 <div>
+//                     <p className="text-sm text-gray-600">You are about to pay:</p>
+//                     <h3 className="text-xl font-bold text-blue-600">
+//                         {plan?.priceOfferBDT || plan?.priceRegularBDT}৳ / {plan?.priceOfferUSD || plan?.priceRegularUSD}$
+//                     </h3>
+//                 </div>
+//                 <CreditCard className="h-8 w-8 text-blue-500" />
+//             </div>
+
+//             {/* Buttons */}
+//             <div className="flex items-center justify-end gap-3 pt-4">
+//                 <button
+//                     type="button"
+//                     onClick={handleReset}
+//                     className="px-5 py-2.5 text-sm rounded-lg border border-gray-300 hover:bg-gray-100 transition"
+//                 >
+//                     Reset
+//                 </button>
+//                 <button
+//                     type="submit"
+//                     className="px-6 py-2.5 text-sm rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition shadow-sm"
+//                 >
+//                     Proceed to Payment
+//                 </button>
+//             </div>
+//         </form>
+//     );
+// }

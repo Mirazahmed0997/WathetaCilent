@@ -10,6 +10,8 @@ import {
   Tv,
 } from "lucide-react";
 
+import { cn } from "@/lib/utils";
+
 export default function TrustedAndServicesSection() {
   const brands = [
     "https://i.postimg.cc/K8RggKt7/louis-vitton-1.jpg",
@@ -66,7 +68,10 @@ export default function TrustedAndServicesSection() {
       {services.map(({ name, icon: Icon }, index) => (
         <div
           key={index}
-          className="bg-white rounded-2xl shadow-sm p-4 sm:p-5 md:p-6 flex flex-col items-center justify-center hover:shadow-md transition-all duration-300"
+          className={cn(
+            'bg-white rounded-2xl shadow-sm p-4 sm:p-5 md:p-6 flex flex-col items-center justify-center hover:shadow-md transition-all duration-300',
+            index % 2 === 1 ? 'bg-green-500' : 'bg-green-500',
+          )}
         >
           <Icon className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-gray-700 mb-3" />
           <h3 className="text-xs sm:text-sm md:text-base text-gray-800 font-medium">
