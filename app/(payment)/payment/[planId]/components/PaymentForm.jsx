@@ -1,10 +1,15 @@
 'use client'
-import { useState } from "react";
-import { Mail, Phone, User, Building2, CreditCard, TicketPercent } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Mail, Phone, User, Building2, CreditCard, TicketPercent, ChevronDown } from "lucide-react";
 import { v4 as uuidv4 } from "uuid";
+import Addons from "@/app/(main)/pricing/components/Addons";
 
-export default function PaymentForm({ plan }) {
+export default function PaymentForm({ plan, addons }) {
     if (!plan) return null;
+
+
+    // console.log(addons)
+
 
     const coupons = [
         {
@@ -34,7 +39,6 @@ export default function PaymentForm({ plan }) {
     ];
 
 
-
     const baseAmount = Number(plan?.priceOfferBDT) || Number(plan?.priceRegularBDT);
     // console.log("planID", plan.id)
     const [formData, setFormData] = useState({
@@ -44,12 +48,38 @@ export default function PaymentForm({ plan }) {
         number: "",
         coupon: "",
         discountPercent: 0,
+        
     });
+
+
+
+    const [selectedAddons, setSelectedAddons] = useState([]); // array of addon objects
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+
+    console.log("selectedAdons",selectedAddons)
+
+    const dropdownRef = useRef();
+
+    useEffect(() => {
+        function handleClickOutside(e) {
+            if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+                setDropdownOpen(false);
+            }
+        }
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
+
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
+
+
+    console.log("form data",formData)
 
     const handleReset = () => {
         setFormData({
@@ -125,9 +155,31 @@ export default function PaymentForm({ plan }) {
     };
 
 
-    const finalAmount = formData.discountPercent
+
+  
+    //  ADDON LOGIC
+    const toggleAddon = (addon) => {
+        const exists = selectedAddons.find((a) => a.id === addon.id);
+
+        if (exists) {
+            setSelectedAddons(selectedAddons.filter((a) => a.id !== addon.id));
+        } else {
+            setSelectedAddons([...selectedAddons, addon]);
+        }
+    };
+
+    const addonTotal = selectedAddons.reduce((sum, a) => sum + Number(a.price), 0);
+
+
+    const discounted = formData.discountPercent
         ? Math.floor(baseAmount - (baseAmount * formData.discountPercent) / 100)
         : baseAmount;
+
+    const finalAmount = discounted + addonTotal;
+
+
+
+
 
     const handlePayment = async (e) => {
         e.preventDefault();
@@ -145,9 +197,10 @@ export default function PaymentForm({ plan }) {
             trxID: "N/A",
             userId: Math.floor(Math.random() * 10000),
             refund: "",
+            selectedAddons:selectedAddons
         };
 
-        // console.log("Submitted:", submittedData);
+        console.log("Submitted:", submittedData);
 
         try {
             const response = await fetch(`https://payapi.watheta.com/api/postByDefaultAbandoned`, {
@@ -169,336 +222,208 @@ export default function PaymentForm({ plan }) {
     };
 
     return (
-        <form
-            onSubmit={handlePayment}
-            className="w-full max-w-3xl mx-auto bg-white shadow-xl rounded-2xl p-8 border border-gray-100 space-y-6"
-        >
-            <div className="text-center space-y-2">
-                <h2 className="text-2xl font-semibold text-gray-800">Complete Your Payment</h2>
-                <p className="text-gray-500 text-sm">
-                    Please fill in your details to proceed with payment for{" "}
-                    <span className="font-medium text-gray-800">{plan?.name}</span>.
-                </p>
-            </div>
-
-            <div className="grid gap-5 sm:grid-cols-2">
-                {/* Full Name */}
-                <div className="flex flex-col">
-                    <label className="text-sm font-medium text-gray-700 mb-1">Full Name</label>
-                    <div className="relative">
-                        <User className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
-                        <input
-                            type="text"
-                            name="name"
-                            value={formData.name}
-                            onChange={handleChange}
-                            required
-                            placeholder="John Doe"
-                            className="w-full pl-10 p-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 transition"
-                        />
-                    </div>
-                </div>
-
-                {/* Business Name */}
-                <div className="flex flex-col">
-                    <label className="text-sm font-medium text-gray-700 mb-1">Business Name</label>
-                    <div className="relative">
-                        <Building2 className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
-                        <input
-                            type="text"
-                            name="businessName"
-                            value={formData.businessName}
-                            onChange={handleChange}
-                            required
-                            placeholder="My Company Ltd."
-                            className="w-full pl-10 p-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 transition"
-                        />
-                    </div>
-                </div>
-
-                {/* Phone */}
-                <div className="flex flex-col">
-                    <label className="text-sm font-medium text-gray-700 mb-1">Contact Number</label>
-                    <div className="relative">
-                        <Phone className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
-                        <input
-                            type="tel"
-                            name="number"
-                            value={formData.number}
-                            onChange={handleChange}
-                            required
-                            placeholder="+8801XXXXXXXXX"
-                            className="w-full pl-10 p-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 transition"
-                        />
-                    </div>
-                </div>
-
-                {/* Email */}
-                <div className="flex flex-col">
-                    <label className="text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                    <div className="relative">
-                        <Mail className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
-                        <input
-                            type="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            required
-                            placeholder="example@email.com"
-                            className="w-full pl-10 p-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 transition"
-                        />
-                    </div>
-                </div>
-            </div>
-
-            {/* Coupon Field */}
-            <div className="flex flex-col">
-                <label className="text-sm font-medium text-gray-700 mb-1">Coupon Code</label>
-                <div className="relative flex gap-2">
-                    <div className="relative w-full">
-                        <TicketPercent className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
-                        <input
-                            type="text"
-                            name="coupon"
-                            value={formData.coupon}
-                            onChange={handleChange}
-                            placeholder="Enter coupon (optional)"
-                            className="w-full pl-10 p-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 transition"
-                        />
-                    </div>
-
-                    <button
-                        type="button"
-                        onClick={applyCoupon}
-                        className="px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
-                    >
-                        Apply
-                    </button>
-                </div>
-
-                {formData.discountPercent > 0 ? (
-                    <p className="text-green-600 mt-1">
-                        Coupon applied! ({formData.discountPercent}% OFF)
+        <section>
+            <form
+                onSubmit={handlePayment}
+                className="w-full max-w-3xl mx-auto bg-white shadow-xl rounded-2xl p-8 border border-gray-100 space-y-6"
+            >
+                <div className="text-center space-y-2">
+                    <h2 className="text-2xl font-semibold text-gray-800">Complete Your Payment</h2>
+                    <p className="text-gray-500 text-sm">
+                        Please fill in your details to proceed with payment for{" "}
+                        <span className="font-medium text-gray-800">{plan?.name}</span>.
                     </p>
-                ) : formData.couponError ? (
-                    <p className="text-red-600 mt-1">{formData.couponError}</p>
-                ) : null}
+                </div>
 
-            </div>
+                <div className="grid gap-5 sm:grid-cols-2">
+                    {/* Full Name */}
+                    <div className="flex flex-col">
+                        <label className="text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                        <div className="relative">
+                            <User className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
+                            <input
+                                type="text"
+                                name="name"
+                                value={formData.name}
+                                onChange={handleChange}
+                                required
+                                placeholder="John Doe"
+                                className="w-full pl-10 p-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 transition"
+                            />
+                        </div>
+                    </div>
 
-            {/* Summary */}
-            <div className="bg-blue-50 rounded-xl p-4 flex justify-between items-center">
-                <div>
-                    <p className="text-sm text-gray-600">Final Amount:</p>
-                    <h3 className="text-2xl font-bold text-blue-600">
-                        ৳{finalAmount}
-                    </h3>
-                    {formData.discountPercent > 0 && (
-                        <p className="text-green-600 text-sm">
-                            Saved ৳{baseAmount - finalAmount}
+                    {/* Business Name */}
+                    <div className="flex flex-col">
+                        <label className="text-sm font-medium text-gray-700 mb-1">Business Name</label>
+                        <div className="relative">
+                            <Building2 className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
+                            <input
+                                type="text"
+                                name="businessName"
+                                value={formData.businessName}
+                                onChange={handleChange}
+                                required
+                                placeholder="My Company Ltd."
+                                className="w-full pl-10 p-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 transition"
+                            />
+                        </div>
+                    </div>
+
+                    {/* Phone */}
+                    <div className="flex flex-col">
+                        <label className="text-sm font-medium text-gray-700 mb-1">Contact Number</label>
+                        <div className="relative">
+                            <Phone className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
+                            <input
+                                type="tel"
+                                name="number"
+                                value={formData.number}
+                                onChange={handleChange}
+                                required
+                                placeholder="+8801XXXXXXXXX"
+                                className="w-full pl-10 p-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 transition"
+                            />
+                        </div>
+                    </div>
+
+                    {/* Email */}
+                    <div className="flex flex-col">
+                        <label className="text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                        <div className="relative">
+                            <Mail className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
+                            <input
+                                type="email"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                required
+                                placeholder="example@email.com"
+                                className="w-full pl-10 p-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 transition"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                {/* Coupon Field */}
+                <div className="flex flex-col">
+                    <label className="text-sm font-medium text-gray-700 mb-1">Coupon Code</label>
+                    <div className="relative flex gap-2">
+                        <div className="relative w-full">
+                            <TicketPercent className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
+                            <input
+                                type="text"
+                                name="coupon"
+                                value={formData.coupon}
+                                onChange={handleChange}
+                                placeholder="Enter coupon (optional)"
+                                className="w-full pl-10 p-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 transition"
+                            />
+                        </div>
+
+                        <button
+                            type="button"
+                            onClick={applyCoupon}
+                            className="px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+                        >
+                            Apply
+                        </button>
+                    </div>
+
+                    {formData.discountPercent > 0 ? (
+                        <p className="text-green-600 mt-1">
+                            Coupon applied! ({formData.discountPercent}% OFF)
                         </p>
+                    ) : formData.couponError ? (
+                        <p className="text-red-600 mt-1">{formData.couponError}</p>
+                    ) : null}
+
+                </div>
+
+
+                {/* MULTIPLE ADDON SELECT DROPDOWN */}
+                <div className="mt-5" ref={dropdownRef}>
+                    <label className="font-medium">Additional Services (Optional)</label>
+
+                    <div
+                        className="border p-2 rounded mt-1 flex justify-between items-center cursor-pointer"
+                        onClick={() => setDropdownOpen(!dropdownOpen)}
+                    >
+                        <span className="text-gray-700">
+                            {selectedAddons.length > 0
+                                ? `${selectedAddons.length} selected`
+                                : "Select additional services (You can select more than one)"}
+                        </span>
+                        <ChevronDown className="w-4 h-4" />
+                    </div>
+
+                    {dropdownOpen && (
+                        <div className="border rounded mt-1 bg-white shadow p-2 max-h-60 overflow-y-auto">
+                            {addons.map((addon) => {
+                                const isActive = selectedAddons.some((a) => a.id === addon.id);
+                                return (
+                                    <div
+                                        key={addon.id}
+                                        onClick={() => toggleAddon(addon)}
+                                        className={`p-2 rounded cursor-pointer flex justify-between hover:bg-gray-100 ${isActive ? "bg-blue-100" : ""
+                                            }`}
+                                    >
+                                        <span>{addon.title}</span>
+                                        <span className="text-sm text-gray-600">৳{addon.price}</span>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    )}
+
+                    {/* selected addon tags */}
+                    {selectedAddons.length > 0 && (
+                        <div className="mt-2 flex flex-wrap gap-2">
+                            {selectedAddons.map((item) => (
+                                <span key={item.id} className="px-3 py-1 text-xs bg-blue-100 text-blue-700 rounded-full">
+                                    {item.title} — ৳{item.price}
+                                </span>
+                            ))}
+                        </div>
                     )}
                 </div>
-                <CreditCard className="h-8 w-8 text-blue-500" />
-            </div>
 
-            {/* Buttons */}
-            <div className="flex items-center justify-end gap-3 pt-4">
-                <button
-                    type="button"
-                    onClick={handleReset}
-                    className="px-5 py-2.5 text-sm rounded-lg border border-gray-300 hover:bg-gray-100 transition"
-                >
-                    Reset
-                </button>
-                <button
-                    type="submit"
-                    className="px-6 py-2.5 text-sm rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition shadow-sm"
-                >
-                    Proceed to Payment (৳{finalAmount})
-                </button>
-            </div>
-        </form>
+
+
+
+                {/* Summary */}
+
+                <div className="mt-6 bg-blue-50 rounded p-4">
+                    <p>Base price: ৳{baseAmount}</p>
+                    <p>Discount: - ৳{baseAmount - discounted}</p>
+                    <p>Addons: + ৳{addonTotal}</p>
+
+                    <h3 className="mt-2 text-xl font-bold text-blue-700">
+                        Final Payable: ৳{finalAmount}
+                    </h3>
+                </div>
+
+              
+
+                {/* Buttons */}
+                <div className="flex items-center justify-end gap-3 pt-4">
+                    <button
+                        type="button"
+                        onClick={handleReset}
+                        className="px-5 py-2.5 text-sm rounded-lg border border-gray-300 hover:bg-gray-100 transition"
+                    >
+                        Reset
+                    </button>
+                    <button
+                        type="submit"
+                        className="px-6 py-2.5 text-sm rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition shadow-sm"
+                    >
+                        Proceed to Payment (৳{finalAmount})
+                    </button>
+                </div>
+            </form>
+
+            <Addons addons={addons} />
+        </section>
     );
 }
-
-
-// 'use client'
-// import { useState } from "react";
-// import { Mail, Phone, User, Building2, CreditCard } from "lucide-react";
-// import { v4 as uuidv4 } from "uuid";
-
-// export default function PaymentForm({ plan }) {
-//     if (!plan) return null;
-
-//     const [formData, setFormData] = useState({
-//         name: "",
-//         email: "",
-//         businessName: "",
-//         number: "",
-//     });
-
-//     const handleChange = (e) => {
-//         const { name, value } = e.target;
-//         setFormData((prev) => ({ ...prev, [name]: value }));
-//     };
-
-//     const handleReset = () => {
-//         setFormData({
-//             name: "",
-//             email: "",
-//             businessName: "",
-//             number: "",
-//         });
-//     };
-
-//     const handlePayment = async (e) => {
-//         e.preventDefault();
-
-//         const submittedData = {
-//             ...formData,
-//             amount: Number(plan?.priceOfferBDT) || Number(plan?.priceRegularBDT),
-//             packageName: plan?.name,
-//             paymentStatus: "abandoned",
-//             date: new Date().toLocaleDateString(),
-//             paymentType: "N/A",
-//             invoiceNumber: "N/A",
-//             paymentNumber: "N/A",
-//             paymentID: uuidv4(),
-//             trxID: "N/A",
-//             userId: Math.floor(Math.random() * 10000),
-//             refund: "",
-//         };
-
-//         try {
-//             const response = await fetch(`https://payapi.watheta.com/api/postByDefaultAbandoned`, {
-//                 method: "POST",
-//                 headers: { "Content-Type": "application/json" },
-//                 body: JSON.stringify(submittedData),
-//             });
-
-//             if (response.ok) {
-//                 handleReset();
-//                 const paymentUrl = `https://payment.watheta.com/?name=${submittedData?.name}&email=${submittedData?.email}&businessName=${submittedData?.businessName}&contactNumber=${submittedData?.number}&packageName=${submittedData?.packageName}&amount=${submittedData?.amount}&currency=৳`;
-//                 window.location.href = paymentUrl;
-//             } else {
-//                 console.error("❌ Payment API failed");
-//             }
-//         } catch (error) {
-//             console.error("❌ Error:", error);
-//         }
-//     };
-
-//     return (
-//         <form
-//             onSubmit={handlePayment}
-//             className="w-full max-w-3xl mx-auto bg-white shadow-xl rounded-2xl p-8 border border-gray-100 space-y-6"
-//         >
-//             <div className="text-center space-y-2">
-//                 <h2 className="text-2xl font-semibold text-gray-800">Complete Your Payment</h2>
-//                 <p className="text-gray-500 text-sm">
-//                     Please fill in your details to proceed with payment for{" "}
-//                     <span className="font-medium text-gray-800">{plan?.name}</span>.
-//                 </p>
-//             </div>
-
-//             <div className="grid gap-5 sm:grid-cols-2">
-//                 {/* Full Name */}
-//                 <div className="flex flex-col">
-//                     <label className="text-sm font-medium text-gray-700 mb-1">Full Name</label>
-//                     <div className="relative">
-//                         <User className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
-//                         <input
-//                             type="text"
-//                             name="name"
-//                             value={formData.name}
-//                             onChange={handleChange}
-//                             placeholder="John Doe"
-//                             required
-//                             className="w-full pl-10 p-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition"
-//                         />
-//                     </div>
-//                 </div>
-
-//                 {/* Business Name */}
-//                 <div className="flex flex-col">
-//                     <label className="text-sm font-medium text-gray-700 mb-1">Business Name</label>
-//                     <div className="relative">
-//                         <Building2 className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
-//                         <input
-//                             type="text"
-//                             name="businessName"
-//                             value={formData.businessName}
-//                             onChange={handleChange}
-//                             placeholder="My Company Ltd."
-//                             required
-//                             className="w-full pl-10 p-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition"
-//                         />
-//                     </div>
-//                 </div>
-
-//                 {/* Contact Number */}
-//                 <div className="flex flex-col">
-//                     <label className="text-sm font-medium text-gray-700 mb-1">Contact Number</label>
-//                     <div className="relative">
-//                         <Phone className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
-//                         <input
-//                             type="tel"
-//                             name="number"
-//                             value={formData.number}
-//                             onChange={handleChange}
-//                             placeholder="+8801XXXXXXXXX"
-//                             required
-//                             className="w-full pl-10 p-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition"
-//                         />
-//                     </div>
-//                 </div>
-
-//                 {/* Email Address */}
-//                 <div className="flex flex-col">
-//                     <label className="text-sm font-medium text-gray-700 mb-1">Email Address</label>
-//                     <div className="relative">
-//                         <Mail className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
-//                         <input
-//                             type="email"
-//                             name="email"
-//                             value={formData.email}
-//                             onChange={handleChange}
-//                             placeholder="example@email.com"
-//                             required
-//                             className="w-full pl-10 p-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition"
-//                         />
-//                     </div>
-//                 </div>
-//             </div>
-
-//             {/* Summary */}
-//             <div className="bg-blue-50 rounded-xl p-4 flex justify-between items-center">
-//                 <div>
-//                     <p className="text-sm text-gray-600">You are about to pay:</p>
-//                     <h3 className="text-xl font-bold text-blue-600">
-//                         {plan?.priceOfferBDT || plan?.priceRegularBDT}৳ / {plan?.priceOfferUSD || plan?.priceRegularUSD}$
-//                     </h3>
-//                 </div>
-//                 <CreditCard className="h-8 w-8 text-blue-500" />
-//             </div>
-
-//             {/* Buttons */}
-//             <div className="flex items-center justify-end gap-3 pt-4">
-//                 <button
-//                     type="button"
-//                     onClick={handleReset}
-//                     className="px-5 py-2.5 text-sm rounded-lg border border-gray-300 hover:bg-gray-100 transition"
-//                 >
-//                     Reset
-//                 </button>
-//                 <button
-//                     type="submit"
-//                     className="px-6 py-2.5 text-sm rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition shadow-sm"
-//                 >
-//                     Proceed to Payment
-//                 </button>
-//             </div>
-//         </form>
-//     );
-// }
