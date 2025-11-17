@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import { Mail, Phone, User, Building2, CreditCard, TicketPercent, ChevronDown } from "lucide-react";
 import { v4 as uuidv4 } from "uuid";
 import Addons from "@/app/(main)/pricing/components/Addons";
+import CONSTANT from '@/configs/constant.config'
+
 
 export default function PaymentForm({ plan, addons }) {
     if (!plan) return null;
@@ -48,7 +50,7 @@ export default function PaymentForm({ plan, addons }) {
         number: "",
         coupon: "",
         discountPercent: 0,
-        
+
     });
 
 
@@ -56,7 +58,7 @@ export default function PaymentForm({ plan, addons }) {
     const [selectedAddons, setSelectedAddons] = useState([]); // array of addon objects
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
-    console.log("selectedAdons",selectedAddons)
+    console.log("selectedAdons", selectedAddons)
 
     const dropdownRef = useRef();
 
@@ -79,7 +81,7 @@ export default function PaymentForm({ plan, addons }) {
     };
 
 
-    console.log("form data",formData)
+    console.log("form data", formData)
 
     const handleReset = () => {
         setFormData({
@@ -156,7 +158,7 @@ export default function PaymentForm({ plan, addons }) {
 
 
 
-  
+
     //  ADDON LOGIC
     const toggleAddon = (addon) => {
         const exists = selectedAddons.find((a) => a.id === addon.id);
@@ -197,7 +199,7 @@ export default function PaymentForm({ plan, addons }) {
             trxID: "N/A",
             userId: Math.floor(Math.random() * 10000),
             refund: "",
-            selectedAddons:selectedAddons
+            selectedAddons: selectedAddons
         };
 
         console.log("Submitted:", submittedData);
@@ -211,7 +213,7 @@ export default function PaymentForm({ plan, addons }) {
 
             if (response.ok) {
                 handleReset();
-                const paymentUrl = `https://payment.watheta.com/?name=${submittedData.name}&email=${submittedData.email}&businessName=${submittedData.businessName}&contactNumber=${submittedData.number}&packageName=${submittedData.packageName}&amount=${submittedData.amount}&currency=৳`;
+                const paymentUrl = `https://payment.watheta.com/?name=${submittedData.name}&email=${submittedData.email}&businessName=${submittedData.businessName}&contactNumber=${submittedData.number}&packageName=${submittedData.packageName}&amount=${submittedData.amount}&addons=${submittedData.selectedAddons}&currency=৳&currency=৳`;
                 window.location.href = paymentUrl;
             } else {
                 console.error("❌ Payment API failed");
@@ -303,84 +305,112 @@ export default function PaymentForm({ plan, addons }) {
                             />
                         </div>
                     </div>
-                </div>
 
-                {/* Coupon Field */}
-                <div className="flex flex-col">
-                    <label className="text-sm font-medium text-gray-700 mb-1">Coupon Code</label>
-                    <div className="relative flex gap-2">
-                        <div className="relative w-full">
-                            <TicketPercent className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
-                            <input
-                                type="text"
-                                name="coupon"
-                                value={formData.coupon}
-                                onChange={handleChange}
-                                placeholder="Enter coupon (optional)"
-                                className="w-full pl-10 p-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 transition"
-                            />
+
+                    {/* Coupon Field */}
+                    <div className="flex flex-col">
+                        <label className="text-sm font-medium text-gray-700 mb-1">Coupon Code</label>
+                        <div className="relative flex gap-2">
+                            <div className="relative w-full">
+                                <TicketPercent className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
+                                <input
+                                    type="text"
+                                    name="coupon"
+                                    value={formData.coupon}
+                                    onChange={handleChange}
+                                    placeholder="Enter coupon (optional)"
+                                    className="w-full pl-10 p-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 transition"
+                                />
+                            </div>
+
+                            <button
+                                type="button"
+                                onClick={applyCoupon}
+                                className="px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+                            >
+                                Apply
+                            </button>
                         </div>
 
-                        <button
-                            type="button"
-                            onClick={applyCoupon}
-                            className="px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
-                        >
-                            Apply
-                        </button>
+                        {formData.discountPercent > 0 ? (
+                            <p className="text-green-600 mt-1">
+                                Coupon applied! ({formData.discountPercent}% OFF)
+                            </p>
+                        ) : formData.couponError ? (
+                            <p className="text-red-600 mt-1">{formData.couponError}</p>
+                        ) : null}
+
                     </div>
-
-                    {formData.discountPercent > 0 ? (
-                        <p className="text-green-600 mt-1">
-                            Coupon applied! ({formData.discountPercent}% OFF)
-                        </p>
-                    ) : formData.couponError ? (
-                        <p className="text-red-600 mt-1">{formData.couponError}</p>
-                    ) : null}
-
                 </div>
+
+
 
 
                 {/* MULTIPLE ADDON SELECT DROPDOWN */}
-                <div className="mt-5" ref={dropdownRef}>
-                    <label className="font-medium">Additional Services (Optional)</label>
+                <div className="mt-5">
+                    <label className="font-medium">
+                        Select Additional Services (Optional Add-ons). You can select more than one.
+                    </label>
 
-                    <div
-                        className="border p-2 rounded mt-1 flex justify-between items-center cursor-pointer"
-                        onClick={() => setDropdownOpen(!dropdownOpen)}
-                    >
-                        <span className="text-gray-700">
-                            {selectedAddons.length > 0
-                                ? `${selectedAddons.length} selected`
-                                : "Select additional services (You can select more than one)"}
-                        </span>
-                        <ChevronDown className="w-4 h-4" />
+                    <div className="flex flex-wrap gap-3 mt-2">
+                        {addons.map((addon) => {
+                            const isActive = selectedAddons.some((a) => a.id === addon.id);
+
+                            return (
+                                <div
+                                    key={addon.id}
+                                    onClick={() => toggleAddon(addon)}
+                                    className={`
+                        cursor-pointer p-3 rounded-xl border w-full sm:w-[48%]
+                        transition shadow-sm flex items-center gap-4
+                        ${isActive
+                                            ? "bg-blue-600 border-blue-700 text-white"
+                                            : "bg-red-100 border-blue-700 text-gray-800"
+                                        }
+                    `}
+                                >
+
+                                    {/* Checkbox */}
+                                    <div
+                                        className={`
+                            w-5 h-5 rounded border flex items-center justify-center bg-white
+                            ${isActive ? "bg-white border-white" : "border-gray-400 bg-transparent"}
+                        `}
+                                    >
+                                        {isActive && (
+                                            <div className="w-3 h-3 bg-blue-600 rounded-sm"></div>
+                                        )}
+                                    </div>
+
+                                    {/* Icon */}
+                                    <div className="w-10 h-10 flex-shrink-0">
+                                        <img
+                                            className="w-full h-full object-contain"
+                                            src={CONSTANT?.API_URL + addon?.icon}
+                                            alt=""
+                                        />
+                                    </div>
+
+                                    {/* Title + Price */}
+                                    <div className="flex-1">
+                                        <div className="font-semibold">{addon.title}</div>
+                                        <div className="text-sm font-semibold opacity-80">
+                                            ৳{addon.price}
+                                        </div>
+                                    </div>
+                                </div>
+                            );
+                        })}
                     </div>
 
-                    {dropdownOpen && (
-                        <div className="border rounded mt-1 bg-white shadow p-2 max-h-60 overflow-y-auto">
-                            {addons.map((addon) => {
-                                const isActive = selectedAddons.some((a) => a.id === addon.id);
-                                return (
-                                    <div
-                                        key={addon.id}
-                                        onClick={() => toggleAddon(addon)}
-                                        className={`p-2 rounded cursor-pointer flex justify-between hover:bg-gray-100 ${isActive ? "bg-blue-100" : ""
-                                            }`}
-                                    >
-                                        <span>{addon.title}</span>
-                                        <span className="text-sm text-gray-600">৳{addon.price}</span>
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    )}
-
-                    {/* selected addon tags */}
+                    {/* selected tags */}
                     {selectedAddons.length > 0 && (
-                        <div className="mt-2 flex flex-wrap gap-2">
+                        <div className="mt-3 flex flex-wrap gap-2">
                             {selectedAddons.map((item) => (
-                                <span key={item.id} className="px-3 py-1 text-xs bg-blue-100 text-blue-700 rounded-full">
+                                <span
+                                    key={item.id}
+                                    className="px-3 py-1 text-xs bg-blue-100 text-blue-700 rounded-full"
+                                >
                                     {item.title} — ৳{item.price}
                                 </span>
                             ))}
@@ -391,19 +421,21 @@ export default function PaymentForm({ plan, addons }) {
 
 
 
+
+
                 {/* Summary */}
 
                 <div className="mt-6 bg-blue-50 rounded p-4">
                     <p>Base price: ৳{baseAmount}</p>
                     <p>Discount: - ৳{baseAmount - discounted}</p>
-                    <p>Addons: + ৳{addonTotal}</p>
+                    <p>Add-ons: + ৳{addonTotal}</p>
 
                     <h3 className="mt-2 text-xl font-bold text-blue-700">
-                        Final Payable: ৳{finalAmount}
+                        Payable Amount: ৳{finalAmount}
                     </h3>
                 </div>
 
-              
+
 
                 {/* Buttons */}
                 <div className="flex items-center justify-end gap-3 pt-4">
@@ -423,7 +455,7 @@ export default function PaymentForm({ plan, addons }) {
                 </div>
             </form>
 
-            <Addons addons={addons} />
+            {/* <Addons addons={addons} /> */}
         </section>
     );
 }
