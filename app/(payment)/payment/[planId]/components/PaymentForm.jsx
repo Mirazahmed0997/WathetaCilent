@@ -6,60 +6,82 @@ import Addons from "@/app/(main)/pricing/components/Addons";
 import CONSTANT from '@/configs/constant.config'
 
 
-export default function PaymentForm({ plan, addons, coupons }) {
+export default function PaymentForm({ plan, addons }) {
     if (!plan) return null;
 
 
-    console.log("coupons", coupons)
+    // console.log(addons)
 
 
-    // const coupons = [
-    //     {
-    //         code: "TEST10",
-    //         discount: 10,
-    //         validFrom: "2025-01-01",
-    //         validTo: "2025-11-18",
-    //         planId: "cmfts8g9c0004u5l0e1e7mv9v",
-    //         limitUsage: 100
-    //     },
-    //     {
-    //         code: "SAVE20",
-    //         discount: 20,
-    //         validFrom: "2025-02-01",
-    //         validTo: "2025-11-30",
-    //         planId: "cmfts8g9c0004u5l0e1e7mv9v",
-    //         limitUsage: 50
-    //     },
-    //     {
-    //         code: "MEGA50",
-    //         discount: 50,
-    //         validFrom: "2025-03-10",
-    //         validTo: "2025-03-20",
-    //         planId: "premium_plan",
-    //         limitUsage: 10
-    //     }
-    // ];
+    const coupons = [
+        {
+            code: "WELCOME101",
+            discount: 10,
+            validFrom: "2025-01-01",
+            validTo: "2025-11-18",
+            planId: "cmfts8g9c0004u5l0e1e7mv9v",
+            limitUsage: 100
+        },
+        {
+            code: "SAVE20",
+            discount: 20,
+            validFrom: "2025-02-01",
+            validTo: "2025-11-30",
+            planId: "cmfts8g9c0004u5l0e1e7mv9v",
+            limitUsage: 50
+        },
+        {
+            code: "MEGA50",
+            discount: 50,
+            validFrom: "2025-03-10",
+            validTo: "2025-03-20",
+            planId: "premium_plan",
+            limitUsage: 10
+        }
+    ];
 
 
     const baseAmount = Number(plan?.priceOfferBDT) || Number(plan?.priceRegularBDT);
-
+    // console.log("planID", plan.id)
     const [formData, setFormData] = useState({
         name: "",
         email: "",
         businessName: "",
         number: "",
         coupon: "",
-        discountedValue: 0,
-        discountType: "",
-        couponError: "",
+        discountPercent: 0,
+
     });
 
-    const [selectedAddons, setSelectedAddons] = useState([]);
+
+
+    const [selectedAddons, setSelectedAddons] = useState([]); // array of addon objects
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+
+    console.log("selectedAdons", selectedAddons)
+
+    const dropdownRef = useRef();
+
+    useEffect(() => {
+        function handleClickOutside(e) {
+            if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+                setDropdownOpen(false);
+            }
+        }
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
+
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
+
+
+    console.log("form data", formData)
 
     const handleReset = () => {
         setFormData({
@@ -68,30 +90,42 @@ export default function PaymentForm({ plan, addons, coupons }) {
             businessName: "",
             number: "",
             coupon: "",
-            discountedValue: 0,
-            discountType: "",
-            couponError: "",
+            discountPercent: 0,
         });
-        setSelectedAddons([]);
     };
 
-    // -------------------------- APPLY COUPON --------------------------
     const applyCoupon = () => {
-        const inputCode = formData.coupon.trim().toLowerCase();
+        // const userPlanId = formData.planId; // your selected plan ID
+        const inputCouponCode = formData.coupon.trim().toLowerCase();
+        // console.log("inputCouponCode",inputCouponCode)
 
-        const found = coupons.find((c) => c.code.toLowerCase() === inputCode);
+        const found = coupons.find(
+            (c) => c.code.toLowerCase() === inputCouponCode
+        );
 
+        // console.log("found",found)
+
+        // If coupon not found
         if (!found) {
             setFormData((prev) => ({
                 ...prev,
-                discountedValue: 0,
-                discountType: "",
+                discountPercent: 0,
                 couponError: "Invalid coupon code",
             }));
             return;
         }
 
-        // Date Validation
+        // Check plan match
+        if (found.planId !== plan.id) {
+            setFormData((prev) => ({
+                ...prev,
+                discountPercent: 0,
+                couponError: "This coupon is not valid for your selected plan",
+            }));
+            return;
+        }
+
+        // Check date validity
         const today = new Date();
         const start = new Date(found.validFrom);
         const end = new Date(found.validTo);
@@ -99,7 +133,7 @@ export default function PaymentForm({ plan, addons, coupons }) {
         if (today < start) {
             setFormData((prev) => ({
                 ...prev,
-                discountedValue: 0,
+                discountPercent: 0,
                 couponError: "This coupon is not active yet",
             }));
             return;
@@ -108,40 +142,24 @@ export default function PaymentForm({ plan, addons, coupons }) {
         if (today > end) {
             setFormData((prev) => ({
                 ...prev,
-                discountedValue: 0,
+                discountPercent: 0,
                 couponError: "This coupon has expired",
             }));
             return;
         }
 
-        // Plan validation
-        const validPlanIds = found.planCoupons.map((p) => p.plan.id);
-
-        if (!validPlanIds.includes(plan.id)) {
-            setFormData((prev) => ({
-                ...prev,
-                discountedValue: 0,
-                couponError: "This coupon is not valid for your selected plan",
-            }));
-            return;
-        }
-
-        // SUCCESS - Apply Coupon
+        // All good → Apply coupon
         setFormData((prev) => ({
             ...prev,
-            discountedValue: found.discountValue,
-            discountType: found.discountType,
+            discountPercent: found.discount,
             couponError: "",
         }));
     };
 
-    // -------------------------- ADDON LOGIC --------------------------
 
 
 
-    console.log("plansType", plan.durationType)
-
-
+    //  ADDON LOGIC
     const toggleAddon = (addon) => {
         const exists = selectedAddons.find((a) => a.id === addon.id);
 
@@ -152,37 +170,14 @@ export default function PaymentForm({ plan, addons, coupons }) {
         }
     };
 
-    // Step 1: Base addon total per MONTH
-    let addonTotal = selectedAddons.reduce(
-        (sum, addon) => sum + Number(addon.priceBDT),
-        0
-    );
-
-    // Step 2: Adjust based on plan duration type
-    if (plan.durationType === "MONTH") {
-        addonTotal = addonTotal * Number(plan.duration);
-    }
-    else if (plan.durationType === "YEAR") {
-        addonTotal = addonTotal * 12 * Number(plan.duration);
-    }
+    const addonTotal = selectedAddons.reduce((sum, a) => sum + Number(a.price), 0);
 
 
-    // -------------------------- FINAL AMOUNT --------------------------
-    let discounted = baseAmount;
-
-    // Apply discount ONLY if coupon applied
-    if (formData.discountType === "PERCENT") {
-        discounted = Math.floor(baseAmount - (baseAmount * formData.discountedValue) / 100);
-    }
-
-    if (formData.discountType === "AMOUNT") {
-        discounted = Math.floor(baseAmount - formData.discountedValue);
-    }
-
-    if (discounted < 0) discounted = 0;
+    const discounted = formData.discountPercent
+        ? Math.floor(baseAmount - (baseAmount * formData.discountPercent) / 100)
+        : baseAmount;
 
     const finalAmount = discounted + addonTotal;
-
 
 
 
@@ -337,9 +332,9 @@ export default function PaymentForm({ plan, addons, coupons }) {
                             </button>
                         </div>
 
-                        {formData.discountedValue > 0 ? (
+                        {formData.discountPercent > 0 ? (
                             <p className="text-green-600 mt-1">
-                                Coupon applied!
+                                Coupon applied! ({formData.discountPercent}% OFF)
                             </p>
                         ) : formData.couponError ? (
                             <p className="text-red-600 mt-1">{formData.couponError}</p>
@@ -383,7 +378,7 @@ export default function PaymentForm({ plan, addons, coupons }) {
                         `}
                                     >
                                         {isActive && (
-                                            <div className=" text-blue-600 ">✔</div>
+                                            <div className="w-3 h-3 bg-blue-600 rounded-sm"></div>
                                         )}
                                     </div>
 
@@ -400,7 +395,7 @@ export default function PaymentForm({ plan, addons, coupons }) {
                                     <div className="flex-1">
                                         <div className="font-semibold">{addon.title}</div>
                                         <div className="text-sm font-semibold opacity-80">
-                                            ৳{addon.priceBDT}/ ${addon.priceUSD} PER MONTH
+                                            ৳{addon.price}
                                         </div>
                                     </div>
                                 </div>
@@ -423,12 +418,17 @@ export default function PaymentForm({ plan, addons, coupons }) {
                     )}
                 </div>
 
+
+
+
+
+
                 {/* Summary */}
 
                 <div className="mt-6 bg-blue-50 rounded p-4">
-                    <p className="text-green-500 font-semibold">Base price: ৳{baseAmount}</p>
-                    <p className="text-green-500 font-semibold">Discount: - ৳{baseAmount - discounted}</p>
-                    <p className="text-green-500 font-semibold">Add-ons: + ৳{addonTotal}</p>
+                    <p>Base price: ৳{baseAmount}</p>
+                    <p>Discount: - ৳{baseAmount - discounted}</p>
+                    <p>Add-ons: + ৳{addonTotal}</p>
 
                     <h3 className="mt-2 text-xl font-bold text-blue-700">
                         Payable Amount: ৳{finalAmount}

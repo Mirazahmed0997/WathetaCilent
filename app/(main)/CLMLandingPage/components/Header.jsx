@@ -2,8 +2,9 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';   // import the module
 import 'swiper/css';
+import Link from 'next/link';
 
-export default function Header() {
+export default function Header({ plans }) {
   return (
     <section className="relative w-full bg-gradient-to-br from-white to-[#f8f9fa] py-20 md:py-28 px-5 sm:px-8 md:px-14 lg:px-20 overflow-hidden">
       <div className="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center justify-between gap-12 lg:gap-16">
@@ -11,7 +12,7 @@ export default function Header() {
         <div className="flex-1 text-center md:text-left">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold leading-tight text-gray-900">
             CLM & Automation Facilities<br className="hidden sm:block" />
-            <span className="text-indigo-600">mart Automation  
+            <span className="text-indigo-600">mart Automation
             </span> That <br className="hidden sm:block" />
             Drives Conversions
           </h1>
@@ -22,23 +23,22 @@ export default function Header() {
 
           {/* Buttons */}
           <div className="mt-8 flex flex-wrap justify-center md:justify-start gap-4">
-            <button className="px-6 sm:px-8 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm sm:text-base transition">
-              Try for Free →
-            </button>
-            <button className="px-6 sm:px-8 py-3 rounded-lg border border-gray-300 hover:border-indigo-500 hover:text-indigo-600 font-semibold text-sm sm:text-base transition">
-              View Demo
-            </button>
+            {plans
+              .filter((plan) => plan.id === "cmfts8g9c0004u5l0e1e7mv9v")
+              .map((plan) => (
+                <Link
+                key={plan.id}
+                 href={`/payment/${plan?.id}`}>
+                  <button
+                    className="px-6 sm:px-8 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm sm:text-base transition"
+                  >
+                    Try  {plan.name}  →
+                  </button>
+                </Link>
+              ))}
+
           </div>
 
-          {/* Optional trusted block */}
-          {/* 
-          <div className="mt-8 flex items-center justify-center md:justify-start bg-gray-900 text-white py-3 px-4 rounded-lg shadow-lg">
-            <span className="text-sm sm:text-base">
-              🔒 Trusted by <strong>2000+ customers</strong> in{" "}
-              <strong>80+ countries</strong> since 2018
-            </span>
-          </div> 
-          */}
         </div>
 
         {/* ===== RIGHT IMAGE SLIDER ===== */}
@@ -57,7 +57,7 @@ export default function Header() {
             >
               <SwiperSlide>
                 <img
-                  src="https://media.istockphoto.com/id/814423752/photo/eye-of-model-with-colorful-art-make-up-close-up.jpg?s=1024x1024&w=is&k=20&c=NQtm4v1Uzp2luv-6f3qORcq9pDtz2H56p8g9Xix8cY0="
+                  src="https://pickyassist.com/en/img/home-page-new/Streamline-&-Automate-your-Entire-Business-In-Just-1-Hour-operational-cost.webp"
                   alt="Slide 1"
                   className="object-cover w-full h-full"
                 />
