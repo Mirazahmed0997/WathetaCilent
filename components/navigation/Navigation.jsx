@@ -81,6 +81,12 @@ export default function Navigation() {
       description: "How to Create An AI Chat Bot?",
       icon: BotMessageSquare,
     },
+     {
+      title: "Piyash",
+      href: "/clm",
+      description: "Seamless e-commerce management with integrated chat & AI tools.",
+      icon: ShoppingBag,
+    },
   ]
 
   return (

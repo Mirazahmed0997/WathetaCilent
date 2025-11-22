@@ -6,6 +6,11 @@ import { CheckCircle2, Clock, DollarSign, TicketPercent } from "lucide-react"
 export default async function PaymentPage({ params }) {
     const { planId } = await params
     const plan = await fetchDataAsServer(apiConfig?.GET_PRICING_BY_ID + planId)
+    const addonsRes = await fetchDataAsServer(apiConfig?.GET_ADDONS);
+    const addons = Array.isArray(addonsRes?.data) ? addonsRes.data : (Array.isArray(addonsRes) ? addonsRes : []);
+
+    const couponRes = await fetchDataAsServer(apiConfig?.GET_COUPON_LIST);
+    const coupons = Array.isArray(couponRes?.data) ? couponRes.data : (Array.isArray(couponRes) ? couponRes : []);
 
     if (!plan) {
         return (
@@ -46,7 +51,7 @@ export default async function PaymentPage({ params }) {
 
                 {/* ===== Right Section: Payment Form ===== */}
                 <div className="lg:sticky top-10">
-                    <PaymentForm plan={plan} />
+                    <PaymentForm plan={plan} addons={addons} coupons={coupons} />
                 </div>
             </div>
         </div>

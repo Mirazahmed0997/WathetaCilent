@@ -11,23 +11,25 @@ export default function PricingPlan({ plans }) {
     const [openTooltip, setOpenTooltip] = useState(null);
     const tooltipRefs = useRef({}); // store refs for tooltips
 
-    useEffect(() => {
-        function handleClickOutside(e) {
-            // if the currently open tooltip exists and click is outside it → close
-            if (
-                openTooltip &&
-                tooltipRefs.current[openTooltip] &&
-                !tooltipRefs.current[openTooltip].contains(e.target)
-            ) {
-                setOpenTooltip(null);
-            }
-        }
+    const validation =
 
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, [openTooltip]);
+        useEffect(() => {
+            function handleClickOutside(e) {
+                // if the currently open tooltip exists and click is outside it → close
+                if (
+                    openTooltip &&
+                    tooltipRefs.current[openTooltip] &&
+                    !tooltipRefs.current[openTooltip].contains(e.target)
+                ) {
+                    setOpenTooltip(null);
+                }
+            }
+
+            document.addEventListener("mousedown", handleClickOutside);
+            return () => {
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+        }, [openTooltip]);
 
     const isNumeric = (value) => !isNaN(value) && !isNaN(parseFloat(value));
 
@@ -52,6 +54,8 @@ export default function PricingPlan({ plans }) {
         trxID: '',
         userId: '',
         refund: '',
+        coupon: "",
+        discountedPrice: ""
     });
 
     const handleChange = (e) => {
@@ -79,6 +83,11 @@ export default function PricingPlan({ plans }) {
         });
     }
 
+
+
+
+
+
     const openPaymentForm = (plan) => {
         setSelectedPlan(plan);
         document.getElementById('payment_modal').showModal();
@@ -100,6 +109,12 @@ export default function PricingPlan({ plans }) {
             trxID: "N/A",
             userId: Math.floor(Math.random() * 10000),
         };
+
+
+        console.log(submittedData)
+
+
+
 
         try {
             const response = await fetch(`https://payapi.watheta.com/api/postByDefaultAbandoned`, {
@@ -160,8 +175,8 @@ export default function PricingPlan({ plans }) {
                 </div>
 
                 {/* Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mx-5 md:mx-16 lg:mx-48 xl:mx-48">
-                    {plans?.data.map((plan) => (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-8 mx-5 md:mx-16 lg:mx-28 xl:mx-36 xxl:mx-48">
+                    {plans.map((plan) => (
                         <div
                             key={plan.id}
                             className={`rounded-2xl w-full shadow-md border bg-white flex flex-col transition hover:shadow-xl ${plan.isRecommended
@@ -329,9 +344,13 @@ export default function PricingPlan({ plans }) {
                     <form onSubmit={handlePayment} className="modal-box bg-white">
                         <PaymentForm plan={selectedPlan} formData={formData} handleChange={handleChange} />
                         <div className="modal-action flex items-center space-x-2">
-                            <form method="dialog">
-                                <button onClick={handleRest} className="btn border-0 bg-[#ba4646] hover:bg-[#c05f5f] rounded-full">Close</button>
-                            </form>
+                            <button
+                                type="button"
+                                onClick={() => { handleRest(); document.getElementById('payment_modal').close(); }}
+                                className="btn border-0 bg-[#ba4646] hover:bg-[#c05f5f] rounded-full"
+                            >
+                                Close
+                            </button>
                             <button type="submit" className="btn border-0 bg-[#46ba85] hover:bg-[#6ccea2] rounded-full">
                                 Proceed to Payment
                             </button>
